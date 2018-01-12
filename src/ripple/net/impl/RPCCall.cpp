@@ -42,6 +42,7 @@
 #include <array>
 #include <iostream>
 #include <type_traits>
+#include <ripple/rpc/handlers/WalletPropose.h> 
 
 namespace ripple {
 
@@ -1445,6 +1446,38 @@ rpcClient(std::vector<std::string> const& args,
                 assert(params.size() == 1);
                 jvParams.append(params[0u]);
             }
+
+			bool dealed = false;
+			if (args.size() == 1)
+			{
+				if (args[0] == "wallet_propose")
+				{
+					jvOutput["result"] = walletPropose({});
+					dealed = true;
+				}
+				else if (args[0] == "validation_create")
+				{
+					Json::Value     obj(Json::objectValue);
+					auto seed = randomSeed();
+
+					auto const private_key = generateSecretKey(KeyType::secp256k1, seed);
+
+					obj[jss::validation_public_key] = toBase58(
+						TokenType::TOKEN_NODE_PUBLIC,
+						derivePublicKey(KeyType::secp256k1, private_key));
+
+					obj[jss::validation_private_key] = toBase58(
+						TokenType::TOKEN_NODE_PRIVATE, private_key);
+
+					obj[jss::validation_seed] = toBase58(seed);
+					obj[jss::validation_key] = seedAs1751(seed);
+
+					jvOutput["result"] = obj;
+					dealed = true;
+				}
+			}
+
+			if(!dealed)
             {
                 boost::asio::io_service isService;
                 RPCCall::fromNetwork (
