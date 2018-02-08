@@ -1178,6 +1178,12 @@ bool ApplicationImp::setup()
 
     Pathfinder::initPathTable();
 
+
+	// VFALCO NOTE Unfortunately, in stand-alone mode some code still
+	//             foolishly calls overlay(). When this is fixed we can
+	//             move the instantiation inside a conditional:
+	//
+	//             if (!config_.standalone())
 	m_overlay = make_Overlay(*this, setup_Overlay(*config_), *m_jobQueue,
 		*serverHandler_, *m_resourceManager, *m_resolver, get_io_service(),
 		*config_);
@@ -1295,13 +1301,6 @@ bool ApplicationImp::setup()
     // Server
     //
     //----------------------------------------------------------------------
-
-    // VFALCO NOTE Unfortunately, in stand-alone mode some code still
-    //             foolishly calls overlay(). When this is fixed we can
-    //             move the instantiation inside a conditional:
-    //
-    //             if (!config_.standalone())
-
 
     validatorSites_->start ();
 
@@ -1487,46 +1486,51 @@ ApplicationImp::getLastFullLedger()
 {
     auto j = journal ("Ledger");
 
-    try
-    {
-        std::shared_ptr<Ledger> ledger;
-        std::uint32_t seq;
-        uint256 hash;
+	int count = 0;
+	while (count < 3)
+	{
+		try
+		{
+			std::shared_ptr<Ledger> ledger;
+			std::uint32_t seq;
+			uint256 hash;
 
-        std::tie (ledger, seq, hash) =
-            loadLedgerHelper (
-                "order by LedgerSeq desc limit 1", *this);
+			int index = 1 + count++;
+			std::stringstream ss;
+			ss << "order by LedgerSeq desc limit " << index << ",1";
+			std::string loadSql = ss.str();
+			std::tie(ledger, seq, hash) = loadLedgerHelper(loadSql, *this);
 
-        if (!ledger)
-            return ledger;
+			if (!ledger)
+				continue;
 
-        ledger->setImmutable(*config_);
+			ledger->setImmutable(*config_);
 
-        if (getLedgerMaster ().haveLedger (seq))
-            ledger->setValidated ();
+			if (getLedgerMaster().haveLedger(seq))
+				ledger->setValidated();
 
-        if (ledger->info().hash == hash)
-        {
-            JLOG (j.trace()) << "Loaded ledger: " << hash;
-            return ledger;
-        }
+			if (ledger->info().hash == hash)
+			{
+				JLOG(j.trace()) << "Loaded ledger: " << hash;
+				return ledger;
+			}
 
-        if (auto stream = j.error())
-        {
-            stream  << "Failed on ledger";
-            Json::Value p;
-            addJson (p, {*ledger, LedgerFill::full});
-            stream << p;
-        }
-
-        return {};
-    }
-    catch (SHAMapMissingNode& sn)
-    {
-        JLOG (j.warn()) <<
-            "Ledger with missing nodes in database: " << sn;
-        return {};
-    }
+			if (auto stream = j.error())
+			{
+				stream << "Failed on ledger";
+				Json::Value p;
+				addJson(p, { *ledger, LedgerFill::full });
+				stream << p;
+			}
+		}
+		catch (SHAMapMissingNode& sn)
+		{
+			JLOG(j.warn()) <<
+				"Ledger with missing nodes in database: " << sn;
+			continue;;
+		}
+	}
+	return{};
 }
 
 std::shared_ptr<Ledger>

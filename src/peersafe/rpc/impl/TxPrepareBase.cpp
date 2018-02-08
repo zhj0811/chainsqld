@@ -216,7 +216,7 @@ Json::Value TxPrepareBase::prepareBase()
 
 	ret = prepareStrictMode();
 	if (ret.isMember("error_message"))
-		return ret;
+		return ret;   
 
 	if(app_.getTableSync().IsPressSwitchOn())
 		preparePressData();
