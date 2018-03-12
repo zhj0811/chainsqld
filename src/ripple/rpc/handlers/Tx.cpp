@@ -111,38 +111,99 @@ Json::Value doTx (RPC::Context& context)
     if (txn->getLedger () == 0)
         return ret;
 
-    if (auto lgr = context.ledgerMaster.getLedgerBySeq (txn->getLedger ()))
-    {
-        bool okay = false;
+	if (binary)
+	{
 
-        if (binary)
-        {
-            std::string meta;
+	}
+	else
+	{
+		bool okay = false;
+		LedgerIndex uLedgerIndex = txn->getLedger();
+		std::uint32_t   uValidatedMin;
+		std::uint32_t   uValidatedMax;
+		bool bValidated = context.ledgerMaster.getValidatedRange(
+			uValidatedMin, uValidatedMax);
 
-            if (getMetaHex (*lgr, txn->getID (), meta))
-            {
-                ret[jss::meta] = meta;
-                okay = true;
-            }
-        }
-        else
-        {
-            auto rawMeta = lgr->txRead (txn->getID()).second;
-            if (rawMeta)
-            {
-                auto txMeta = std::make_shared<TxMeta> (txn->getID (),
-                    lgr->seq (), *rawMeta, context.app.journal ("TxMeta"));
-                okay = true;
-                auto meta = txMeta->getJson (0);
-                addPaymentDeliveredAmount (meta, context, txn, txMeta);
-                ret[jss::meta] = meta;
-            }
-        }
+		if (!bValidated)
+		{
+			return rpcError(rpcLGR_IDXS_INVALID);
+		}
 
-        if (okay)
-            ret[jss::validated] = isValidated (
-                context, lgr->info().seq, lgr->info().hash);
-    }
+		DatabaseCon& connection = context.app.getTxnDB();
+		auto db(connection.checkoutDb());
+		
+		static std::string const prefix(
+			R"(SELECT RawTxn,TxnMeta FROM Transactions WHERE TransID = '%s')");
+		std::string sql = boost::str(boost::format(
+			prefix )
+			% txid);
+
+		Blob rawData;
+		Blob rawMeta;
+
+		soci::blob txnData(*db);
+		soci::blob txnMeta(*db);
+		soci::indicator dataPresent, metaPresent;
+
+		soci::statement st = (db->prepare << sql,
+			soci::into(txnData, dataPresent),
+			soci::into(txnMeta, metaPresent));
+
+		st.execute();
+
+		if (st.fetch())
+		{
+			if (metaPresent == soci::i_ok)
+				convert(txnMeta, rawMeta);
+			else
+				rawMeta.clear();
+
+			if (rawMeta.size() > 0)
+			{
+				auto txMeta = std::make_shared<TxMeta>(
+					from_hex_text<uint256>(txid), uLedgerIndex, rawMeta, context.app.journal("TxMeta"));
+				okay = true;
+				auto meta = txMeta->getJson(0);
+				addPaymentDeliveredAmount(meta, context, txn, txMeta);
+				ret[jss::meta] = meta;
+			}
+		}
+
+		if (okay)
+			ret[jss::validated] = true;
+	}
+    //if (auto lgr = context.ledgerMaster.getLedgerBySeq (txn->getLedger ()))
+    //{
+    //    bool okay = false;
+
+    //    if (binary)
+    //    {
+    //        std::string meta;
+
+    //        if (getMetaHex (*lgr, txn->getID (), meta))
+    //        {
+    //            ret[jss::meta] = meta;
+    //            okay = true;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        auto rawMeta = lgr->txRead (txn->getID()).second;
+    //        if (rawMeta)
+    //        {
+    //            auto txMeta = std::make_shared<TxMeta> (txn->getID (),
+    //                lgr->seq (), *rawMeta, context.app.journal ("TxMeta"));
+    //            okay = true;
+    //            auto meta = txMeta->getJson (0);
+    //            addPaymentDeliveredAmount (meta, context, txn, txMeta);
+    //            ret[jss::meta] = meta;
+    //        }
+    //    }
+
+    //    if (okay)
+    //        ret[jss::validated] = isValidated (
+    //            context, lgr->info().seq, lgr->info().hash);
+    //}
 
     return ret;
 }
