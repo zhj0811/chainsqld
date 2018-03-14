@@ -58,7 +58,7 @@ Json::Value doAccountTx (RPC::Context& context)
     std::uint32_t   uValidatedMax;
     bool bValidated = context.ledgerMaster.getValidatedRange (
         uValidatedMin, uValidatedMax);
-
+	uValidatedMin = 1;
     if (!bValidated)
     {
         // Don't have a validated ledger range.
