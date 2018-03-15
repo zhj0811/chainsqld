@@ -2229,7 +2229,7 @@ NetworkOPsImp::getTxsAccountB (
 bool NetworkOPsImp::recvValidation (
     STValidation::ref val, std::string const& source)
 {
-    JLOG(m_journal.debug()) << "recvValidation " << val->getLedgerHash ()
+	JLOG(m_journal.warn()) << "recvValidation " << val->getLedgerHash() << ",seq=" << val->getLedgerSeq()
                           << " from " << source;
     pubValidation (val);
     return handleNewValidation(app_, val, source);

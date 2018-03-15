@@ -1149,9 +1149,9 @@ LedgerMaster::checkAccept (
     auto const tvc = app_.getValidations().numTrustedForLedger(ledger->info().hash);
     if (tvc < minVal) // nothing we can do
     {
-        JLOG (m_journal.trace()) <<
+        JLOG (m_journal.warn()) <<
             "Only " << tvc <<
-            " validations for " << ledger->info().hash;
+            " validations for " << ledger->info().seq;
         return;
     }
 

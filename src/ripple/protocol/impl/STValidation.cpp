@@ -81,6 +81,11 @@ uint256 STValidation::getLedgerHash () const
     return getFieldH256 (sfLedgerHash);
 }
 
+uint32 STValidation::getLedgerSeq() const
+{
+	return getFieldU32(sfLedgerSequence);
+}
+
 NetClock::time_point
 STValidation::getSignTime () const
 {

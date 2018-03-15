@@ -69,6 +69,7 @@ public:
     }
 
     uint256         getLedgerHash ()     const;
+	uint32			getLedgerSeq()		 const;
     NetClock::time_point getSignTime ()  const;
     NetClock::time_point getSeenTime ()  const;
     std::uint32_t   getFlags ()          const;
