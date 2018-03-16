@@ -26,6 +26,10 @@ namespace ripple {
 
 Message::Message (::google::protobuf::Message const& message, int type)
 {
+	setBuffer(message, type);
+}
+
+void Message::setBuffer(::google::protobuf::Message const& message, int type) {
     unsigned const messageBytes = message.ByteSize ();
 
     assert (messageBytes != 0);

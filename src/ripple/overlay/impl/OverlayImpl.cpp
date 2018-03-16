@@ -679,7 +679,7 @@ OverlayImpl::onManifests (
                 auto const toSkip = hashRouter.shouldRelay (hash);
                 if(toSkip)
                     foreach (send_if_not (
-                        std::make_shared<Message>(o, protocol::mtMANIFESTS),
+						MessageFactory::instance()->create(o, protocol::mtMANIFESTS),
                             peer_in_set (*toSkip)));
             }
             else
@@ -864,7 +864,7 @@ OverlayImpl::send (protocol::TMProposeSet& m)
 {
     if (setup_.expire)
         m.set_hops(0);
-    auto const sm = std::make_shared<Message>(
+    auto const sm = MessageFactory::instance()->create(
         m, protocol::mtPROPOSE_LEDGER);
     for_each([&](std::shared_ptr<PeerImp>&& p)
     {
@@ -877,7 +877,7 @@ OverlayImpl::send (protocol::TMValidation& m)
 {
     if (setup_.expire)
         m.set_hops(0);
-    auto const sm = std::make_shared<Message>(
+    auto const sm = MessageFactory::instance()->create(
         m, protocol::mtVALIDATION);
     for_each([&](std::shared_ptr<PeerImp>&& p)
     {
@@ -900,7 +900,7 @@ OverlayImpl::relay (protocol::TMProposeSet& m,
     auto const toSkip = app_.getHashRouter().shouldRelay(uid);
     if (!toSkip)
         return;
-    auto const sm = std::make_shared<Message>(
+    auto const sm = MessageFactory::instance()->create(
         m, protocol::mtPROPOSE_LEDGER);
     for_each([&](std::shared_ptr<PeerImp>&& p)
     {
@@ -920,7 +920,7 @@ OverlayImpl::relay (protocol::TMValidation& m,
     auto const toSkip = app_.getHashRouter().shouldRelay(uid);
     if (! toSkip)
         return;
-    auto const sm = std::make_shared<Message>(
+    auto const sm = MessageFactory::instance()->create(
         m, protocol::mtVALIDATION);
     for_each([&](std::shared_ptr<PeerImp>&& p)
     {

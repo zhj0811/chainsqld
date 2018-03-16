@@ -23,6 +23,11 @@
 #include "ripple.pb.h"
 #include <boost/asio/buffer.hpp>
 #include <boost/asio/buffers_iterator.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/pool/pool.hpp>
+#include <boost/pool/object_pool.hpp>
+#include <boost/bind.hpp>
+
 #include <algorithm>
 #include <cstdint>
 #include <iterator>
@@ -47,14 +52,17 @@ namespace ripple {
 class Message : public std::enable_shared_from_this <Message>
 {
 public:
-    using pointer = std::shared_ptr<Message>;
+    using pointer = boost::shared_ptr<Message>;
 
 public:
     /** Number of bytes in a message header.
     */
     static size_t const kHeaderBytes = 6;
-
+	
+	Message() {}
     Message (::google::protobuf::Message const& message, int type);
+
+	void setBuffer(::google::protobuf::Message const& message, int type);
 
     /** Retrieve the packed message data. */
     std::vector <uint8_t> const&
@@ -157,6 +165,27 @@ private:
     std::vector <uint8_t> mBuffer;
 
     int mCategory;
+};
+
+class MessageFactory {
+	boost::object_pool<Message> alloctor;
+public:
+	static MessageFactory* instance() {
+		static MessageFactory f;
+		return &f;
+	}
+
+	Message::pointer create(::google::protobuf::Message const& message, int type) {
+		Message::pointer p(alloctor.construct(),
+			boost::bind(&MessageFactory::destroy, this, _1));
+		p->setBuffer(message, type);
+		return p;
+	}
+
+	void destroy(Message* pointer) {
+		alloctor.destroy(pointer);
+	}
+
 };
 
 }

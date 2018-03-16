@@ -526,7 +526,7 @@ PeerImp::sendEndpoints (FwdIt first, FwdIt last)
     }
     tm.set_version (1);
 
-    send (std::make_shared <Message> (tm, protocol::mtENDPOINTS));
+    send (MessageFactory::instance()->create(tm, protocol::mtENDPOINTS));
 }
 
 }

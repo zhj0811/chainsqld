@@ -39,6 +39,7 @@
 #include <mutex>
 #include <peersafe/protocol/TableDefines.h>
 #include <ripple/protocol/Protocol.h>
+#include <ripple/overlay/Message.h>
 
 #include "ripple.pb.h"
 
@@ -379,7 +380,6 @@ private:
     // Try to keep a validator from switching from test to live network
     // without first wiping the database.
     LedgerIndex const max_ledger_difference_ {1000000};
-
 };
 
 } // ripple

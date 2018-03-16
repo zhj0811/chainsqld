@@ -545,7 +545,7 @@ PeerImp::onTimer (error_code const& ec)
         message.set_type (protocol::TMPing::ptPING);
         message.set_seq (lastPingSeq_);
 
-        send (std::make_shared<Message> (
+        send (MessageFactory::instance()->create (
             message, protocol::mtPING));
     }
     else
@@ -708,7 +708,7 @@ PeerImp::doProtocolStart()
 
     if (tm.list_size() > 0)
     {
-        auto m = std::make_shared<Message>(tm, protocol::mtMANIFESTS);
+        auto m = MessageFactory::instance()->create(tm, protocol::mtMANIFESTS);
         send (m);
     }
 }
@@ -858,7 +858,7 @@ PeerImp::onMessage (std::shared_ptr <protocol::TMPing> const& m)
         // We have received a ping request, reply with a pong
         fee_ = Resource::feeMediumBurdenPeer;
         m->set_type (protocol::TMPing::ptPONG);
-        send (std::make_shared<Message> (*m, protocol::mtPING));
+        send (MessageFactory::instance()->create(*m, protocol::mtPING));
 
         return;
     }
@@ -1165,7 +1165,7 @@ PeerImp::onMessage (std::shared_ptr <protocol::TMLedgerData> const& m)
         if (target)
         {
             m->clear_requestcookie ();
-            target->send (std::make_shared<Message> (
+            target->send (MessageFactory::instance()->create(
                 packet, protocol::mtLEDGER_DATA));
         }
         else
@@ -1741,7 +1741,7 @@ PeerImp::onMessage (std::shared_ptr <protocol::TMGetObjectByHash> const& m)
         JLOG(p_journal_.trace()) <<
             "GetObj: " << reply.objects_size () <<
                 " of " << packet.objects_size ();
-        send (std::make_shared<Message> (reply, protocol::mtGET_OBJECTS));
+        send (MessageFactory::instance()->create(reply, protocol::mtGET_OBJECTS));
     }
     else
     {
@@ -2105,7 +2105,7 @@ PeerImp::getLedger (std::shared_ptr<protocol::TMGetLedger> const& m)
                 }
 
                 packet.set_requestcookie (id ());
-                v->send (std::make_shared<Message> (
+                v->send (MessageFactory::instance()->create(
                     packet, protocol::mtGET_LEDGER));
                 return;
             }
@@ -2148,7 +2148,7 @@ PeerImp::getLedger (std::shared_ptr<protocol::TMGetLedger> const& m)
 
                 reply.add_nodes()->set_nodedata(blobSkip.data(), blobSkip.size());
 
-                Message::pointer oPacket = std::make_shared<Message>(
+                Message::pointer oPacket = MessageFactory::instance()->create(
                     reply, protocol::mtLEDGER_DATA);
                 send(oPacket);
             }
@@ -2211,7 +2211,7 @@ PeerImp::getLedger (std::shared_ptr<protocol::TMGetLedger> const& m)
                 }
 
                 packet.set_requestcookie (id ());
-                v->send (std::make_shared<Message>(
+                v->send (MessageFactory::instance()->create(
                     packet, protocol::mtGET_LEDGER));
                 JLOG(p_journal_.debug()) << "GetLedger: Request routed";
                 return;
@@ -2313,7 +2313,7 @@ PeerImp::getLedger (std::shared_ptr<protocol::TMGetLedger> const& m)
                 }
             }
 
-            Message::pointer oPacket = std::make_shared<Message> (
+            Message::pointer oPacket = MessageFactory::instance()->create(
                 reply, protocol::mtLEDGER_DATA);
             send (oPacket);
             return;
@@ -2419,7 +2419,7 @@ PeerImp::getLedger (std::shared_ptr<protocol::TMGetLedger> const& m)
         "Got request for " << packet.nodeids().size() << " nodes at depth " <<
         depth << ", return " << reply.nodes().size() << " nodes";
 
-    Message::pointer oPacket = std::make_shared<Message> (
+    Message::pointer oPacket = MessageFactory::instance()->create(
         reply, protocol::mtLEDGER_DATA);
     send (oPacket);
 }

@@ -904,7 +904,7 @@ void NetworkOPsImp::processClusterTimer ()
         node.set_cost (item.balance);
     }
     app_.overlay ().foreach (send_if (
-        std::make_shared<Message>(cluster, protocol::mtCLUSTER),
+        MessageFactory::instance()->create(cluster, protocol::mtCLUSTER),
         peer_in_cluster ()));
     setClusterTimer ();
 }
@@ -1277,7 +1277,7 @@ void NetworkOPsImp::apply (std::unique_lock<std::mutex>& batchLock)
                     tx.set_deferred(e.result == terQUEUED);
                     // FIXME: This should be when we received it
                     app_.overlay().foreach (send_if_not (
-                        std::make_shared<Message> (tx, protocol::mtTRANSACTION),
+                        MessageFactory::instance()->create(tx, protocol::mtTRANSACTION),
                         peer_in_set(*toSkip)));
                 }
             }
@@ -1569,7 +1569,7 @@ void NetworkOPsImp::switchLastClosedLedger (
         newLCL->info().hash.size ());
 
     app_.overlay ().foreach (send_always (
-        std::make_shared<Message> (s, protocol::mtSTATUS_CHANGE)));
+		MessageFactory::instance()->create(s, protocol::mtSTATUS_CHANGE)));
 }
 
 bool NetworkOPsImp::beginConsensus (uint256 const& networkClosed)
@@ -1645,7 +1645,7 @@ NetworkOPsImp::mapComplete (
     msg.set_hash (map->getHash().as_uint256().begin(), 256 / 8);
     msg.set_status (protocol::tsHAVE);
     app_.overlay().foreach (send_always (
-        std::make_shared<Message> (
+		MessageFactory::instance()->create(
             msg, protocol::mtHAVE_SET)));
 
     // We acquired it because consensus asked us to

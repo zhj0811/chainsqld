@@ -243,7 +243,7 @@ bool TableSync::SendSeekResultReply(std::string sAccountID, const STEntry * pEnt
 
     if (!MakeTableDataReply(sAccountID, pEntry, bStop, time, sNickName, eTargeType, reply))  return false;
 	
-    Message::pointer oPacket = std::make_shared<Message>(
+    Message::pointer oPacket = MessageFactory::instance()->create(
         reply, protocol::mtTABLE_DATA);
   
     auto peer = wPeer.lock();
@@ -280,7 +280,7 @@ bool TableSync::SendSeekEndReply(LedgerIndex iSeq, uint256 hash, LedgerIndex iLa
     ret = MakeSeekEndReply(iSeq, hash, iLastSeq, lastHash, checkHash, account, tablename, nickName, time, eTargeType, reply);
     if (!ret)  return false;
 
-    Message::pointer oPacket = std::make_shared<Message>(
+    Message::pointer oPacket = MessageFactory::instance()->create(
         reply, protocol::mtTABLE_DATA);
     
     auto peer = wPeer.lock();
@@ -559,7 +559,7 @@ bool TableSync::SendSyncRequest(AccountID accountID, std::string sTableName, Led
 	tmGT.set_etargettype(pItem->TargetType());
     tmGT.set_nickname(pItem->GetNickName());
 
-    pItem->SendTableMessage(std::make_shared<Message>(tmGT, protocol::mtGET_TABLE));
+    pItem->SendTableMessage(MessageFactory::instance()->create(tmGT, protocol::mtGET_TABLE));
     return true;
 }
 
@@ -1456,7 +1456,7 @@ bool TableSync::SendLedgerRequest(LedgerIndex iSeq, uint256 hash, std::shared_pt
     tmGL.set_itype(protocol::liSKIP_NODE);
     tmGL.set_querydepth(3); // We probably need the whole thing
 
-    Message::pointer oPacket = std::make_shared<Message>(
+    Message::pointer oPacket = MessageFactory::instance()->create(
         tmGL, protocol::mtGET_LEDGER);
     pItem->SendTableMessage(oPacket);
     return true;
