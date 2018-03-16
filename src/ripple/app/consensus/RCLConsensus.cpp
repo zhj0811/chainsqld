@@ -848,6 +848,7 @@ RCLConsensus::Adaptor::validate(RCLCxLedger const& ledger, bool proposing)
         validationTime = lastValidationTime_ + 1s;
     lastValidationTime_ = validationTime;
 
+	JLOG(j_.warn()) << "validate for ledger "<< ledger.seq();
     // Build validation
     auto v = std::make_shared<STValidation>(
         ledger.id(), validationTime, valPublic_, proposing);
