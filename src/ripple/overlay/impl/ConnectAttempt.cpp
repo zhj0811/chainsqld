@@ -387,7 +387,7 @@ ConnectAttempt::processResponse()
         std::move(ssl_bundle_), read_buf_.data(),
             std::move(slot_), std::move(response_),
                 usage_, *hello, *publicKey, id_, overlay_);
-
+	JLOG(journal_.warn()) << "new peer: "<< toBase58(TOKEN_ACCOUNT_PUBLIC, *publicKey);
     overlay_.add_active (peer);
 }
 

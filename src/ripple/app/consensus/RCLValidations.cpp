@@ -185,6 +185,8 @@ handleNewValidation(Application& app,
 
     beast::Journal j = validations.journal();
 
+	JLOG(j.warn()) << "handle validation,public_key = " << toBase58(TokenType::TOKEN_NODE_PUBLIC, signer) << ",source="<<source;
+
     // Do not process partial validations.
     if (!val->isFull())
     {
