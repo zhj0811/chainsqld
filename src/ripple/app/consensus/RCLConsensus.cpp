@@ -978,6 +978,9 @@ RCLConsensus::Adaptor::preStartRound(RCLCxLedger const & prevLgr)
         // Otherwise we just want to monitor the validation process.
         JLOG(j_.info()) << "Entering consensus process, watching, synced="
                         << (synced ? "yes" : "no");
+		JLOG(j_.warn()) << "validating_ = false,valPublic_.size() = " << valPublic_.size()
+			<< ",prevLgr.seq()=" << prevLgr.seq() << ",maxDisallowedLedger="
+			<< app_.getMaxDisallowedLedger() << ",isAmendmentBlocked=" << app_.getOPs().isAmendmentBlocked();
     }
 
     // Notify inbound ledgers that we are starting a new round
