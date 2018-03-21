@@ -2290,6 +2290,88 @@ LedgerMaster::makeFetchPack (
     }
 }
 
+
+void
+LedgerMaster::makeFetchPack(
+    std::shared_ptr<protocol::TMGetObjectByHash> const& request,
+    uint256 haveLedgerHash,
+    std::uint32_t uUptime)
+{
+    uUptime = UptimeTimer::getInstance().getElapsedSeconds();
+
+    auto haveLedger = getValidatedLedger();
+
+    auto wantLedger = getLedgerByHash(haveLedger->info().parentHash);
+    
+    auto fpAppender = [](
+        protocol::TMGetObjectByHash* reply,
+        std::uint32_t ledgerSeq,
+        SHAMapHash const& hash,
+        const Blob& blob)
+    {
+        protocol::TMIndexedObject& newObj = *(reply->add_objects());
+        newObj.set_ledgerseq(ledgerSeq);
+        newObj.set_hash(hash.as_uint256().begin(), 256 / 8);
+        newObj.set_data(&blob[0], blob.size());
+    };
+    while (wantLedger)
+    {
+        try
+        {
+            protocol::TMGetObjectByHash reply;
+            reply.set_query(false);
+            
+            reply.set_type(protocol::TMGetObjectByHash::otFETCH_PACK);
+
+            do
+            {
+                std::uint32_t lSeq = wantLedger->info().seq;
+                JLOG(m_journal.error())
+                    << "make fetch pack for ledger:  " << lSeq ;
+
+                protocol::TMIndexedObject& newObj = *reply.add_objects();
+                newObj.set_hash(
+                    wantLedger->info().hash.data(), 256 / 8);
+                Serializer s(256);
+                s.add32(HashPrefix::ledgerMaster);
+                addRaw(wantLedger->info(), s);
+                newObj.set_data(s.getDataPtr(), s.getLength());
+                newObj.set_ledgerseq(lSeq);
+
+                wantLedger->stateMap().getFetchPack
+                (&haveLedger->stateMap(), true, 16384,
+                    std::bind(fpAppender, &reply, lSeq, std::placeholders::_1,
+                        std::placeholders::_2));
+
+                if (wantLedger->info().txHash.isNonZero())
+                    wantLedger->txMap().getFetchPack(
+                        nullptr, true, 512,
+                        std::bind(fpAppender, &reply, lSeq, std::placeholders::_1,
+                            std::placeholders::_2));
+
+                if (reply.objects().size() >= 512)
+                    break;
+
+                // move may save a ref/unref
+                haveLedger = std::move(wantLedger);
+                wantLedger = getLedgerByHash(haveLedger->info().parentHash);
+            } while (wantLedger &&
+                UptimeTimer::getInstance().getElapsedSeconds() <= uUptime + 1);
+
+            //JLOG(m_journal.error())
+             //   << "Built fetch pack with " << reply.objects().size() << " nodes";
+            //auto msg = std::make_shared<Message>(reply, protocol::mtGET_OBJECTS);
+            //peer->send(msg);
+        }
+        catch (std::exception const&)
+        {
+            JLOG(m_journal.warn()) << "Exception building fetch pach";
+        }
+    }
+    
+}
+
+
 std::size_t
 LedgerMaster::getFetchPackCacheSize () const
 {

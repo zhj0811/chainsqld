@@ -265,6 +265,11 @@ public:
         uint256 haveLedgerHash,
         std::uint32_t uUptime);
 
+    void makeFetchPack(
+        std::shared_ptr<protocol::TMGetObjectByHash> const& request,
+        uint256 haveLedgerHash,
+        std::uint32_t uUptime);
+
     std::size_t getFetchPackCacheSize () const;
 
 private:

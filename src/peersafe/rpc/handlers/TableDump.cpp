@@ -99,6 +99,20 @@ namespace ripple {
 
 	Json::Value doTableDumpStop(RPC::Context& context)
 	{
+        Json::Value ret1(context.params);
+
+        uint256 hash;
+        std::shared_ptr<protocol::TMGetObjectByHash> request;
+        std::uint32_t elapsed = 0;
+        auto const pap = &context.app;
+        context.app.getJobQueue().addJob(
+            jtPACK, "MakeFetchPack",
+            [pap, request, hash, elapsed](Job&) {
+            pap->getLedgerMaster().makeFetchPack(
+                request, hash, elapsed);
+        });
+
+        return ret1;
 		Json::Value ret(context.params);
 
 		if (ret[jss::tx_json].size() != 2)
