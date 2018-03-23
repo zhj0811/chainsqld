@@ -54,7 +54,7 @@
 #include <cassert>
 #include <memory>
 #include <vector>
-
+#include <unistd.h>
 namespace ripple {
 
 using namespace std::chrono_literals;
@@ -2316,6 +2316,7 @@ LedgerMaster::makeFetchPack(
     };
     while (wantLedger)
     {
+        usleep(200000);
         try
         {
             protocol::TMGetObjectByHash reply;
