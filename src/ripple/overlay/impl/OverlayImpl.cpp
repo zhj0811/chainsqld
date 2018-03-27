@@ -277,7 +277,7 @@ OverlayImpl::onHandoff (std::unique_ptr <beast::asio::ssl_bundle>&& ssl_bundle,
         handoff.keep_alive = beast::rfc2616::is_keep_alive(request);
         return handoff;
     }
-	JLOG(journal.warn()) <<"connect peer,id= "<<id<<",publickey= " << toBase58(TOKEN_ACCOUNT_PUBLIC, *publicKey);
+	JLOG(journal.warn()) <<"connect peer,id= "<<id<<",publickey= " << toBase58(TOKEN_NODE_PUBLIC, *publicKey);
     auto const peer = std::make_shared<PeerImp>(app_, id,
         remote_endpoint, slot, std::move(request), *hello,
             *publicKey, consumer, std::move(ssl_bundle), *this);

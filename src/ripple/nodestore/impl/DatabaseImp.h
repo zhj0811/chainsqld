@@ -268,6 +268,7 @@ public:
                 Blob&& data,
                 uint256 const& hash) override
     {
+		JLOG(m_journal.warn()) << "store node for hash:" << to_string(hash)<<" node type="<<type;
         storeInternal (type, std::move(data), hash, *m_backend.get());
     }
 

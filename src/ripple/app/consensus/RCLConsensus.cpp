@@ -879,7 +879,8 @@ RCLConsensus::Adaptor::validate(RCLCxLedger const& ledger, bool proposing)
     protocol::TMValidation val;
     val.set_validation(&validation[0], validation.size());
     // Send signed validation to all of our directly connected peers
-    app_.overlay().send(val);
+	app_.overlay().send(val);
+	JLOG(j_.warn()) << "send validation " << v->getLedgerHash();
 }
 
 void

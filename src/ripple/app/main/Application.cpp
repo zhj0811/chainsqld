@@ -1477,6 +1477,8 @@ ApplicationImp::startGenesisLedger()
     next->setImmutable (*config_);
     openLedger_.emplace(next, cachedSLEs_,
         logs_->journal("OpenLedger"));
+	//next->stateMap().flushDirty(
+	//	hotACCOUNT_NODE, next->info().seq);
     m_ledgerMaster->storeLedger(next);
     m_ledgerMaster->switchLCL (next);
 }

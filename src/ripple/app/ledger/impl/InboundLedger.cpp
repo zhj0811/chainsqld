@@ -501,6 +501,7 @@ void InboundLedger::trigger (std::shared_ptr<Peer> const& peer, TriggerReason re
 
     protocol::TMGetLedger tmGL;
     tmGL.set_ledgerhash (mHash.begin (), mHash.size ());
+	JLOG(m_journal.error()) << "require ledger:" << to_string(mHash);
 
     if (getTimeouts () != 0)
     { // Be more aggressive if we've timed out at least once
