@@ -174,6 +174,7 @@ TxStoreDBConn& TableSyncItem::getTxStoreDBConn()
 		if (conn_->GetDBConn() == NULL)
 		{
 			JLOG(journal_.error()) << "TableSyncItem::getTxStoreDBConn() return null";
+            SetSyncState(SYNC_STOP);
 		}
     }
     return *conn_;
@@ -1158,6 +1159,9 @@ bool TableSyncItem::DealWithEveryLedgerData(const std::vector<protocol::TMTableD
 }
 void TableSyncItem::OperateSQLThread()
 {
+    //check the connection is ok
+    getTxStoreDBConn();
+
 	if (GetSyncState() == SYNC_STOP)
 	{
 		bOperateSQL_ = false;
