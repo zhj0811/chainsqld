@@ -539,6 +539,12 @@ void TableSyncItem::SetSyncTxLedger(LedgerIndex iSeq, uint256 uHash)
 void TableSyncItem::SetSyncState(TableSyncState eState)
 {
     std::lock_guard<std::mutex> lock(mutexInfo_);
+	if (eState_ == SYNC_DELETING)
+		if (eState_ != SYNC_REMOVE && eState_ != SYNC_INIT)
+			return;
+	if (eState_ == SYNC_REMOVE)
+		return;
+
     if(eState_ != SYNC_STOP)    eState_ = eState;
 }
 

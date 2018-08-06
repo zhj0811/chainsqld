@@ -826,6 +826,8 @@ bool TableSync::isExist(std::list<std::shared_ptr <TableSyncItem>>  listTableInf
     std::lock_guard<std::mutex> lock(mutexlistTable_);
     std::list<std::shared_ptr <TableSyncItem>>::iterator iter = std::find_if(listTableInfo_.begin(), listTableInfo_.end(),
         [accountID, sTableName, eTargeType](std::shared_ptr <TableSyncItem> pItem) {
+		if (pItem->GetSyncState() == TableSyncItem::SYNC_DELETING || pItem->GetSyncState() == TableSyncItem::SYNC_REMOVE)
+			return false;
         return pItem->GetTableName() == sTableName && pItem->GetAccount() == accountID && pItem->TargetType() == eTargeType;
     });
     if (iter == listTableInfo_.end())     return false;
