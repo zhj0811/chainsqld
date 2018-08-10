@@ -131,7 +131,7 @@ Handler handlerArray[] {
     {   "logrotate",            byRef (&doLogRotate),          Role::ADMIN,   NO_CONDITION     },
     {   "noripple_check",       byRef (&doNoRippleCheck),      Role::USER,  NO_CONDITION  },
     {   "owner_info",           byRef (&doOwnerInfo),          Role::USER,  NEEDS_CURRENT_LEDGER  },
-    {   "peers",                byRef (&doPeers),              Role::ADMIN,   NO_CONDITION     },
+    {   "peers",                byRef (&doPeers),              Role::USER,   NO_CONDITION     },
     {   "path_find",            byRef (&doPathFind),           Role::USER,  NEEDS_CURRENT_LEDGER  },
     {   "ping",                 byRef (&doPing),               Role::USER,  NO_CONDITION     },
     {   "print",                byRef (&doPrint),              Role::ADMIN,   NO_CONDITION     },
