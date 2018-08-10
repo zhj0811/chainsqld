@@ -2284,8 +2284,8 @@ Json::Value NetworkOPsImp::getServerInfo (bool human, bool admin)
     info[jss::io_latency_ms] = static_cast<Json::UInt> (
         app_.getIOLatency().count());
 
-    if (admin)
-    {
+    //if (admin)
+    //{
         if (!app_.getValidationPublicKey().empty())
         {
             info[jss::pubkey_validator] = toBase58 (
@@ -2296,7 +2296,7 @@ Json::Value NetworkOPsImp::getServerInfo (bool human, bool admin)
         {
             info[jss::pubkey_validator] = "none";
         }
-    }
+    //}
 
     info[jss::pubkey_node] = toBase58 (
         TokenType::TOKEN_NODE_PUBLIC,
