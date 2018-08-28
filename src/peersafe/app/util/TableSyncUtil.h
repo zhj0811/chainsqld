@@ -1,3 +1,26 @@
+/**
+
+* @file       TableSyncUtil.h
+
+* @brief      同步表工具类.
+
+* @details	同步表工具类
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
 This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -23,7 +46,13 @@ along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
 #include <peersafe/protocol/STEntry.h>
 
 namespace ripple {
-	//table sync tool class
+	/**
+
+	* 同步表工具类
+
+	* 同步表工具类
+
+	*/
 	class TableSyncUtil {
 	public:
 		static uint256 GetChainId(const ReadView * pView);

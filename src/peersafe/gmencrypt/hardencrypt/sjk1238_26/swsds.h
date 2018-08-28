@@ -31,7 +31,7 @@
 extern "C"{
 #endif
     
-    /*数据类型定义*/
+    /*�������Ͷ���*/
     typedef char				SGD_CHAR;
     typedef char				SGD_INT8;
     typedef short				SGD_INT16;
@@ -47,7 +47,7 @@ extern "C"{
     typedef int					SGD_BOOL;
     typedef void*				SGD_HANDLE;
     
-    /*设备信息*/
+    /*�豸��Ϣ*/
     typedef struct DeviceInfo_st{
         unsigned char IssuerName[40];
         unsigned char DeviceName[16];
@@ -60,7 +60,7 @@ extern "C"{
         unsigned int  BufferSize;
     } DEVICEINFO;
     
-    /*RSA密钥*/
+    /*RSA��Կ*/
 #define RSAref_MAX_BITS    2048
 #define RSAref_MAX_LEN     ((RSAref_MAX_BITS + 7) / 8)
 #define RSAref_MAX_PBITS   ((RSAref_MAX_BITS + 1) / 2)
@@ -85,7 +85,7 @@ extern "C"{
     } RSArefPrivateKey;
     
     
-    /*ECC密钥*/
+    /*ECC��Կ*/
 #define ECCref_MAX_BITS			256
 #define ECCref_MAX_LEN			((ECCref_MAX_BITS+7) / 8)
 #define ECCref_MAX_CIPHER_LEN	136
@@ -103,28 +103,28 @@ extern "C"{
         unsigned char D[ECCref_MAX_LEN];
     } ECCrefPrivateKey;
     
-    /*ECC 密文*/
+    /*ECC ����*/
     typedef struct ECCCipher_st
     {
-        unsigned int  clength;  //C的有效长度
+        unsigned int  clength;  //C����Ч����
         unsigned char x[ECCref_MAX_LEN];
         unsigned char y[ECCref_MAX_LEN];
         unsigned char C[ECCref_MAX_CIPHER_LEN];
         unsigned char M[ECCref_MAX_LEN];
     } ECCCipher;
     
-    /*ECC 签名*/
+    /*ECC ǩ��*/
     typedef struct ECCSignature_st
     {
         unsigned char r[ECCref_MAX_LEN];
         unsigned char s[ECCref_MAX_LEN];
     } ECCSignature;
     
-    /*常量定义*/
+    /*��������*/
 #define SGD_TRUE		0x00000001
 #define SGD_FALSE		0x00000000
     
-    /*算法标识*/
+    /*�㷨��ʶ*/
 #define SGD_SM1_ECB		0x00000101
 #define SGD_SM1_CBC		0x00000102
 #define SGD_SM1_CFB		0x00000104
@@ -183,110 +183,110 @@ extern "C"{
 #define SGD_MD5			0x00000080
     
     
-    /*标准错误码定义*/
-#define SDR_OK					0x0						   /*成功*/
+    /*��׼�����붨��*/
+#define SDR_OK					0x0						   /*�ɹ�*/
 #define SDR_BASE				0x01000000
-#define SDR_UNKNOWERR			(SDR_BASE + 0x00000001)	   /*未知错误*/
-#define SDR_NOTSUPPORT			(SDR_BASE + 0x00000002)	   /*不支持*/
-#define SDR_COMMFAIL			(SDR_BASE + 0x00000003)    /*通信错误*/
-#define SDR_HARDFAIL			(SDR_BASE + 0x00000004)    /*硬件错误*/
-#define SDR_OPENDEVICE			(SDR_BASE + 0x00000005)    /*打开设备错误*/
-#define SDR_OPENSESSION			(SDR_BASE + 0x00000006)    /*打开会话句柄错误*/
-#define SDR_PARDENY				(SDR_BASE + 0x00000007)    /*权限不满足*/
-#define SDR_KEYNOTEXIST			(SDR_BASE + 0x00000008)    /*密钥不存在*/
-#define SDR_ALGNOTSUPPORT		(SDR_BASE + 0x00000009)    /*不支持的算法*/
-#define SDR_ALGMODNOTSUPPORT	(SDR_BASE + 0x0000000A)    /*不支持的算法模式*/
-#define SDR_PKOPERR				(SDR_BASE + 0x0000000B)    /*公钥运算错误*/
-#define SDR_SKOPERR				(SDR_BASE + 0x0000000C)    /*私钥运算错误*/
-#define SDR_SIGNERR				(SDR_BASE + 0x0000000D)    /*签名错误*/
-#define SDR_VERIFYERR			(SDR_BASE + 0x0000000E)    /*验证错误*/
-#define SDR_SYMOPERR			(SDR_BASE + 0x0000000F)    /*对称运算错误*/
-#define SDR_STEPERR				(SDR_BASE + 0x00000010)    /*步骤错误*/
-#define SDR_FILESIZEERR			(SDR_BASE + 0x00000011)    /*文件大小错误或输入数据长度非法*/
-#define SDR_FILENOEXIST			(SDR_BASE + 0x00000012)    /*文件不存在*/
-#define SDR_FILEOFSERR			(SDR_BASE + 0x00000013)    /*文件操作偏移量错误*/
-#define SDR_KEYTYPEERR			(SDR_BASE + 0x00000014)    /*密钥类型错误*/
-#define SDR_KEYERR				(SDR_BASE + 0x00000015)    /*密钥错误*/
+#define SDR_UNKNOWERR			(SDR_BASE + 0x00000001)	   /*δ֪����*/
+#define SDR_NOTSUPPORT			(SDR_BASE + 0x00000002)	   /*��֧��*/
+#define SDR_COMMFAIL			(SDR_BASE + 0x00000003)    /*ͨ�Ŵ���*/
+#define SDR_HARDFAIL			(SDR_BASE + 0x00000004)    /*Ӳ������*/
+#define SDR_OPENDEVICE			(SDR_BASE + 0x00000005)    /*���豸����*/
+#define SDR_OPENSESSION			(SDR_BASE + 0x00000006)    /*�򿪻Ự�������*/
+#define SDR_PARDENY				(SDR_BASE + 0x00000007)    /*Ȩ�޲�����*/
+#define SDR_KEYNOTEXIST			(SDR_BASE + 0x00000008)    /*��Կ������*/
+#define SDR_ALGNOTSUPPORT		(SDR_BASE + 0x00000009)    /*��֧�ֵ��㷨*/
+#define SDR_ALGMODNOTSUPPORT	(SDR_BASE + 0x0000000A)    /*��֧�ֵ��㷨ģʽ*/
+#define SDR_PKOPERR				(SDR_BASE + 0x0000000B)    /*��Կ�������*/
+#define SDR_SKOPERR				(SDR_BASE + 0x0000000C)    /*˽Կ�������*/
+#define SDR_SIGNERR				(SDR_BASE + 0x0000000D)    /*ǩ������*/
+#define SDR_VERIFYERR			(SDR_BASE + 0x0000000E)    /*��֤����*/
+#define SDR_SYMOPERR			(SDR_BASE + 0x0000000F)    /*�Գ��������*/
+#define SDR_STEPERR				(SDR_BASE + 0x00000010)    /*�������*/
+#define SDR_FILESIZEERR			(SDR_BASE + 0x00000011)    /*�ļ���С������������ݳ��ȷǷ�*/
+#define SDR_FILENOEXIST			(SDR_BASE + 0x00000012)    /*�ļ�������*/
+#define SDR_FILEOFSERR			(SDR_BASE + 0x00000013)    /*�ļ�����ƫ��������*/
+#define SDR_KEYTYPEERR			(SDR_BASE + 0x00000014)    /*��Կ���ʹ���*/
+#define SDR_KEYERR				(SDR_BASE + 0x00000015)    /*��Կ����*/
     
     /*============================================================*/
-    /*扩展错误码*/
-#define SWR_BASE				(SDR_BASE + 0x00010000)	/*自定义错误码基础值*/
-#define SWR_INVALID_USER		(SWR_BASE + 0x00000001)	/*无效的用户名*/
-#define SWR_INVALID_AUTHENCODE	(SWR_BASE + 0x00000002)	/*无效的授权码*/
-#define SWR_PROTOCOL_VER_ERR	(SWR_BASE + 0x00000003)	/*不支持的协议版本*/
-#define SWR_INVALID_COMMAND		(SWR_BASE + 0x00000004)	/*错误的命令字*/
-#define SWR_INVALID_PARAMETERS	(SWR_BASE + 0x00000005)	/*参数错误或错误的数据包格式*/
-#define SWR_FILE_ALREADY_EXIST	(SWR_BASE + 0x00000006)	/*已存在同名文件*/
-#define SWR_SYNCH_ERR			(SWR_BASE + 0x00000007)	/*多卡同步错误*/
-#define SWR_SYNCH_LOGIN_ERR		(SWR_BASE + 0x00000008)	/*多卡同步后登录错误*/
+    /*��չ������*/
+#define SWR_BASE				(SDR_BASE + 0x00010000)	/*�Զ�����������ֵ*/
+#define SWR_INVALID_USER		(SWR_BASE + 0x00000001)	/*��Ч���û���*/
+#define SWR_INVALID_AUTHENCODE	(SWR_BASE + 0x00000002)	/*��Ч����Ȩ��*/
+#define SWR_PROTOCOL_VER_ERR	(SWR_BASE + 0x00000003)	/*��֧�ֵ�Э��汾*/
+#define SWR_INVALID_COMMAND		(SWR_BASE + 0x00000004)	/*�����������*/
+#define SWR_INVALID_PARAMETERS	(SWR_BASE + 0x00000005)	/*����������������ݰ���ʽ*/
+#define SWR_FILE_ALREADY_EXIST	(SWR_BASE + 0x00000006)	/*�Ѵ���ͬ���ļ�*/
+#define SWR_SYNCH_ERR			(SWR_BASE + 0x00000007)	/*�࿨ͬ������*/
+#define SWR_SYNCH_LOGIN_ERR		(SWR_BASE + 0x00000008)	/*�࿨ͬ�����¼����*/
     
-#define SWR_SOCKET_TIMEOUT		(SWR_BASE + 0x00000100)	/*超时错误*/
-#define SWR_CONNECT_ERR			(SWR_BASE + 0x00000101)	/*连接服务器错误*/
-#define SWR_SET_SOCKOPT_ERR		(SWR_BASE + 0x00000102)	/*设置Socket参数错误*/
-#define SWR_SOCKET_SEND_ERR		(SWR_BASE + 0x00000104)	/*发送LOGINRequest错误*/
-#define SWR_SOCKET_RECV_ERR		(SWR_BASE + 0x00000105)	/*发送LOGINRequest错误*/
-#define SWR_SOCKET_RECV_0		(SWR_BASE + 0x00000106)	/*发送LOGINRequest错误*/
+#define SWR_SOCKET_TIMEOUT		(SWR_BASE + 0x00000100)	/*��ʱ����*/
+#define SWR_CONNECT_ERR			(SWR_BASE + 0x00000101)	/*���ӷ���������*/
+#define SWR_SET_SOCKOPT_ERR		(SWR_BASE + 0x00000102)	/*����Socket��������*/
+#define SWR_SOCKET_SEND_ERR		(SWR_BASE + 0x00000104)	/*����LOGINRequest����*/
+#define SWR_SOCKET_RECV_ERR		(SWR_BASE + 0x00000105)	/*����LOGINRequest����*/
+#define SWR_SOCKET_RECV_0		(SWR_BASE + 0x00000106)	/*����LOGINRequest����*/
     
-#define SWR_SEM_TIMEOUT			(SWR_BASE + 0x00000200)	/*超时错误*/
-#define SWR_NO_AVAILABLE_HSM	(SWR_BASE + 0x00000201)	/*没有可用的加密机*/
-#define SWR_NO_AVAILABLE_CSM	(SWR_BASE + 0x00000202)	/*加密机内没有可用的加密模块*/
+#define SWR_SEM_TIMEOUT			(SWR_BASE + 0x00000200)	/*��ʱ����*/
+#define SWR_NO_AVAILABLE_HSM	(SWR_BASE + 0x00000201)	/*û�п��õļ��ܻ�*/
+#define SWR_NO_AVAILABLE_CSM	(SWR_BASE + 0x00000202)	/*���ܻ���û�п��õļ���ģ��*/
     
-#define SWR_CONFIG_ERR			(SWR_BASE + 0x00000301)	/*配置文件错误*/
-    
-    /*============================================================*/
-    /*密码卡错误码*/
-#define SWR_CARD_BASE					(SDR_BASE + 0x00020000)			/*密码卡错误码*/
-#define SWR_CARD_UNKNOWERR				(SWR_CARD_BASE + 0x00000001)	//未知错误
-#define SWR_CARD_NOTSUPPORT				(SWR_CARD_BASE + 0x00000002)	//不支持的接口调用
-#define SWR_CARD_COMMFAIL				(SWR_CARD_BASE + 0x00000003)	//与设备通信失败
-#define SWR_CARD_HARDFAIL				(SWR_CARD_BASE + 0x00000004)	//运算模块无响应
-#define SWR_CARD_OPENDEVICE				(SWR_CARD_BASE + 0x00000005)	//打开设备失败
-#define SWR_CARD_OPENSESSION			(SWR_CARD_BASE + 0x00000006)	//创建会话失败
-#define SWR_CARD_PARDENY				(SWR_CARD_BASE + 0x00000007)	//无私钥使用权限
-#define SWR_CARD_KEYNOTEXIST			(SWR_CARD_BASE + 0x00000008)	//不存在的密钥调用
-#define SWR_CARD_ALGNOTSUPPORT			(SWR_CARD_BASE + 0x00000009)	//不支持的算法调用
-#define SWR_CARD_ALGMODNOTSUPPORT		(SWR_CARD_BASE + 0x00000010)	//不支持的算法调用
-#define SWR_CARD_PKOPERR				(SWR_CARD_BASE + 0x00000011)	//公钥运算失败
-#define SWR_CARD_SKOPERR				(SWR_CARD_BASE + 0x00000012)	//私钥运算失败
-#define SWR_CARD_SIGNERR				(SWR_CARD_BASE + 0x00000013)	//签名运算失败
-#define SWR_CARD_VERIFYERR				(SWR_CARD_BASE + 0x00000014)	//验证签名失败
-#define SWR_CARD_SYMOPERR				(SWR_CARD_BASE + 0x00000015)	//对称算法运算失败
-#define SWR_CARD_STEPERR				(SWR_CARD_BASE + 0x00000016)	//多步运算步骤错误
-#define SWR_CARD_FILESIZEERR			(SWR_CARD_BASE + 0x00000017)	//文件长度超出限制
-#define SWR_CARD_FILENOEXIST			(SWR_CARD_BASE + 0x00000018)	//指定的文件不存在
-#define SWR_CARD_FILEOFSERR				(SWR_CARD_BASE + 0x00000019)	//文件起始位置错误
-#define SWR_CARD_KEYTYPEERR				(SWR_CARD_BASE + 0x00000020)	//密钥类型错误
-#define SWR_CARD_KEYERR					(SWR_CARD_BASE + 0x00000021)	//密钥错误
-#define SWR_CARD_BUFFER_TOO_SMALL		(SWR_CARD_BASE + 0x00000101)	//接收参数的缓存区太小
-#define SWR_CARD_DATA_PAD				(SWR_CARD_BASE + 0x00000102)	//数据没有按正确格式填充，或解密得到的脱密数据不符合填充格式
-#define SWR_CARD_DATA_SIZE				(SWR_CARD_BASE + 0x00000103)	//明文或密文长度不符合相应的算法要求
-#define SWR_CARD_CRYPTO_NOT_INIT		(SWR_CARD_BASE + 0x00000104)	//该错误表明没有为相应的算法调用初始化函数
-    
-    //01/03/09版密码卡权限管理错误码
-#define SWR_CARD_MANAGEMENT_DENY		(SWR_CARD_BASE + 0x00001001)	//管理权限不满足
-#define SWR_CARD_OPERATION_DENY			(SWR_CARD_BASE + 0x00001002)	//操作权限不满足
-#define SWR_CARD_DEVICE_STATUS_ERR		(SWR_CARD_BASE + 0x00001003)	//当前设备状态不满足现有操作
-#define SWR_CARD_LOGIN_ERR				(SWR_CARD_BASE + 0x00001011)	//登录失败
-#define SWR_CARD_USERID_ERR				(SWR_CARD_BASE + 0x00001012)	//用户ID数目/号码错误
-#define SWR_CARD_PARAMENT_ERR			(SWR_CARD_BASE + 0x00001013)	//参数错误
-    
-    //05/06版密码卡权限管理错误码
-#define SWR_CARD_MANAGEMENT_DENY_05		(SWR_CARD_BASE + 0x00000801)	//管理权限不满足
-#define SWR_CARD_OPERATION_DENY_05		(SWR_CARD_BASE + 0x00000802)	//操作权限不满足
-#define SWR_CARD_DEVICE_STATUS_ERR_05	(SWR_CARD_BASE + 0x00000803)	//当前设备状态不满足现有操作
-#define SWR_CARD_LOGIN_ERR_05			(SWR_CARD_BASE + 0x00000811)	//登录失败
-#define SWR_CARD_USERID_ERR_05			(SWR_CARD_BASE + 0x00000812)	//用户ID数目/号码错误
-#define SWR_CARD_PARAMENT_ERR_05		(SWR_CARD_BASE + 0x00000813)	//参数错误
+#define SWR_CONFIG_ERR			(SWR_BASE + 0x00000301)	/*�����ļ�����*/
     
     /*============================================================*/
-    /*读卡器错误*/
-#define SWR_CARD_READER_BASE				(SDR_BASE + 0x00030000)	//	读卡器类型错误
-#define SWR_CARD_READER_PIN_ERROR			(SWR_CARD_READER_BASE + 0x000063CE)  //口令错误
-#define SWR_CARD_READER_NO_CARD				(SWR_CARD_READER_BASE + 0x0000FF01)	 //	IC未插入
-#define SWR_CARD_READER_CARD_INSERT			(SWR_CARD_READER_BASE + 0x0000FF02)	 //	IC插入方向错误或不到位
-#define SWR_CARD_READER_CARD_INSERT_TYPE	(SWR_CARD_READER_BASE + 0x0000FF03)	 //	IC类型错误
+    /*���뿨������*/
+#define SWR_CARD_BASE					(SDR_BASE + 0x00020000)			/*���뿨������*/
+#define SWR_CARD_UNKNOWERR				(SWR_CARD_BASE + 0x00000001)	//δ֪����
+#define SWR_CARD_NOTSUPPORT				(SWR_CARD_BASE + 0x00000002)	//��֧�ֵĽӿڵ���
+#define SWR_CARD_COMMFAIL				(SWR_CARD_BASE + 0x00000003)	//���豸ͨ��ʧ��
+#define SWR_CARD_HARDFAIL				(SWR_CARD_BASE + 0x00000004)	//����ģ������Ӧ
+#define SWR_CARD_OPENDEVICE				(SWR_CARD_BASE + 0x00000005)	//���豸ʧ��
+#define SWR_CARD_OPENSESSION			(SWR_CARD_BASE + 0x00000006)	//�����Ựʧ��
+#define SWR_CARD_PARDENY				(SWR_CARD_BASE + 0x00000007)	//��˽Կʹ��Ȩ��
+#define SWR_CARD_KEYNOTEXIST			(SWR_CARD_BASE + 0x00000008)	//�����ڵ���Կ����
+#define SWR_CARD_ALGNOTSUPPORT			(SWR_CARD_BASE + 0x00000009)	//��֧�ֵ��㷨����
+#define SWR_CARD_ALGMODNOTSUPPORT		(SWR_CARD_BASE + 0x00000010)	//��֧�ֵ��㷨����
+#define SWR_CARD_PKOPERR				(SWR_CARD_BASE + 0x00000011)	//��Կ����ʧ��
+#define SWR_CARD_SKOPERR				(SWR_CARD_BASE + 0x00000012)	//˽Կ����ʧ��
+#define SWR_CARD_SIGNERR				(SWR_CARD_BASE + 0x00000013)	//ǩ������ʧ��
+#define SWR_CARD_VERIFYERR				(SWR_CARD_BASE + 0x00000014)	//��֤ǩ��ʧ��
+#define SWR_CARD_SYMOPERR				(SWR_CARD_BASE + 0x00000015)	//�Գ��㷨����ʧ��
+#define SWR_CARD_STEPERR				(SWR_CARD_BASE + 0x00000016)	//�ಽ���㲽�����
+#define SWR_CARD_FILESIZEERR			(SWR_CARD_BASE + 0x00000017)	//�ļ����ȳ�������
+#define SWR_CARD_FILENOEXIST			(SWR_CARD_BASE + 0x00000018)	//ָ�����ļ�������
+#define SWR_CARD_FILEOFSERR				(SWR_CARD_BASE + 0x00000019)	//�ļ���ʼλ�ô���
+#define SWR_CARD_KEYTYPEERR				(SWR_CARD_BASE + 0x00000020)	//��Կ���ʹ���
+#define SWR_CARD_KEYERR					(SWR_CARD_BASE + 0x00000021)	//��Կ����
+#define SWR_CARD_BUFFER_TOO_SMALL		(SWR_CARD_BASE + 0x00000101)	//���ղ����Ļ�����̫С
+#define SWR_CARD_DATA_PAD				(SWR_CARD_BASE + 0x00000102)	//����û�а���ȷ��ʽ��䣬����ܵõ����������ݲ���������ʽ
+#define SWR_CARD_DATA_SIZE				(SWR_CARD_BASE + 0x00000103)	//���Ļ����ĳ��Ȳ�������Ӧ���㷨Ҫ��
+#define SWR_CARD_CRYPTO_NOT_INIT		(SWR_CARD_BASE + 0x00000104)	//�ô������û��Ϊ��Ӧ���㷨���ó�ʼ������
     
-    /*设备管理类函数*/
+    //01/03/09�����뿨Ȩ�޹���������
+#define SWR_CARD_MANAGEMENT_DENY		(SWR_CARD_BASE + 0x00001001)	//����Ȩ�޲�����
+#define SWR_CARD_OPERATION_DENY			(SWR_CARD_BASE + 0x00001002)	//����Ȩ�޲�����
+#define SWR_CARD_DEVICE_STATUS_ERR		(SWR_CARD_BASE + 0x00001003)	//��ǰ�豸״̬���������в���
+#define SWR_CARD_LOGIN_ERR				(SWR_CARD_BASE + 0x00001011)	//��¼ʧ��
+#define SWR_CARD_USERID_ERR				(SWR_CARD_BASE + 0x00001012)	//�û�ID��Ŀ/�������
+#define SWR_CARD_PARAMENT_ERR			(SWR_CARD_BASE + 0x00001013)	//��������
+    
+    //05/06�����뿨Ȩ�޹���������
+#define SWR_CARD_MANAGEMENT_DENY_05		(SWR_CARD_BASE + 0x00000801)	//����Ȩ�޲�����
+#define SWR_CARD_OPERATION_DENY_05		(SWR_CARD_BASE + 0x00000802)	//����Ȩ�޲�����
+#define SWR_CARD_DEVICE_STATUS_ERR_05	(SWR_CARD_BASE + 0x00000803)	//��ǰ�豸״̬���������в���
+#define SWR_CARD_LOGIN_ERR_05			(SWR_CARD_BASE + 0x00000811)	//��¼ʧ��
+#define SWR_CARD_USERID_ERR_05			(SWR_CARD_BASE + 0x00000812)	//�û�ID��Ŀ/�������
+#define SWR_CARD_PARAMENT_ERR_05		(SWR_CARD_BASE + 0x00000813)	//��������
+    
+    /*============================================================*/
+    /*����������*/
+#define SWR_CARD_READER_BASE				(SDR_BASE + 0x00030000)	//	���������ʹ���
+#define SWR_CARD_READER_PIN_ERROR			(SWR_CARD_READER_BASE + 0x000063CE)  //�������
+#define SWR_CARD_READER_NO_CARD				(SWR_CARD_READER_BASE + 0x0000FF01)	 //	ICδ����
+#define SWR_CARD_READER_CARD_INSERT			(SWR_CARD_READER_BASE + 0x0000FF02)	 //	IC���뷽�����򲻵�λ
+#define SWR_CARD_READER_CARD_INSERT_TYPE	(SWR_CARD_READER_BASE + 0x0000FF03)	 //	IC���ʹ���
+    
+    /*�豸�����ຯ��*/
     SGD_RV SDF_OpenDevice(SGD_HANDLE *phDeviceHandle);
     SGD_RV SDF_CloseDevice(SGD_HANDLE hDeviceHandle);
     SGD_RV SDF_OpenSession(SGD_HANDLE hDeviceHandle, SGD_HANDLE *phSessionHandle);
@@ -298,7 +298,7 @@ extern "C"{
     SGD_RV SDF_GetFirmwareVersion(SGD_HANDLE hSessionHandle, SGD_UCHAR * sFirmware, SGD_UINT32 * ulFirmwareLen);
     SGD_RV SDF_GetLibraryVersion(SGD_HANDLE hSessionHandle, SGD_UCHAR * sLibraryVersion, SGD_UINT32 * ulLibraryVersionLen);
     
-    /*密钥管理类函数*/
+    /*��Կ�����ຯ��*/
     SGD_RV SDF_GenerateKeyPair_RSA(SGD_HANDLE hSessionHandle, SGD_UINT32  uiKeyBits, RSArefPublicKey *pucPublicKey, RSArefPrivateKey *pucPrivateKey);
     SGD_RV SDF_ExportSignPublicKey_RSA(SGD_HANDLE hSessionHandle, SGD_UINT32  uiKeyIndex, RSArefPublicKey *pucPublicKey);
     SGD_RV SDF_ExportEncPublicKey_RSA(SGD_HANDLE hSessionHandle, SGD_UINT32  uiKeyIndex, RSArefPublicKey *pucPublicKey);
@@ -330,7 +330,7 @@ extern "C"{
     SGD_RV SDF_GenerateKeyWithKEK(SGD_HANDLE hSessionHandle, SGD_UINT32 uiKeyBits, SGD_UINT32 uiAlgID,SGD_UINT32 uiKEKIndex, SGD_UCHAR *pucKey, SGD_UINT32 *puiKeyLength, SGD_HANDLE *phKeyHandle);
     SGD_RV SDF_ImportKeyWithKEK(SGD_HANDLE hSessionHandle, SGD_UINT32 uiAlgID, SGD_UINT32 uiKEKIndex, SGD_UCHAR *pucKey, SGD_UINT32 uiKeyLength, SGD_HANDLE *phKeyHandle);
     
-    /*非对称密码运算函数*/
+    /*�ǶԳ��������㺯��*/
     SGD_RV SDF_ExternalPublicKeyOperation_RSA(SGD_HANDLE hSessionHandle, RSArefPublicKey *pucPublicKey, SGD_UCHAR *pucDataInput, SGD_UINT32 uiInputLength, SGD_UCHAR *pucDataOutput, \
                                               SGD_UINT32 *puiOutputLength);
     SGD_RV SDF_ExternalPrivateKeyOperation_RSA(SGD_HANDLE hSessionHandle, RSArefPrivateKey *pucPrivateKey, SGD_UCHAR *pucDataInput, SGD_UINT32 uiInputLength, SGD_UCHAR *pucDataOutput, \
@@ -351,7 +351,7 @@ extern "C"{
     SGD_RV SDF_InternalEncrypt_ECC(SGD_HANDLE hSessionHandle, SGD_UINT32 uiIPKIndex, SGD_UINT32 uiAlgID, SGD_UCHAR *pucData, SGD_UINT32 uiDataLength, ECCCipher *pucEncData);
     SGD_RV SDF_InternalDecrypt_ECC(SGD_HANDLE hSessionHandle, SGD_UINT32 uiISKIndex, SGD_UINT32 uiAlgID, ECCCipher *pucEncData, SGD_UCHAR *pucData, SGD_UINT32 *puiDataLength);
     
-    /*对称密码运算函数*/
+    /*�Գ��������㺯��*/
     SGD_RV SDF_Encrypt(SGD_HANDLE hSessionHandle, SGD_HANDLE hKeyHandle, SGD_UINT32 uiAlgID, SGD_UCHAR *pucIV, SGD_UCHAR *pucData, SGD_UINT32 uiDataLength, SGD_UCHAR *pucEncData, \
                        SGD_UINT32 *puiEncDataLength);
     SGD_RV SDF_Decrypt(SGD_HANDLE hSessionHandle, SGD_HANDLE hKeyHandle, SGD_UINT32 uiAlgID, SGD_UCHAR *pucIV, SGD_UCHAR *pucEncData, SGD_UINT32 uiEncDataLength, SGD_UCHAR *pucData, \
@@ -359,13 +359,13 @@ extern "C"{
     SGD_RV SDF_CalculateMAC(SGD_HANDLE hSessionHandle, SGD_HANDLE hKeyHandle, SGD_UINT32 uiAlgID, SGD_UCHAR *pucIV, SGD_UCHAR *pucData, SGD_UINT32 uiDataLength, SGD_UCHAR *pucMAC, \
                             SGD_UINT32 *puiMACLength);
     
-    /*杂凑运算函数*/
+    /*�Ӵ����㺯��*/
     SGD_RV SDF_HashInit(SGD_HANDLE hSessionHandle, SGD_UINT32 uiAlgID, ECCrefPublicKey *pucPublicKey, SGD_UCHAR *pucID, SGD_UINT32 uiIDLength);
     SGD_RV SDF_HashUpdate(SGD_HANDLE hSessionHandle, SGD_UCHAR *pucData, SGD_UINT32 uiDataLength);
     SGD_RV SDF_HashFinal(SGD_HANDLE hSessionHandle, SGD_UCHAR *pucHash, SGD_UINT32 *puiHashLength);
     SGD_RV SDF_HashInit_ECC(SGD_HANDLE hSessionHandle, SGD_UINT32 uiAlgID, SGD_UCHAR *pucParamID);
     
-    /*用户文件操作函数*/
+    /*�û��ļ���������*/
     SGD_RV SDF_CreateFile(SGD_HANDLE hSessionHandle, SGD_UCHAR *pucFileName, SGD_UINT32 uiNameLen, SGD_UINT32 uiFileSize);
     SGD_RV SDF_ReadFile(SGD_HANDLE hSessionHandle, SGD_UCHAR *pucFileName, SGD_UINT32 uiNameLen, SGD_UINT32 uiOffset, SGD_UINT32 *puiReadLength, SGD_UCHAR *pucBuffer);
     SGD_RV SDF_WriteFile(SGD_HANDLE hSessionHandle, SGD_UCHAR *pucFileName, SGD_UINT32 uiNameLen, SGD_UINT32 uiOffset, SGD_UINT32 uiWriteLength, SGD_UCHAR *pucBuffer);

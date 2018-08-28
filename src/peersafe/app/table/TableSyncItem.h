@@ -1,3 +1,26 @@
+/**
+
+* @file       TableSyncItem.h
+
+* @brief      同步表项的抽象数据类.
+
+* @details	同步表项的抽象数据类
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -35,12 +58,26 @@ namespace ripple {
 class STTx;
 
 //class Peer;
+/**
+
+* 同步表项的抽象数据类
+
+* 同步表项的抽象数据类
+
+*/
 class TableSyncItem
 {
 public:
     using clock_type = beast::abstract_clock <std::chrono::steady_clock>;
     using sqldata_type = std::pair<LedgerIndex, protocol::TMTableData>;	
 
+	/**
+
+	* 同步表记录的状态
+
+	* 同步表记录时候的状态
+		 
+	*/
     enum TableSyncState
     {        
 		/*
@@ -49,38 +86,44 @@ public:
 			2. after table created
 			3. a
 		*/
-        SYNC_INIT,
-		//state after restart one table,will change to SYNC_BLOCK_STOP
-        SYNC_REINIT,
-		//waiting for remote data acquired
-        SYNC_WAIT_DATA,
-		//table enter sync state,will sync tx from local or remote node
-        SYNC_BLOCK_STOP,
-		//waiting local acquiring tx,will change to SYNC_BLOCK_STOP after finished 
-        SYNC_WAIT_LOCAL_ACQUIRE,
-		//acquiring tx from local
-        SYNC_LOCAL_ACQUIRING,
-		//will delete the real table and set 'deleted' to '1' in SyncTableState
-        SYNC_DELETING,
-		//will not sync until state change
-        SYNC_STOP,
-		//Table will be removed from listTableInfo_ the next ledger
-		SYNC_REMOVE
+        SYNC_INIT,	
+        SYNC_REINIT, ///< state after restart one table,will change to SYNC_BLOCK_STOP
+        SYNC_WAIT_DATA, ///< waiting for remote data acquired
+        SYNC_BLOCK_STOP, ///< table enter sync state,will sync tx from local or remote node
+        SYNC_WAIT_LOCAL_ACQUIRE, ///< waiting local acquiring tx,will change to SYNC_BLOCK_STOP after finished  
+        SYNC_LOCAL_ACQUIRING, ///< acquiring tx from local 
+        SYNC_DELETING, ///< will delete the real table and set 'deleted' to '1' in SyncTableState 
+        SYNC_STOP, ///< will not sync until state change 
+		SYNC_REMOVE ///< Table will be removed from listTableInfo_ the next ledger
     };
 
+	/**
+
+	* 同步表条件类型
+
+	* 同步表条件类型
+
+	*/
     enum TableSyncCondType
     {
-        SYNC_NOCONDITION,
-        SYNC_PRIOR,
-        SYNC_AFTER,
-        SYNC_JUMP
+        SYNC_NOCONDITION,	///< 同步的时候没有条件限制
+        SYNC_PRIOR,			///< 同步之前的数据
+        SYNC_AFTER,			///< 同步之后的数据
+        SYNC_JUMP			///< dump 所有表数据
     };
 
+	/**
+
+	* 条件检查状态
+
+	* 条件检查状态
+
+	*/
     enum CheckConditionState
     {
-        CHECK_ADVANCED,
-        CHECK_REJECT,
-        CHECK_JUMP
+        CHECK_ADVANCED,		///< 
+        CHECK_REJECT,		///< 
+        CHECK_JUMP			///< 
     };
 
     enum LedgerSyncState

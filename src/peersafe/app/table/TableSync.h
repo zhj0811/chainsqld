@@ -1,3 +1,26 @@
+/**
+
+* @file       TableSync.h
+
+* @brief      表数据同步.
+
+* @details	表数据同步
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -37,7 +60,13 @@ namespace ripple {
 class STEntry;
 class Ledger;
 
+/**
 
+* 表数据同步
+
+* 表数据同步
+
+*/
 class TableSync
 {
 public:
@@ -67,13 +96,42 @@ public:
     bool ReStartOneTable(AccountID accountID, std::string sNameInDB, std::string sTableName, bool bDrop, bool bCommit);
     bool StopOneTable(AccountID accountID, std::string sNameInDB, bool bNewTable);
 
+	/**  dump 表
+	*
+	*    dump 整张表数据 
+	*	@param sPara 
+	*	@param sPath 
+	*	@param funCB 
+	*	@return std::pair 第一个元素表示 dump 是否成功，第二个表示错误信息
+	*/
 	std::pair<bool, std::string> StartDumpTable(std::string sPara, std::string sPath, TableDumpItem::funDumpCB funCB);
 	std::pair<bool, std::string> StopDumpTable(AccountID accountID, std::string sTableName);
 
+	/**  审计表
+	*
+	*    审计表数据
+	*	@param sPara
+	*	@param sSql
+	*	@param sPath
+	*	@return std::pair 第一个元素表示 dump 是否成功，第二个表示错误信息
+	*/
     std::pair<bool, std::string> StartAuditTable(std::string sPara, std::string sSql, std::string sPath);
     std::pair<bool, std::string> StopAuditTable(std::string sNickName);
 
+	/** 同步网络所有表 
+	*
+	*    同步网络所有表
+	*	@param void 
+	*	@return void
+	*/
     void TryTableSync();
+
+	/** 启动线程用于同步表数据 
+	*
+	*    启动线程用于同步表数据
+	*	@param void 
+	*	@return void
+	*/
     void TableSyncThread();
 
     void TryLocalSync();
@@ -81,6 +139,13 @@ public:
 
     void SetHaveSyncFlag(bool haveSync);
 
+	/** 从后端数据库中获取交易
+	*
+	*    查找某账本下某账户的交易信息
+	*	@param TxnLgrSeq 账本序号
+	*	@param sAccountID 账号 id
+	*	@return 交易集合
+	*/
 	std::vector <uint256> getTxsFromDb(uint32 TxnLgrSeq, std::string sAccountID);
 	//press test table name
 	std::string GetPressTableName();

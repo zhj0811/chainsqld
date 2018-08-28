@@ -30,34 +30,34 @@ extern "C" {
 #define IN
 #define OUT
     
-    //ç®¡ç†å‘˜/ç”¨æˆ·å£ä»¤ ç±»åž‹
-#define TYPE_SO				1	//ç®¡ç†å‘˜ pin.
-#define TYPE_USER			2	//ç”¨æˆ· pin.
+    //¹ÜÀíÔ±/ÓÃ»§¿ÚÁî ÀàÐÍ
+#define TYPE_SO				1	//¹ÜÀíÔ± pin.
+#define TYPE_USER			2	//ÓÃ»§ pin.
 #define TYPE_PIN_MINLEN		4	//Min Pin Len
 #define TYPE_PIN_MAXLEN		16	//Max Pin Len
     
-    //å¯†é’¥/è¯ä¹¦ç±»åž‹
-#define TYPE_SIGN			2	//ç­¾åç±»åž‹
-#define TYPE_ENCRYPT		1	//åŠ å¯†ç±»åž‹
+    //ÃÜÔ¿/Ö¤ÊéÀàÐÍ
+#define TYPE_SIGN			2	//Ç©ÃûÀàÐÍ
+#define TYPE_ENCRYPT		1	//¼ÓÃÜÀàÐÍ
     
-    //å®¹å™¨å®å®šä¹‰
-#define MAX_KEY_NUMBER		4		//æœ€å¤§å®¹å™¨æ•°
-    
-    
-    //å·æ ‡
-#define TYPE_LABEL_NAME_MINLEN		5		//æœ€å°å·æ ‡åç§°é•¿åº¦
-#define TYPE_LABEL_NAME_MAXLEN		16		//æœ€å¤§å·æ ‡åç§°é•¿åº¦
+    //ÈÝÆ÷ºê¶¨Òå
+#define MAX_KEY_NUMBER		4		//×î´óÈÝÆ÷Êý
     
     
-    //
-    //èŽ·å–SDKEYè®¾å¤‡ä¿¡æ¯å®å®šä¹‰
-    //
-#define EP_FREE_SIZE 					1	//SDKey å‰©ä½™ç©ºé—´
-#define EP_SERIAL_NUMBER			2	//SDKey ç¡¬ä»¶å”¯ä¸€åºåˆ—å·
-#define EP_MAX_RETRY_TIMES		3	//èŽ·å–å½“å‰SDKEYå‰©ä½™çš„å£ä»¤é‡è¯•æ¬¡æ•°
+    //¾í±ê
+#define TYPE_LABEL_NAME_MINLEN		5		//×îÐ¡¾í±êÃû³Æ³¤¶È
+#define TYPE_LABEL_NAME_MAXLEN		16		//×î´ó¾í±êÃû³Æ³¤¶È
+    
     
     //
-    //æ‘˜è¦ç®—æ³•ç±»åž‹
+    //»ñÈ¡SDKEYÉè±¸ÐÅÏ¢ºê¶¨Òå
+    //
+#define EP_FREE_SIZE 					1	//SDKey Ê£Óà¿Õ¼ä
+#define EP_SERIAL_NUMBER			2	//SDKey Ó²¼þÎ¨Ò»ÐòÁÐºÅ
+#define EP_MAX_RETRY_TIMES		3	//»ñÈ¡µ±Ç°SDKEYÊ£ÓàµÄ¿ÚÁîÖØÊÔ´ÎÊý
+    
+    //
+    //ÕªÒªËã·¨ÀàÐÍ
     //
 #define HASH_ALG_MD2	1
 #define HASH_ALG_MD5	2
@@ -66,7 +66,7 @@ extern "C" {
 #define SGD_SM3	4
     
     //
-    //å¯¹ç§°ç®—æ³•ç±»åž‹
+    //¶Ô³ÆËã·¨ÀàÐÍ
     //
     
 #define ALG_DES			1
@@ -76,100 +76,100 @@ extern "C" {
 #define ALG_SM1			5
 #define ALG_SM4         6
     
-    //è¡¥ä¸æ–¹å¼
+    //²¹¶¡·½Ê½
 #define PADDING_TYPE_NONE		0
 #define PADDING_TYPE_PKCS5		1
     
     //
-    //åŠ å¯†æ¨¡å¼
+    //¼ÓÃÜÄ£Ê½
     //
 #define ALG_MOD_ECB			1
 #define ALG_MOD_CBC			2
     
     
-    //ç”¨æˆ·æ–‡ä»¶å®
-#define EP_PUBLIC							0x00000001		//å…¬æœ‰åŒº è¯»å–æ•°æ®ä¸å—pinä¿æŠ¤
-#define EP_PRIVATE 						0x00000002		//ç§æœ‰åŒº è¯»å–æ•°æ®å—pinä¿æŠ¤
-#define EP_FILENAME_MAXLEN				24//20				//ç”¨æˆ·æ–‡ä»¶åç§°çš„æœ€å¤§é•¿åº¦
-#define EP_FILE_MAX_NUM_PUB				10				//å­˜å‚¨ç”¨æˆ·å…¬æœ‰æ–‡ä»¶çš„æœ€å¤§æ•°é‡
-#define EP_FILE_MAX_NUM_PRI				10				//å­˜å‚¨ç”¨æˆ·ç§æœ‰æ–‡ä»¶çš„æœ€å¤§æ•°é‡
-#define EP_FILE_MAX_NUM				 (EP_FILE_MAX_NUM_PUB+EP_FILE_MAX_NUM_PRI)	//å­˜å‚¨ç”¨æˆ·æ–‡ä»¶çš„æœ€å¤§æ•°é‡
+    //ÓÃ»§ÎÄ¼þºê
+#define EP_PUBLIC							0x00000001		//¹«ÓÐÇø ¶ÁÈ¡Êý¾Ý²»ÊÜpin±£»¤
+#define EP_PRIVATE 						0x00000002		//Ë½ÓÐÇø ¶ÁÈ¡Êý¾ÝÊÜpin±£»¤
+#define EP_FILENAME_MAXLEN				24//20				//ÓÃ»§ÎÄ¼þÃû³ÆµÄ×î´ó³¤¶È
+#define EP_FILE_MAX_NUM_PUB				10				//´æ´¢ÓÃ»§¹«ÓÐÎÄ¼þµÄ×î´óÊýÁ¿
+#define EP_FILE_MAX_NUM_PRI				10				//´æ´¢ÓÃ»§Ë½ÓÐÎÄ¼þµÄ×î´óÊýÁ¿
+#define EP_FILE_MAX_NUM				 (EP_FILE_MAX_NUM_PUB+EP_FILE_MAX_NUM_PRI)	//´æ´¢ÓÃ»§ÎÄ¼þµÄ×î´óÊýÁ¿
     
-    //å®šä¹‰ FILEINFO ç»“æž„ä¸»è¦åˆ—ä¸¾æ—¶ä½¿ç”¨
+    //¶¨Òå FILEINFO ½á¹¹Ö÷ÒªÁÐ¾ÙÊ±Ê¹ÓÃ
     typedef struct
     {
-        unsigned char 	pbFileName[EP_FILENAME_MAXLEN];	//æ–‡ä»¶åç§°
-        unsigned long	dwFileNameLen;					//æ–‡ä»¶åç§°é•¿åº¦
-        unsigned long	dwFileType;						//æ–‡ä»¶ç±»åž‹
-        unsigned long	dwFileLen;						//æ–‡ä»¶å¤§å°
+        unsigned char 	pbFileName[EP_FILENAME_MAXLEN];	//ÎÄ¼þÃû³Æ
+        unsigned long	dwFileNameLen;					//ÎÄ¼þÃû³Æ³¤¶È
+        unsigned long	dwFileType;						//ÎÄ¼þÀàÐÍ
+        unsigned long	dwFileLen;						//ÎÄ¼þ´óÐ¡
     }FILEINFO, *PFILEINFO;
     
     /*ECC*/
 #define ECC_MAX_MODULUS_BITS_LEN 256
-    /*ECCå…¬é’¥æ•°æ®ç»“æž„*/
+    /*ECC¹«Ô¿Êý¾Ý½á¹¹*/
     typedef struct Struct_ECCPUBLICKEYBLOB{
         BYTE XCoordinate[ECC_MAX_MODULUS_BITS_LEN/8];
         BYTE YCoordinate[ECC_MAX_MODULUS_BITS_LEN/8];
     } ECCPUBLICKEYBLOB, *PECCPUBLICKEYBLOB;
     
-    /*ECCç§é’¥æ•°æ®ç»“æž„*/
+    /*ECCË½Ô¿Êý¾Ý½á¹¹*/
     typedef struct Struct_ECCPRIVATEKEYBLOB{
         BYTE PrivateKey[ECC_MAX_MODULUS_BITS_LEN/8];
     } ECCPRIVATEKEYBLOB, *PECCPRIVATEKEYBLOB;
     
-    /*ECCç­¾åæ•°æ®ç»“æž„*/
+    /*ECCÇ©ÃûÊý¾Ý½á¹¹*/
     typedef struct Struct_ECCSIGNATUREBLOB{
         BYTE r[ECC_MAX_MODULUS_BITS_LEN/8];
         BYTE s[ECC_MAX_MODULUS_BITS_LEN/8];
     } ECCSIGNATUREBLOB, *PECCSIGNATUREBLOB;
     
     //-----------------------------------------------------------------------------
-    //é”™è¯¯ä»£ç 
+    //´íÎó´úÂë
     //-----------------------------------------------------------------------------
-#define SDKEY_SUCCESS						0x00000000	//æ“ä½œæˆåŠŸ
-#define SDKEY_FAILED						0x20000001	//æ“ä½œå¤±è´¥
-#define SDKEY_KEY_REMOVED					0x20000002	//æœªæ’å…¥SDKEY
-#define SDKEY_KEY_INVALID					0x20000003	//è¿žæŽ¥SDKEYå¤±è´¥/SDKEYæ— æ•ˆ
-#define SDKEY_INVALID_PARAMETER  			0x20000004	//å‚æ•°é”™è¯¯
-#define SDKEY_VERIFIEDPIN_FAILED			0x20000005	//éªŒè¯å£ä»¤å¤±è´¥
-#define SDKEY_USER_NOT_LOG_IN				0x20000006	//ç”¨æˆ·æ²¡æœ‰ç™»é™†ï¼Œæ²¡æœ‰éªŒè¯å£ä»¤
-#define SDKEY_BUFFER_TOO_SMALL       		0x20000007	//ç¼“å†²åŒºå¤ªå°
-#define SDKEY_CONTAINER_TOOMORE 			0x20000008	//å®¹å™¨ä¸ªæ•°å·²æ»¡,å¤§äºŽ10ä¸ª
-#define SDKEY_ERR_GETEKEYPARAM				0x20000009	//è¯»å–SDKEYä¿¡æ¯å¤±è´¥
-#define SDKEY_ERR_PINLOCKED					0x20000010	//å¯†ç å·²ç»é”æ­»
-#define SDKEY_ERR_CREATEFILE				0x20000011	//åˆ›å»ºæ–‡ä»¶é”™è¯¯
-#define SDKEY_ERR_EXISTFILE					0x20000012	//æ–‡ä»¶å·²å­˜åœ¨é”™è¯¯
-#define SDKEY_ERR_OPENFILE					0x20000013	//æ‰“å¼€æ–‡ä»¶é”™è¯¯
-#define SDKEY_ERR_READFILE					0x20000014	//è¯»æ–‡ä»¶é”™è¯¯
-#define SDKEY_ERR_WRITEFILE					0x20000015	//å†™æ–‡ä»¶é”™è¯¯
-#define SDKEY_ERR_NOFILE					0x20000016	//æ²¡æœ‰æ‰¾åˆ°æ–‡ä»¶é”™è¯¯
+#define SDKEY_SUCCESS						0x00000000	//²Ù×÷³É¹¦
+#define SDKEY_FAILED						0x20000001	//²Ù×÷Ê§°Ü
+#define SDKEY_KEY_REMOVED					0x20000002	//Î´²åÈëSDKEY
+#define SDKEY_KEY_INVALID					0x20000003	//Á¬½ÓSDKEYÊ§°Ü/SDKEYÎÞÐ§
+#define SDKEY_INVALID_PARAMETER  			0x20000004	//²ÎÊý´íÎó
+#define SDKEY_VERIFIEDPIN_FAILED			0x20000005	//ÑéÖ¤¿ÚÁîÊ§°Ü
+#define SDKEY_USER_NOT_LOG_IN				0x20000006	//ÓÃ»§Ã»ÓÐµÇÂ½£¬Ã»ÓÐÑéÖ¤¿ÚÁî
+#define SDKEY_BUFFER_TOO_SMALL       		0x20000007	//»º³åÇøÌ«Ð¡
+#define SDKEY_CONTAINER_TOOMORE 			0x20000008	//ÈÝÆ÷¸öÊýÒÑÂú,´óÓÚ10¸ö
+#define SDKEY_ERR_GETEKEYPARAM				0x20000009	//¶ÁÈ¡SDKEYÐÅÏ¢Ê§°Ü
+#define SDKEY_ERR_PINLOCKED					0x20000010	//ÃÜÂëÒÑ¾­ËøËÀ
+#define SDKEY_ERR_CREATEFILE				0x20000011	//´´½¨ÎÄ¼þ´íÎó
+#define SDKEY_ERR_EXISTFILE					0x20000012	//ÎÄ¼þÒÑ´æÔÚ´íÎó
+#define SDKEY_ERR_OPENFILE					0x20000013	//´ò¿ªÎÄ¼þ´íÎó
+#define SDKEY_ERR_READFILE					0x20000014	//¶ÁÎÄ¼þ´íÎó
+#define SDKEY_ERR_WRITEFILE					0x20000015	//Ð´ÎÄ¼þ´íÎó
+#define SDKEY_ERR_NOFILE					0x20000016	//Ã»ÓÐÕÒµ½ÎÄ¼þ´íÎó
     
-#define SDKEY_ERR_PARAMETER_NOT_SUPPORT				0x20000020	//ä¸æ”¯æŒçš„å‚æ•°
-#define SDKEY_ERR_FUNCTION_NOT_SUPPORT				0x20000021	//ä¸æ”¯æŒçš„å‡½æ•°
+#define SDKEY_ERR_PARAMETER_NOT_SUPPORT				0x20000020	//²»Ö§³ÖµÄ²ÎÊý
+#define SDKEY_ERR_FUNCTION_NOT_SUPPORT				0x20000021	//²»Ö§³ÖµÄº¯Êý
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	æ‰“å¼€SDKEY,å¾—åˆ°æ“ä½œå¥æŸ„
-     å‚æ•°è¯´æ˜Žï¼š	hKey:		è¿”å›žæ“ä½œå¥æŸ„
-     è¿”å›žå€¼ï¼š	SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	´ò¿ªSDKEY,µÃµ½²Ù×÷¾ä±ú
+     ²ÎÊýËµÃ÷£º	hKey:		·µ»Ø²Ù×÷¾ä±ú
+     ·µ»ØÖµ£º	SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_OpenCard(IN OUT HANDLE* hKey);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	å…³é—­SDKEY
-     å‚æ•°è¯´æ˜Žï¼š	hKey:		æ“ä½œå¥æŸ„
-     è¿”å›žå€¼ï¼š	SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	¹Ø±ÕSDKEY
+     ²ÎÊýËµÃ÷£º	hKey:		²Ù×÷¾ä±ú
+     ·µ»ØÖµ£º	SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_CloseCard(IN HANDLE hKey);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	ç”¨æˆ·LogIn
-     å‚æ•°è¯´æ˜Žï¼š	hKey:		æ“ä½œå¥æŸ„
-     ulPINType:	ç®¡ç†å‘˜/ç”¨æˆ·å£ä»¤ç±»åž‹
-     pbPIN:		ç®¡ç†å‘˜/ç”¨æˆ·å£ä»¤
-     ulPINLen:	ç®¡ç†å‘˜/ç”¨æˆ·å£ä»¤é•¿åº¦
-     pulRetry:	å£ä»¤å¯é‡è¯•æ¬¡æ•°
-     è¿”å›žå€¼ï¼š	SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	ÓÃ»§LogIn
+     ²ÎÊýËµÃ÷£º	hKey:		²Ù×÷¾ä±ú
+     ulPINType:	¹ÜÀíÔ±/ÓÃ»§¿ÚÁîÀàÐÍ
+     pbPIN:		¹ÜÀíÔ±/ÓÃ»§¿ÚÁî
+     ulPINLen:	¹ÜÀíÔ±/ÓÃ»§¿ÚÁî³¤¶È
+     pulRetry:	¿ÚÁî¿ÉÖØÊÔ´ÎÊý
+     ·µ»ØÖµ£º	SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_LogIn(IN HANDLE	hKey,
                                IN unsigned long			ulPINType,
@@ -178,22 +178,22 @@ extern "C" {
                                OUT unsigned long		*pulRetry);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	ç”¨æˆ·LogOut
-     å‚æ•°è¯´æ˜Žï¼š	hKey:		æ“ä½œå¥æŸ„
-     è¿”å›žå€¼ï¼š	SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	ÓÃ»§LogOut
+     ²ÎÊýËµÃ÷£º	hKey:		²Ù×÷¾ä±ú
+     ·µ»ØÖµ£º	SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_LogOut(IN HANDLE hKey);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	ä¿®æ”¹å£ä»¤
-     å‚æ•°è¯´æ˜Žï¼š	hKey:		æ“ä½œå¥æŸ„
-     ulPINType:	ç®¡ç†å‘˜/ç”¨æˆ·å£ä»¤ç±»åž‹
-     pbOldPIN:		ç®¡ç†å‘˜/ç”¨æˆ·æ—§å£ä»¤
-     ulOldPINLen:	ç®¡ç†å‘˜/ç”¨æˆ·æ—§å£ä»¤é•¿åº¦
-     pbNewPIN:		ç®¡ç†å‘˜/ç”¨æˆ·æ–°å£ä»¤
-     ulNewPINLen:	ç®¡ç†å‘˜/ç”¨æˆ·æ–°å£ä»¤é•¿åº¦
-     pulRetry: å£ä»¤éªŒè¯å¤±è´¥æ—¶è¿”å›žå¯é‡è¯•æ¬¡æ•°
-     è¿”å›žå€¼ï¼š	SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	ÐÞ¸Ä¿ÚÁî
+     ²ÎÊýËµÃ÷£º	hKey:		²Ù×÷¾ä±ú
+     ulPINType:	¹ÜÀíÔ±/ÓÃ»§¿ÚÁîÀàÐÍ
+     pbOldPIN:		¹ÜÀíÔ±/ÓÃ»§¾É¿ÚÁî
+     ulOldPINLen:	¹ÜÀíÔ±/ÓÃ»§¾É¿ÚÁî³¤¶È
+     pbNewPIN:		¹ÜÀíÔ±/ÓÃ»§ÐÂ¿ÚÁî
+     ulNewPINLen:	¹ÜÀíÔ±/ÓÃ»§ÐÂ¿ÚÁî³¤¶È
+     pulRetry: ¿ÚÁîÑéÖ¤Ê§°ÜÊ±·µ»Ø¿ÉÖØÊÔ´ÎÊý
+     ·µ»ØÖµ£º	SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_ChangePIN(IN HANDLE	hKey,
                                    IN unsigned long	ulPINType,
@@ -204,31 +204,31 @@ extern "C" {
                                    OUT unsigned long		*pulRetry);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	è§£é”å£ä»¤
-     å‚æ•°è¯´æ˜Žï¼š	hKey:		æ“ä½œå¥æŸ„
-     pbPIN:		ç®¡ç†å‘˜å£ä»¤
-     ulPINLen:	ç®¡ç†å‘˜å£ä»¤é•¿åº¦
-     pbNewPIN:		ç”¨æˆ·æ–°å£ä»¤
-     ulNewPINLen:	ç”¨æˆ·æ–°å£ä»¤é•¿åº¦
-     pulRetry: å£ä»¤éªŒè¯å¤±è´¥æ—¶è¿”å›žç®¡ç†å‘˜å£ä»¤å¯é‡è¯•æ¬¡æ•°
-     è¿”å›žå€¼ï¼š	SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	½âËø¿ÚÁî
+     ²ÎÊýËµÃ÷£º	hKey:		²Ù×÷¾ä±ú
+     pbPIN:		¹ÜÀíÔ±¿ÚÁî
+     ulPINLen:	¹ÜÀíÔ±¿ÚÁî³¤¶È
+     pbNewPIN:		ÓÃ»§ÐÂ¿ÚÁî
+     ulNewPINLen:	ÓÃ»§ÐÂ¿ÚÁî³¤¶È
+     pulRetry: ¿ÚÁîÑéÖ¤Ê§°ÜÊ±·µ»Ø¹ÜÀíÔ±¿ÚÁî¿ÉÖØÊÔ´ÎÊý
+     ·µ»ØÖµ£º	SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_UnLock(IN HANDLE	hKey,
-                                IN const unsigned char*	 pbPIN,    //ç®¡ç†å‘˜å£ä»¤
+                                IN const unsigned char*	 pbPIN,    //¹ÜÀíÔ±¿ÚÁî
                                 IN unsigned long			ulPINLen,
-                                IN const unsigned char*	     pbNewPIN,  //æ–°çš„ç”¨æˆ·å£ä»¤
+                                IN const unsigned char*	     pbNewPIN,  //ÐÂµÄÓÃ»§¿ÚÁî
                                 IN unsigned long			ulNewPINLen,
                                 OUT unsigned long		*pulRetry);
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	å–å¾—SDKEYç¡¬ä»¶å‚æ•°
-     å‚æ•°è¯´æ˜Žï¼š	hKey:		æ“ä½œå¥æŸ„
-     dwParam:	èŽ·å¾—ä¿¡æ¯ç±»åž‹ï¼Œå…·ä½“è§ SDKEYè®¾å¤‡ä¿¡æ¯å®å®šä¹‰
-     pbData:			è¾“å‡ºæ•°æ®
-     pdwDataLen:		è¾“å‡ºæ•°æ®é•¿åº¦
-     dwFlags:		å–å€¼0ï¼Œä¿ç•™å­—èŠ‚
-     è¿”å›žå€¼ï¼š	SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	È¡µÃSDKEYÓ²¼þ²ÎÊý
+     ²ÎÊýËµÃ÷£º	hKey:		²Ù×÷¾ä±ú
+     dwParam:	»ñµÃÐÅÏ¢ÀàÐÍ£¬¾ßÌå¼û SDKEYÉè±¸ÐÅÏ¢ºê¶¨Òå
+     pbData:			Êä³öÊý¾Ý
+     pdwDataLen:		Êä³öÊý¾Ý³¤¶È
+     dwFlags:		È¡Öµ0£¬±£Áô×Ö½Ú
+     ·µ»ØÖµ£º	SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_GetKeyParam(IN HANDLE		hKey,
                                      IN unsigned long		dwParam,
@@ -236,15 +236,15 @@ extern "C" {
                                      IN OUT unsigned long	*pdwDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š åœ¨SDKEYå†…åˆ›å»ºæ–‡ä»¶
-     å‚æ•°è¯´æ˜Žï¼š	hKey:   æ“ä½œå¥æŸ„
-     *FileName    ç§æœ‰æ–‡ä»¶åŒºåç§°
-     FileNameLen  æ–‡ä»¶åç§°é•¿åº¦
-     MaxFileLen   æœ€å¤§æ–‡ä»¶é•¿åº¦
-     Flag         æ–‡ä»¶å±žæ€§ (è§ç”¨æˆ·æ–‡ä»¶å®),ç§æœ‰åŒºæ–‡ä»¶è¿˜æ˜¯å…±æœ‰åŒºæ–‡ä»¶
+     º¯Êý¹¦ÄÜ£º ÔÚSDKEYÄÚ´´½¨ÎÄ¼þ
+     ²ÎÊýËµÃ÷£º	hKey:   ²Ù×÷¾ä±ú
+     *FileName    Ë½ÓÐÎÄ¼þÇøÃû³Æ
+     FileNameLen  ÎÄ¼þÃû³Æ³¤¶È
+     MaxFileLen   ×î´óÎÄ¼þ³¤¶È
+     Flag         ÎÄ¼þÊôÐÔ (¼ûÓÃ»§ÎÄ¼þºê),Ë½ÓÐÇøÎÄ¼þ»¹ÊÇ¹²ÓÐÇøÎÄ¼þ
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     å¤‡æ³¨:å¯¹sdkeyå†…çš„æ–‡ä»¶æ“ä½œæ— ç›®å½•çš„æ¦‚å¿µã€‚
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ±¸×¢:¶ÔsdkeyÄÚµÄÎÄ¼þ²Ù×÷ÎÞÄ¿Â¼µÄ¸ÅÄî¡£
      */
     unsigned long  SDKEY_CreateFile(IN HANDLE hKey,
                                     IN unsigned char *FileName,
@@ -253,13 +253,13 @@ extern "C" {
                                     IN unsigned long Flag    );
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å†™æ•°æ®åˆ°SDKEY
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     *FileName    ç§æœ‰æ–‡ä»¶åŒºåç§°
-     FileNameLen  æ–‡ä»¶åç§°é•¿åº¦
-     *pbData      æ•°æ®å†…å®¹
-     pbDataLen    æ•°æ®é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º Ð´Êý¾Ýµ½SDKEY
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     *FileName    Ë½ÓÐÎÄ¼þÇøÃû³Æ
+     FileNameLen  ÎÄ¼þÃû³Æ³¤¶È
+     *pbData      Êý¾ÝÄÚÈÝ
+     pbDataLen    Êý¾Ý³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_WriteData(IN HANDLE hKey,
                                    IN unsigned char *FileName,
@@ -269,14 +269,14 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š ä»ŽSDKEYå†…è¯»å–æ•°æ®
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     *FileName    ç§æœ‰æ–‡ä»¶åŒºåç§°
-     FileNameLen  æ–‡ä»¶åç§°é•¿åº¦
-     *pbData      æ•°æ®å†…å®¹
-     pbDataLen    æ•°æ®é•¿åº¦
+     º¯Êý¹¦ÄÜ£º ´ÓSDKEYÄÚ¶ÁÈ¡Êý¾Ý
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     *FileName    Ë½ÓÐÎÄ¼þÇøÃû³Æ
+     FileNameLen  ÎÄ¼þÃû³Æ³¤¶È
+     *pbData      Êý¾ÝÄÚÈÝ
+     pbDataLen    Êý¾Ý³¤¶È
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_ReadData(IN HANDLE hKey,
                                   IN unsigned char *FileName,
@@ -285,49 +285,49 @@ extern "C" {
                                   OUT unsigned long *pbDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š  åˆ é™¤SDKEYå†…æŒ‡å®šæ•°æ®
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     *FileName    ç§æœ‰æ–‡ä»¶åŒºåç§°
-     FileNameLen  æ–‡ä»¶åç§°é•¿åº¦
+     º¯Êý¹¦ÄÜ£º  É¾³ýSDKEYÄÚÖ¸¶¨Êý¾Ý
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     *FileName    Ë½ÓÐÎÄ¼þÇøÃû³Æ
+     FileNameLen  ÎÄ¼þÃû³Æ³¤¶È
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_DelFile(IN HANDLE hKey,
                                  IN unsigned char *FileName,
                                  IN unsigned long FileNameLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š åˆ—ä¸¾SDKEYå†…æ–‡ä»¶æ•°æ®
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     *pbFileInfo    æ–‡ä»¶å¥æŸ„
-     pdwFileNum  æ–‡ä»¶ä¸ªæ•°
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ÁÐ¾ÙSDKEYÄÚÎÄ¼þÊý¾Ý
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     *pbFileInfo    ÎÄ¼þ¾ä±ú
+     pdwFileNum  ÎÄ¼þ¸öÊý
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long  SDKEY_ListFile(IN HANDLE hKey,
                                   OUT FILEINFO *pbFileInfo,
                                   OUT unsigned long *pdwFileNum);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š äº§ç”Ÿéšæœºæ•°
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     ulRandLen å¾…ç”Ÿäº§çš„éšæœºæ•°é•¿åº¦
-     pRandom   è¾“å‡ºéšæœºæ•°çš„ç¼“å†²åŒºæŒ‡é’ˆ
+     º¯Êý¹¦ÄÜ£º ²úÉúËæ»úÊý
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     ulRandLen ´ýÉú²úµÄËæ»úÊý³¤¶È
+     pRandom   Êä³öËæ»úÊýµÄ»º³åÇøÖ¸Õë
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_GenRandom(IN HANDLE hKey,
                                   IN unsigned long ulRandLen,
                                   OUT unsigned char *pRandom);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š äº§ç”ŸRSAå¯†é’¥
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     ulModulusLen   rsaå¯†é’¥æ¨¡é•¿ï¼Œæ”¯æŒ1024
+     º¯Êý¹¦ÄÜ£º ²úÉúRSAÃÜÔ¿
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     ulModulusLen   rsaÃÜÔ¿Ä£³¤£¬Ö§³Ö1024
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     å¤‡æ³¨ï¼šä¸€ä¸ªå¯†é’¥å®¹å™¨ä¸‹æ”¯æŒåŒå¯†é’¥ï¼Œå³ç­¾åå’ŒåŠ å¯†(äº¤è´§)2ç§ã€‚
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ±¸×¢£ºÒ»¸öÃÜÔ¿ÈÝÆ÷ÏÂÖ§³ÖË«ÃÜÔ¿£¬¼´Ç©ÃûºÍ¼ÓÃÜ(½»»õ)2ÖÖ¡£
      */
     unsigned long SDKEY_GenerateRsaKeyPair(IN HANDLE hKey,
                                            IN unsigned long ulAlias,
@@ -335,15 +335,15 @@ extern "C" {
                                            IN unsigned long ulModulusLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š èŽ·å–å…¬é’¥ä¿¡æ¯
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pDerPubKey:derç¼–ç çš„å…¬é’¥
-     pulDerPubKeyLenï¼šå…¬é’¥é•¿åº¦ï¼Œæ¯”å¦‚1024bitsçš„rsaå¯†é’¥,derç¼–ç çš„é•¿åº¦ä¸º140å­—èŠ‚
+     º¯Êý¹¦ÄÜ£º »ñÈ¡¹«Ô¿ÐÅÏ¢
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pDerPubKey:der±àÂëµÄ¹«Ô¿
+     pulDerPubKeyLen£º¹«Ô¿³¤¶È£¬±ÈÈç1024bitsµÄrsaÃÜÔ¿,der±àÂëµÄ³¤¶ÈÎª140×Ö½Ú
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     å¤‡æ³¨ï¼šä¸€ä¸ªå¯†é’¥å®¹å™¨ä¸‹æ”¯æŒåŒå¯†é’¥ï¼Œå³ç­¾åå’ŒåŠ å¯†(äº¤è´§)2ç§ã€‚
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ±¸×¢£ºÒ»¸öÃÜÔ¿ÈÝÆ÷ÏÂÖ§³ÖË«ÃÜÔ¿£¬¼´Ç©ÃûºÍ¼ÓÃÜ(½»»õ)2ÖÖ¡£
      */
     unsigned long SDKEY_GetRsaPubLicKey(IN HANDLE hKey,
                                         IN unsigned long ulAlias,
@@ -352,13 +352,13 @@ extern "C" {
                                         OUT unsigned long *pulDerPubKeyLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¼å…¥è¯ä¹¦åˆ°SDKEYå†…
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pDerCert   Derç¼–ç çš„è¯ä¹¦
-     ulDerCertLen è¯ä¹¦é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º µ¼ÈëÖ¤Êéµ½SDKEYÄÚ
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pDerCert   Der±àÂëµÄÖ¤Êé
+     ulDerCertLen Ö¤Êé³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SetCertificate(IN HANDLE hKey,
                                        IN unsigned long ulAlias,
@@ -368,13 +368,13 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¼å‡ºè¯ä¹¦
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pDerCert   Derç¼–ç çš„è¯ä¹¦
-     pulDerCertLen è¯ä¹¦é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º µ¼³öÖ¤Êé
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pDerCert   Der±àÂëµÄÖ¤Êé
+     pulDerCertLen Ö¤Êé³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_GetCertificate(IN HANDLE hKey,
                                        IN unsigned long ulAlias,
@@ -383,17 +383,17 @@ extern "C" {
                                        OUT unsigned long *pulDerCertLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š rsaç­¾åï¼ˆpkcs1æ ¼å¼ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:   			æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     ulHashType  		æ‘˜è¦ç®—æ³•ç±»åž‹ï¼ŒHASH_ALG_MD2,HASH_ALG_MD5,HASH_ALG_SHA1_160
+     º¯Êý¹¦ÄÜ£º rsaÇ©Ãû£¨pkcs1¸ñÊ½£©
+     ²ÎÊýËµÃ÷£º hKey:   			²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     ulHashType  		ÕªÒªËã·¨ÀàÐÍ£¬HASH_ALG_MD2,HASH_ALG_MD5,HASH_ALG_SHA1_160
      
-     pInData 			å¾…ç­¾åçš„åŽŸæ–‡
-     ulInDataLen    	å¾…ç­¾åçš„åŽŸæ–‡é•¿åº¦
-     pSignValue				ç­¾åå€¼
-     pulSignValueLen	ç­¾åå€¼é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     pInData 			´ýÇ©ÃûµÄÔ­ÎÄ
+     ulInDataLen    	´ýÇ©ÃûµÄÔ­ÎÄ³¤¶È
+     pSignValue				Ç©ÃûÖµ
+     pulSignValueLen	Ç©ÃûÖµ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_RSASign(IN HANDLE hKey,
                                 IN unsigned long ulAlias,
@@ -405,17 +405,17 @@ extern "C" {
                                 OUT unsigned long *pulSignValueLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š éªŒè¯ç­¾åï¼ˆpkcs1æ ¼å¼ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     ulHashTypeæ‘˜è¦ç®—æ³•ç±»åž‹ï¼Œ
+     º¯Êý¹¦ÄÜ£º ÑéÖ¤Ç©Ãû£¨pkcs1¸ñÊ½£©
+     ²ÎÊýËµÃ÷£º hKey:²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     ulHashTypeÕªÒªËã·¨ÀàÐÍ£¬
 					HASH_ALG_MD2,HASH_ALG_MD5,HASH_ALG_SHA1_160
-     pInData 	å¾…ç­¾åçš„åŽŸæ–‡
-     ulInDataLenå¾…ç­¾åçš„åŽŸæ–‡é•¿åº¦
-     pSignValue ç­¾åå€¼
-     ulSignValueLen ç­¾åå€¼é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     pInData 	´ýÇ©ÃûµÄÔ­ÎÄ
+     ulInDataLen´ýÇ©ÃûµÄÔ­ÎÄ³¤¶È
+     pSignValue Ç©ÃûÖµ
+     ulSignValueLen Ç©ÃûÖµ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_RSAVerify(IN HANDLE hKey,
                                   IN unsigned long ulAlias,
@@ -428,15 +428,15 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å…¬é’¥åŠ å¯†ï¼ˆpkcs1æ ¼å¼ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pPlainData	æ˜Žæ–‡
-     ulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     pCipherData 	å¯†æ–‡
-     pulCipherDataLenå¯†æ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ¹«Ô¿¼ÓÃÜ£¨pkcs1¸ñÊ½£©
+     ²ÎÊýËµÃ÷£º hKey:²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pPlainData	Ã÷ÎÄ
+     ulPlainDataLen	Ã÷ÎÄ³¤¶È
+     pCipherData 	ÃÜÎÄ
+     pulCipherDataLenÃÜÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_RSAPubKeyEncrypt(IN HANDLE hEkey,
                                          IN unsigned long ulAlias,
@@ -448,15 +448,15 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š ç§é’¥è§£å¯†ï¼ˆpkcs1æ ¼å¼ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pCipherData 			å¯†æ–‡
-     ulCipherDataLen    	å¯†æ–‡é•¿åº¦
-     pPlainData				æ˜Žæ–‡
-     pulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º Ë½Ô¿½âÃÜ£¨pkcs1¸ñÊ½£©
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pCipherData 			ÃÜÎÄ
+     ulCipherDataLen    	ÃÜÎÄ³¤¶È
+     pPlainData				Ã÷ÎÄ
+     pulPlainDataLen	Ã÷ÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_RSAPriKeyDecrypt(IN HANDLE hEkey,
                                          IN unsigned long ulAlias,
@@ -467,15 +467,15 @@ extern "C" {
                                          OUT unsigned long *pulPlainDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š ç§é’¥åŠ å¯†ï¼ˆpkcs1æ ¼å¼ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pPlainData	æ˜Žæ–‡
-     ulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     pCipherData 	å¯†æ–‡
-     pulCipherDataLenå¯†æ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º Ë½Ô¿¼ÓÃÜ£¨pkcs1¸ñÊ½£©
+     ²ÎÊýËµÃ÷£º hKey:²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pPlainData	Ã÷ÎÄ
+     ulPlainDataLen	Ã÷ÎÄ³¤¶È
+     pCipherData 	ÃÜÎÄ
+     pulCipherDataLenÃÜÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_RSAPriKeyEncrypt(IN HANDLE hEkey,
                                          IN unsigned long ulAlias,
@@ -487,15 +487,15 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å…¬é’¥è§£å¯†ï¼ˆpkcs1æ ¼å¼ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pCipherData 			å¯†æ–‡
-     ulCipherDataLen    	å¯†æ–‡é•¿åº¦
-     pPlainData				æ˜Žæ–‡
-     pulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ¹«Ô¿½âÃÜ£¨pkcs1¸ñÊ½£©
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pCipherData 			ÃÜÎÄ
+     ulCipherDataLen    	ÃÜÎÄ³¤¶È
+     pPlainData				Ã÷ÎÄ
+     pulPlainDataLen	Ã÷ÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_RSAPubKeyDecrypt(IN HANDLE hEkey,
                                          IN unsigned long ulAlias,
@@ -506,18 +506,18 @@ extern "C" {
                                          OUT unsigned long *pulPlainDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•åŠ å¯†
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     ulAlgFlag			ç®—æ³•ç±»åž‹ï¼Œè§ å¯¹ç§°ç®—æ³•ç±»åž‹å®å®šä¹‰
-     ulAlgMode		åŠ å¯†æ¨¡å¼ ï¼Œè§ åŠ å¯†æ¨¡å¼å®å®šä¹‰
-     iv						åˆå§‹åŒ–å‘é‡
-     pKey					å¯†é’¥
-     pPlainData			æ˜Žæ–‡
-     ulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     pCipherData 		å¯†æ–‡
-     pulCipherDataDataLen   å¯†æ–‡é•¿åº¦
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨¼ÓÃÜ
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     ulAlgFlag			Ëã·¨ÀàÐÍ£¬¼û ¶Ô³ÆËã·¨ÀàÐÍºê¶¨Òå
+     ulAlgMode		¼ÓÃÜÄ£Ê½ £¬¼û ¼ÓÃÜÄ£Ê½ºê¶¨Òå
+     iv						³õÊ¼»¯ÏòÁ¿
+     pKey					ÃÜÔ¿
+     pPlainData			Ã÷ÎÄ
+     ulPlainDataLen	Ã÷ÎÄ³¤¶È
+     pCipherData 		ÃÜÎÄ
+     pulCipherDataDataLen   ÃÜÎÄ³¤¶È
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymEncrypt(IN HANDLE hEkey,
                                    IN unsigned long ulAlgFlag,
@@ -530,19 +530,19 @@ extern "C" {
                                    OUT unsigned long *pulCipherDataDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•è§£å¯†
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   æ“ä½œå¥æŸ„
-     ulAlgFlag				ç®—æ³•ç±»åž‹,è§ å¯¹ç§°ç®—æ³•ç±»åž‹å®å®šä¹‰
-     ulAlgMode			åŠ å¯†æ¨¡å¼ è§ åŠ å¯†æ¨¡å¼å®å®šä¹‰
-     iv							åˆå§‹åŒ–å‘é‡
-     pKey						å¯†é’¥
-     pCipherData 			å¯†æ–‡
-     ulCipherDataDataLen    	å¯†æ–‡é•¿åº¦
-     pPlainData				æ˜Žæ–‡
-     pulPlainDataLen	æ˜Žæ–‡é•¿åº¦
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨½âÃÜ
+     ²ÎÊýËµÃ÷£º hEkey:   ²Ù×÷¾ä±ú
+     ulAlgFlag				Ëã·¨ÀàÐÍ,¼û ¶Ô³ÆËã·¨ÀàÐÍºê¶¨Òå
+     ulAlgMode			¼ÓÃÜÄ£Ê½ ¼û ¼ÓÃÜÄ£Ê½ºê¶¨Òå
+     iv							³õÊ¼»¯ÏòÁ¿
+     pKey						ÃÜÔ¿
+     pCipherData 			ÃÜÎÄ
+     ulCipherDataDataLen    	ÃÜÎÄ³¤¶È
+     pPlainData				Ã÷ÎÄ
+     pulPlainDataLen	Ã÷ÎÄ³¤¶È
      
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymDecrypt(IN HANDLE hEkey,
                                    IN unsigned long ulAlgFlag,
@@ -555,16 +555,16 @@ extern "C" {
                                    OUT unsigned long *pulPlainDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•åŠ å¯†åˆå§‹åŒ–
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     ulAlgFlag			ç®—æ³•ç±»åž‹ï¼Œè§ å¯¹ç§°ç®—æ³•ç±»åž‹å®å®šä¹‰
-     ulAlgMode		åŠ å¯†æ¨¡å¼ ï¼Œè§ åŠ å¯†æ¨¡å¼å®å®šä¹‰
-     ulPadding			è¡¥ä¸æ–¹å¼ï¼Œè§è¡¥ä¸æ–¹å¼å®å®šä¹‰
-     iv						åˆå§‹åŒ–å‘é‡
-     pKey					å¯†é’¥
-     phKey				è¿”å›žçš„ç®—æ³•å¤„ç†å¥æŸ„
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨¼ÓÃÜ³õÊ¼»¯
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     ulAlgFlag			Ëã·¨ÀàÐÍ£¬¼û ¶Ô³ÆËã·¨ÀàÐÍºê¶¨Òå
+     ulAlgMode		¼ÓÃÜÄ£Ê½ £¬¼û ¼ÓÃÜÄ£Ê½ºê¶¨Òå
+     ulPadding			²¹¶¡·½Ê½£¬¼û²¹¶¡·½Ê½ºê¶¨Òå
+     iv						³õÊ¼»¯ÏòÁ¿
+     pKey					ÃÜÔ¿
+     phKey				·µ»ØµÄËã·¨´¦Àí¾ä±ú
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymEncryptInit(
                                        IN HANDLE hEkey,
@@ -576,15 +576,15 @@ extern "C" {
                                        OUT HANDLE	*phKey);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•åŠ å¯†ä¸­é—´å¤„ç†å‡½æ•°
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     phKey				ç”±SDKEY_SymEncryptInitç”Ÿæˆçš„ç®—æ³•å¤„ç†å¥æŸ„
-     pPlainData			æ˜Žæ–‡
-     ulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     pCipherData 		å¯†æ–‡
-     pulCipherDataLen   å¯†æ–‡é•¿åº¦
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨¼ÓÃÜÖÐ¼ä´¦Àíº¯Êý
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     phKey				ÓÉSDKEY_SymEncryptInitÉú³ÉµÄËã·¨´¦Àí¾ä±ú
+     pPlainData			Ã÷ÎÄ
+     ulPlainDataLen	Ã÷ÎÄ³¤¶È
+     pCipherData 		ÃÜÎÄ
+     pulCipherDataLen   ÃÜÎÄ³¤¶È
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymEncryptUpdate(
                                          IN HANDLE hEkey,
@@ -595,13 +595,13 @@ extern "C" {
                                          OUT unsigned long *pulCipherDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•åŠ å¯†ç»“æŸå‡½æ•°
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     phKey				ç”±SDKEY_SymEncryptInitç”Ÿæˆçš„ç®—æ³•å¤„ç†å¥æŸ„
-     pCipherData 		å¯†æ–‡
-     pulCipherDataLen   å¯†æ–‡é•¿åº¦
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨¼ÓÃÜ½áÊøº¯Êý
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     phKey				ÓÉSDKEY_SymEncryptInitÉú³ÉµÄËã·¨´¦Àí¾ä±ú
+     pCipherData 		ÃÜÎÄ
+     pulCipherDataLen   ÃÜÎÄ³¤¶È
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymEncryptFinal(
                                         IN HANDLE hEkey,
@@ -610,16 +610,16 @@ extern "C" {
                                         OUT unsigned long *pulCipherDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•è§£å¯†åˆå§‹åŒ–
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     ulAlgFlag			ç®—æ³•ç±»åž‹ï¼Œè§ å¯¹ç§°ç®—æ³•ç±»åž‹å®å®šä¹‰
-     ulAlgMode		åŠ å¯†æ¨¡å¼ ï¼Œè§ åŠ å¯†æ¨¡å¼å®å®šä¹‰
-     ulPadding			è¡¥ä¸æ–¹å¼ï¼Œè§è¡¥ä¸æ–¹å¼å®å®šä¹‰
-     iv						åˆå§‹åŒ–å‘é‡
-     pKey					å¯†é’¥
-     phKey				è¿”å›žçš„ç®—æ³•å¤„ç†å¥æŸ„
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨½âÃÜ³õÊ¼»¯
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     ulAlgFlag			Ëã·¨ÀàÐÍ£¬¼û ¶Ô³ÆËã·¨ÀàÐÍºê¶¨Òå
+     ulAlgMode		¼ÓÃÜÄ£Ê½ £¬¼û ¼ÓÃÜÄ£Ê½ºê¶¨Òå
+     ulPadding			²¹¶¡·½Ê½£¬¼û²¹¶¡·½Ê½ºê¶¨Òå
+     iv						³õÊ¼»¯ÏòÁ¿
+     pKey					ÃÜÔ¿
+     phKey				·µ»ØµÄËã·¨´¦Àí¾ä±ú
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymDecryptInit(
                                        IN HANDLE hEkey,
@@ -631,14 +631,14 @@ extern "C" {
                                        OUT HANDLE	*phKey);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•è§£å¯†ä¸­é—´å¤„ç†å‡½æ•°
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     phKey				ç”±SDKEY_SymDecryptInitç”Ÿæˆçš„ç®—æ³•å¤„ç†å¥æŸ„
-     pCipherData 		å¯†æ–‡
-     pulCipherDataLen   å¯†æ–‡é•¿åº¦
-     pPlainData			æ˜Žæ–‡
-     ulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨½âÃÜÖÐ¼ä´¦Àíº¯Êý
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     phKey				ÓÉSDKEY_SymDecryptInitÉú³ÉµÄËã·¨´¦Àí¾ä±ú
+     pCipherData 		ÃÜÎÄ
+     pulCipherDataLen   ÃÜÎÄ³¤¶È
+     pPlainData			Ã÷ÎÄ
+     ulPlainDataLen	Ã÷ÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymDecryptUpdate(
                                          IN HANDLE hEkey,
@@ -649,13 +649,13 @@ extern "C" {
                                          OUT unsigned long *pulPlainDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¹ç§°ç®—æ³•è§£å¯†ç»“æŸå‡½æ•°
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     phKey				ç”±SDKEY_SymDecryptInitç”Ÿæˆçš„ç®—æ³•å¤„ç†å¥æŸ„
-     pPlainData 		æ˜Žæ–‡
-     pulPlainDataLen æ˜Žæ–‡é•¿åº¦
+     º¯Êý¹¦ÄÜ£º ¶Ô³ÆËã·¨½âÃÜ½áÊøº¯Êý
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     phKey				ÓÉSDKEY_SymDecryptInitÉú³ÉµÄËã·¨´¦Àí¾ä±ú
+     pPlainData 		Ã÷ÎÄ
+     pulPlainDataLen Ã÷ÎÄ³¤¶È
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_SymDecryptFinal(
                                         IN HANDLE hEkey,
@@ -665,15 +665,15 @@ extern "C" {
     
     //ver2.2 add sm2 sm3 support
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š ECCç­¾åï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:   			æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pInData 			å¾…ç­¾åçš„HASHå€¼
-     ulInDataLen    	å¾…ç­¾åçš„HASHå€¼é•¿åº¦
-     pSignValue			ç­¾åå€¼
-     pulSignValueLen	ç­¾åå€¼é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ECCÇ©Ãû£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:   			²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pInData 			´ýÇ©ÃûµÄHASHÖµ
+     ulInDataLen    	´ýÇ©ÃûµÄHASHÖµ³¤¶È
+     pSignValue			Ç©ÃûÖµ
+     pulSignValueLen	Ç©ÃûÖµ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_ECCSign(IN HANDLE hKey,
                                 IN unsigned long ulAlias,
@@ -684,15 +684,15 @@ extern "C" {
                                 OUT unsigned long *pulSignValueLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š ECCéªŒç­¾ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pInData 	å¾…ç­¾åçš„HASHå€¼
-     ulInDataLenå¾…ç­¾åçš„HASHå€¼é•¿åº¦
-     pSignValue ç­¾åå€¼
-     ulSignValueLen ç­¾åå€¼é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ECCÑéÇ©£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pInData 	´ýÇ©ÃûµÄHASHÖµ
+     ulInDataLen´ýÇ©ÃûµÄHASHÖµ³¤¶È
+     pSignValue Ç©ÃûÖµ
+     ulSignValueLen Ç©ÃûÖµ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_ECCVerify(IN HANDLE hKey,
                                   IN unsigned long ulAlias,
@@ -704,16 +704,16 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š ECCå…¬é’¥åŠ å¯†ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pPlainData	æ˜Žæ–‡
-     ulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     pCipherData 	å¯†æ–‡
-     pulCipherDataLenå¯†æ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     è¯´æ˜Žï¼šå¯†æ–‡é•¿åº¦ä¸ºæ˜Žæ–‡+96å­—èŠ‚ï¼Œé¡ºåºåˆ†åˆ«ä¸ºC1C3C2ï¼Œå…¶ä¸­C1ä¸ºä¸€ä¸ªç‚¹é•¿åº¦ä¸º64å­—èŠ‚ï¼ŒC3é•¿åº¦å›ºå®šä¸º32å­—èŠ‚ï¼ŒC2é•¿åº¦åŒæ˜Žæ–‡
+     º¯Êý¹¦ÄÜ£º ECC¹«Ô¿¼ÓÃÜ£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pPlainData	Ã÷ÎÄ
+     ulPlainDataLen	Ã÷ÎÄ³¤¶È
+     pCipherData 	ÃÜÎÄ
+     pulCipherDataLenÃÜÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ËµÃ÷£ºÃÜÎÄ³¤¶ÈÎªÃ÷ÎÄ+96×Ö½Ú£¬Ë³Ðò·Ö±ðÎªC1C3C2£¬ÆäÖÐC1ÎªÒ»¸öµã³¤¶ÈÎª64×Ö½Ú£¬C3³¤¶È¹Ì¶¨Îª32×Ö½Ú£¬C2³¤¶ÈÍ¬Ã÷ÎÄ
      */
     unsigned long SDKEY_ECCEncrypt(IN HANDLE hEkey,
                                    IN unsigned long ulAlias,
@@ -725,16 +725,16 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š ECCç§é’¥è§£å¯†ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pCipherData 			å¯†æ–‡
-     ulCipherDataLen    	å¯†æ–‡é•¿åº¦
-     pPlainData				æ˜Žæ–‡
-     pulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     è¯´æ˜Žï¼šå¯†æ–‡æ ¼å¼å‚è€ƒåŠ å¯†å‡½æ•°ä¸­è¯´æ˜Ž
+     º¯Êý¹¦ÄÜ£º ECCË½Ô¿½âÃÜ£¨SM2£©
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pCipherData 			ÃÜÎÄ
+     ulCipherDataLen    	ÃÜÎÄ³¤¶È
+     pPlainData				Ã÷ÎÄ
+     pulPlainDataLen	Ã÷ÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ËµÃ÷£ºÃÜÎÄ¸ñÊ½²Î¿¼¼ÓÃÜº¯ÊýÖÐËµÃ÷
      */
     unsigned long SDKEY_ECCDecrypt(IN HANDLE hEkey,
                                    IN unsigned long ulAlias,
@@ -745,15 +745,15 @@ extern "C" {
                                    OUT unsigned long *pulPlainDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¤–éƒ¨ECCç­¾åï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:   			æ“ä½œå¥æŸ„
-     pPriKey			å¤–éƒ¨è¾“å…¥çš„ECCç§é’¥
-     ulPriKeyLen		ECCç§é’¥é•¿åº¦
-     pInData 			å¾…ç­¾åçš„HASHå€¼
-     ulInDataLen    	å¾…ç­¾åçš„HASHå€¼é•¿åº¦
-     pSignValue			ç­¾åå€¼
-     pulSignValueLen	ç­¾åå€¼é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º Íâ²¿ECCÇ©Ãû£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:   			²Ù×÷¾ä±ú
+     pPriKey			Íâ²¿ÊäÈëµÄECCË½Ô¿
+     ulPriKeyLen		ECCË½Ô¿³¤¶È
+     pInData 			´ýÇ©ÃûµÄHASHÖµ
+     ulInDataLen    	´ýÇ©ÃûµÄHASHÖµ³¤¶È
+     pSignValue			Ç©ÃûÖµ
+     pulSignValueLen	Ç©ÃûÖµ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_ExtECCSign(IN HANDLE hKey,
                                    IN unsigned char *pPriKey,
@@ -764,15 +764,15 @@ extern "C" {
                                    OUT unsigned long *pulSignValueLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¤–éƒ¨ECCéªŒç­¾ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey				æ“ä½œå¥æŸ„
-     pPubKey		å¤–éƒ¨è¾“å…¥çš„ECCå…¬é’¥
-     ulPubKeyLen	å…¬é’¥é•¿åº¦
-     pInData 		å¾…ç­¾åçš„HASHå€¼
-     ulInDataLen	å¾…ç­¾åçš„HASHå€¼é•¿åº¦
-     pSignValue	ç­¾åå€¼
-     ulSignValueLen ç­¾åå€¼é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º Íâ²¿ECCÑéÇ©£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey				²Ù×÷¾ä±ú
+     pPubKey		Íâ²¿ÊäÈëµÄECC¹«Ô¿
+     ulPubKeyLen	¹«Ô¿³¤¶È
+     pInData 		´ýÇ©ÃûµÄHASHÖµ
+     ulInDataLen	´ýÇ©ÃûµÄHASHÖµ³¤¶È
+     pSignValue	Ç©ÃûÖµ
+     ulSignValueLen Ç©ÃûÖµ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_ExtECCVerify(IN HANDLE hKey,
                                      IN unsigned char *pPubKey,
@@ -784,16 +784,16 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¤–éƒ¨ECCå…¬é’¥åŠ å¯†ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:æ“ä½œå¥æŸ„
-     pPubKey		å¤–éƒ¨è¾“å…¥çš„ECCå…¬é’¥
-     ulPubKeyLen	å…¬é’¥é•¿åº¦
-     pPlainData		æ˜Žæ–‡
-     ulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     pCipherData 	å¯†æ–‡
-     pulCipherDataLenå¯†æ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     è¯´æ˜Žï¼šå¯†æ–‡é•¿åº¦ä¸ºæ˜Žæ–‡+96å­—èŠ‚ï¼Œé¡ºåºåˆ†åˆ«ä¸ºC1C3C2ï¼Œå…¶ä¸­C1ä¸ºä¸€ä¸ªç‚¹é•¿åº¦ä¸º64å­—èŠ‚ï¼ŒC3é•¿åº¦å›ºå®šä¸º32å­—èŠ‚ï¼ŒC2é•¿åº¦åŒæ˜Žæ–‡
+     º¯Êý¹¦ÄÜ£º Íâ²¿ECC¹«Ô¿¼ÓÃÜ£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:²Ù×÷¾ä±ú
+     pPubKey		Íâ²¿ÊäÈëµÄECC¹«Ô¿
+     ulPubKeyLen	¹«Ô¿³¤¶È
+     pPlainData		Ã÷ÎÄ
+     ulPlainDataLen	Ã÷ÎÄ³¤¶È
+     pCipherData 	ÃÜÎÄ
+     pulCipherDataLenÃÜÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ËµÃ÷£ºÃÜÎÄ³¤¶ÈÎªÃ÷ÎÄ+96×Ö½Ú£¬Ë³Ðò·Ö±ðÎªC1C3C2£¬ÆäÖÐC1ÎªÒ»¸öµã³¤¶ÈÎª64×Ö½Ú£¬C3³¤¶È¹Ì¶¨Îª32×Ö½Ú£¬C2³¤¶ÈÍ¬Ã÷ÎÄ
      */
     unsigned long SDKEY_ExtECCEncrypt(IN HANDLE hEkey,
                                       IN unsigned char *pPubKey,
@@ -805,16 +805,16 @@ extern "C" {
     
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¤–éƒ¨ECCç§é’¥è§£å¯†ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hEkey:   			æ“ä½œå¥æŸ„
-     pPriKey			å¤–éƒ¨è¾“å…¥çš„ECCç§é’¥
-     ulPriKeyLen		ECCç§é’¥é•¿åº¦
-     pCipherData 			å¯†æ–‡
-     ulCipherDataLen    	å¯†æ–‡é•¿åº¦
-     pPlainData				æ˜Žæ–‡
-     pulPlainDataLen	æ˜Žæ–‡é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     è¯´æ˜Žï¼šå¯†æ–‡æ ¼å¼å‚è€ƒåŠ å¯†å‡½æ•°ä¸­è¯´æ˜Ž
+     º¯Êý¹¦ÄÜ£º Íâ²¿ECCË½Ô¿½âÃÜ£¨SM2£©
+     ²ÎÊýËµÃ÷£º hEkey:   			²Ù×÷¾ä±ú
+     pPriKey			Íâ²¿ÊäÈëµÄECCË½Ô¿
+     ulPriKeyLen		ECCË½Ô¿³¤¶È
+     pCipherData 			ÃÜÎÄ
+     ulCipherDataLen    	ÃÜÎÄ³¤¶È
+     pPlainData				Ã÷ÎÄ
+     pulPlainDataLen	Ã÷ÎÄ³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ËµÃ÷£ºÃÜÎÄ¸ñÊ½²Î¿¼¼ÓÃÜº¯ÊýÖÐËµÃ÷
      */
     unsigned long SDKEY_ExtECCDecrypt(IN HANDLE hEkey,
                                       IN unsigned char *pPriKey,
@@ -825,14 +825,14 @@ extern "C" {
                                       OUT unsigned long *pulPlainDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š äº§ç”ŸECCå¯†é’¥ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     ulModulusLen  ECCå¯†é’¥æ¨¡é•¿ï¼Œç›®å‰SM2ä¸º256bit
+     º¯Êý¹¦ÄÜ£º ²úÉúECCÃÜÔ¿£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     ulModulusLen  ECCÃÜÔ¿Ä£³¤£¬Ä¿Ç°SM2Îª256bit
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     å¤‡æ³¨ï¼šä¸€ä¸ªå¯†é’¥å®¹å™¨ä¸‹æ”¯æŒåŒå¯†é’¥ï¼Œå³ç­¾åå’ŒåŠ å¯†(äº¤æ¢)2ç§ã€‚
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ±¸×¢£ºÒ»¸öÃÜÔ¿ÈÝÆ÷ÏÂÖ§³ÖË«ÃÜÔ¿£¬¼´Ç©ÃûºÍ¼ÓÃÜ(½»»»)2ÖÖ¡£
      */
     unsigned long SDKEY_GenECCKeyPair(IN HANDLE hKey,
                                       IN unsigned long ulAlias,
@@ -840,14 +840,14 @@ extern "C" {
                                       IN unsigned long ulModulusLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š äº§ç”Ÿå¡å¤–ECCå¯†é’¥ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„
-     ulModulusLen  ECCå¯†é’¥æ¨¡é•¿ï¼Œç›®å‰SM2ä¸º256bit
-     pPubKey ECCå…¬é’¥
-     pulPubKeyLen ECCå…¬é’¥é•¿åº¦
-     pPriKey ECCç§é’¥
-     pulPriKeyLen ECCç§é’¥é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ²úÉú¿¨ÍâECCÃÜÔ¿£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú
+     ulModulusLen  ECCÃÜÔ¿Ä£³¤£¬Ä¿Ç°SM2Îª256bit
+     pPubKey ECC¹«Ô¿
+     pulPubKeyLen ECC¹«Ô¿³¤¶È
+     pPriKey ECCË½Ô¿
+     pulPriKeyLen ECCË½Ô¿³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_GenExtECCKeyPair(IN HANDLE hKey,
                                          IN unsigned long ulModulusLen,
@@ -857,15 +857,15 @@ extern "C" {
                                          OUT unsigned long *pulPriKeyLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š èŽ·å–å…¬é’¥ä¿¡æ¯
-     å‚æ•°è¯´æ˜Žï¼š hKey:   æ“ä½œå¥æŸ„  
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pPubKey: ECCå…¬é’¥
-     pulPubKeyLenï¼šå…¬é’¥é•¿åº¦
+     º¯Êý¹¦ÄÜ£º »ñÈ¡¹«Ô¿ÐÅÏ¢
+     ²ÎÊýËµÃ÷£º hKey:   ²Ù×÷¾ä±ú  
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pPubKey: ECC¹«Ô¿
+     pulPubKeyLen£º¹«Ô¿³¤¶È
      
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
-     å¤‡æ³¨ï¼šä¸€ä¸ªå¯†é’¥å®¹å™¨ä¸‹æ”¯æŒåŒå¯†é’¥ï¼Œå³ç­¾åå’ŒåŠ å¯†(äº¤æ¢)2ç§ã€‚
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
+     ±¸×¢£ºÒ»¸öÃÜÔ¿ÈÝÆ÷ÏÂÖ§³ÖË«ÃÜÔ¿£¬¼´Ç©ÃûºÍ¼ÓÃÜ(½»»»)2ÖÖ¡£
      */ 
     unsigned long SDKEY_GetECCPublicKey(IN HANDLE hKey,
                                         IN unsigned long ulAlias,
@@ -874,26 +874,26 @@ extern "C" {
                                         OUT unsigned long *pulPubKeyLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	Hashå¤„ç†åˆå§‹åŒ–
-     å‚æ•°è¯´æ˜Žï¼š	hKey		æ“ä½œå¥æŸ„
-     ulAlgo	Hashç®—æ³•è¡¨ç¤ºï¼Œç›®å‰æ”¯æŒSGD_SM3å’ŒSGD_SHA1
-     hHash	Hashå¤„ç†å¥æŸ„
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	Hash´¦Àí³õÊ¼»¯
+     ²ÎÊýËµÃ÷£º	hKey		²Ù×÷¾ä±ú
+     ulAlgo	HashËã·¨±íÊ¾£¬Ä¿Ç°Ö§³ÖSGD_SM3ºÍSGD_SHA1
+     hHash	Hash´¦Àí¾ä±ú
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_HashInit(IN HANDLE hKey,
                                  IN unsigned long ulAlgo,
                                  OUT HANDLE *hHash);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	Hashå¸¦IDçš„å¤„ç†åˆå§‹åŒ–
-     å‚æ•°è¯´æ˜Žï¼š	hKey		æ“ä½œå¥æŸ„
-     ulAlgo	Hashç®—æ³•è¡¨ç¤ºï¼Œå¸¦IDçš„åˆå§‹åŒ–ä»…æ”¯æŒSGD_SM3
-     pECCPubKey ECCå…¬é’¥
-     ulECCPubKeyLen ECCå…¬é’¥é•¿åº¦
-     pID IDæ•°æ®
-     ulIDLen IDçš„æ•°æ®é•¿åº¦
-     hHash	Hashå¤„ç†å¥æŸ„
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	Hash´øIDµÄ´¦Àí³õÊ¼»¯
+     ²ÎÊýËµÃ÷£º	hKey		²Ù×÷¾ä±ú
+     ulAlgo	HashËã·¨±íÊ¾£¬´øIDµÄ³õÊ¼»¯½öÖ§³ÖSGD_SM3
+     pECCPubKey ECC¹«Ô¿
+     ulECCPubKeyLen ECC¹«Ô¿³¤¶È
+     pID IDÊý¾Ý
+     ulIDLen IDµÄÊý¾Ý³¤¶È
+     hHash	Hash´¦Àí¾ä±ú
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_HashInit_ID(IN HANDLE hKey,
                                     IN unsigned long ulAlgo,
@@ -904,12 +904,12 @@ extern "C" {
                                     OUT HANDLE *hHash);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	Hashå¤„ç†ä¸­é—´æ®µå‡½æ•°
-     å‚æ•°è¯´æ˜Žï¼š	hKey		æ“ä½œå¥æŸ„
-     hHash	Hashå¤„ç†å¥æŸ„
-     pInData å¾…å¤„ç†æ•°æ®
-     ulInDataLen å¾…å¤„ç†æ•°æ®é•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	Hash´¦ÀíÖÐ¼ä¶Îº¯Êý
+     ²ÎÊýËµÃ÷£º	hKey		²Ù×÷¾ä±ú
+     hHash	Hash´¦Àí¾ä±ú
+     pInData ´ý´¦ÀíÊý¾Ý
+     ulInDataLen ´ý´¦ÀíÊý¾Ý³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_HashUpdate(IN HANDLE hKey,
                                    IN HANDLE hHash,
@@ -917,12 +917,12 @@ extern "C" {
                                    IN unsigned long ulInDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	Hashå¤„ç†ç»“æŸå‡½æ•°
-     å‚æ•°è¯´æ˜Žï¼š	hKey		æ“ä½œå¥æŸ„
-     hHash	Hashå¤„ç†å¥æŸ„
-     pHashData Hashç»“æžœ
-     ulHashDataLen Hashç»“æžœé•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	Hash´¦Àí½áÊøº¯Êý
+     ²ÎÊýËµÃ÷£º	hKey		²Ù×÷¾ä±ú
+     hHash	Hash´¦Àí¾ä±ú
+     pHashData Hash½á¹û
+     ulHashDataLen Hash½á¹û³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_HashFinal(IN HANDLE hKey,
                                   IN HANDLE hHash,
@@ -930,14 +930,14 @@ extern "C" {
                                   OUT unsigned long *pulHashDataLen);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š	Hashå¤„ç†å‡½æ•°
-     å‚æ•°è¯´æ˜Žï¼š	hKey		æ“ä½œå¥æŸ„
-     ulAlgo	Hashç®—æ³•è¡¨ç¤ºï¼Œç›®å‰æ”¯æŒSGD_SM3å’ŒSGD_SHA1
-     pInData å¾…å¤„ç†æ•°æ®
-     ulInDataLen å¾…å¤„ç†æ•°æ®é•¿åº¦
-     pHashData Hashç»“æžœ
-     ulHashDataLen Hashç»“æžœé•¿åº¦
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º	Hash´¦Àíº¯Êý
+     ²ÎÊýËµÃ÷£º	hKey		²Ù×÷¾ä±ú
+     ulAlgo	HashËã·¨±íÊ¾£¬Ä¿Ç°Ö§³ÖSGD_SM3ºÍSGD_SHA1
+     pInData ´ý´¦ÀíÊý¾Ý
+     ulInDataLen ´ý´¦ÀíÊý¾Ý³¤¶È
+     pHashData Hash½á¹û
+     ulHashDataLen Hash½á¹û³¤¶È
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_Hash(IN HANDLE hKey,
                              IN unsigned long ulAlgo,
@@ -948,15 +948,15 @@ extern "C" {
     
     //ver2.2.0.1 add import ecc key pair function
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å¯¼å…¥ECCå¯†é’¥å¯¹ï¼ˆSM2ï¼‰
-     å‚æ•°è¯´æ˜Žï¼š hKey:æ“ä½œå¥æŸ„  
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pPubKey 	ECCå…¬é’¥
-     ulPubKeyLen ECCå…¬é’¥é•¿åº¦
-     pPriKey ECCç§é’¥
-     ulPriKeyLen ç§é’¥é•¿åº¦          
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º µ¼ÈëECCÃÜÔ¿¶Ô£¨SM2£©
+     ²ÎÊýËµÃ÷£º hKey:²Ù×÷¾ä±ú  
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pPubKey 	ECC¹«Ô¿
+     ulPubKeyLen ECC¹«Ô¿³¤¶È
+     pPriKey ECCË½Ô¿
+     ulPriKeyLen Ë½Ô¿³¤¶È          
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_ImportEccKeyPair(IN HANDLE hKey,
                                          IN unsigned long ulAlias,
@@ -968,18 +968,18 @@ extern "C" {
     
     
     
-    //ver2.2.0.3ä»¥åŽ  å¢žåŠ SM2å¯†é’¥åå•†åŠŸèƒ½
+    //ver2.2.0.3ÒÔºó  Ôö¼ÓSM2ÃÜÔ¿Ð­ÉÌ¹¦ÄÜ
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š å‘èµ·æ–¹ç¬¬ä¸€æ­¥è°ƒç”¨,ç”Ÿæˆå¯†é’¥åå•†å‚æ•°å¹¶è¾“å‡ºã€‚
-     ä½¿ç”¨ECCå¯†é’¥åå•†ç®—æ³•ï¼Œä¸ºè®¡ç®—ä¼šè¯å¯†é’¥è€Œäº§ç”Ÿåå•†å‚æ•°ï¼Œè¿”å›žä¸´æ—¶ECCå¯†é’¥å¯¹çš„å…¬é’¥åŠåå•†å¥æŸ„ã€‚
-     å‚æ•°è¯´æ˜Žï¼š  hKey:æ“ä½œå¥æŸ„  
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT			
-     pTempPubKeyï¼š å‘èµ·æ–¹ä¸´æ—¶å…¬é’¥
-     pulTempPubKeyLenï¼š å‘èµ·æ–¹ä¸´æ—¶å…¬é’¥é•¿åº¦   
-     phAgreementHandleï¼š è¿”å›žçš„å¯†é’¥åå•†å¥æŸ„
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º ·¢Æð·½µÚÒ»²½µ÷ÓÃ,Éú³ÉÃÜÔ¿Ð­ÉÌ²ÎÊý²¢Êä³ö¡£
+     Ê¹ÓÃECCÃÜÔ¿Ð­ÉÌËã·¨£¬Îª¼ÆËã»á»°ÃÜÔ¿¶ø²úÉúÐ­ÉÌ²ÎÊý£¬·µ»ØÁÙÊ±ECCÃÜÔ¿¶ÔµÄ¹«Ô¿¼°Ð­ÉÌ¾ä±ú¡£
+     ²ÎÊýËµÃ÷£º  hKey:²Ù×÷¾ä±ú  
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT			
+     pTempPubKey£º ·¢Æð·½ÁÙÊ±¹«Ô¿
+     pulTempPubKeyLen£º ·¢Æð·½ÁÙÊ±¹«Ô¿³¤¶È   
+     phAgreementHandle£º ·µ»ØµÄÃÜÔ¿Ð­ÉÌ¾ä±ú
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_GenAgreementDataWithECC(IN HANDLE hKey,
                                                 IN unsigned long ulAlias,
@@ -988,24 +988,24 @@ extern "C" {
                                                 OUT unsigned long *pulTempPubKeyLen,
                                                 OUT HANDLE *phAgreementHandle);
     /*
-     å‡½æ•°åŠŸèƒ½ï¼š  å“åº”æ–¹è°ƒç”¨,äº§ç”Ÿåå•†æ•°æ®å¹¶è®¡ç®—ä¼šè¯å¯†é’¥ã€‚
-     ä½¿ç”¨ECCå¯†é’¥åå•†ç®—æ³•ï¼Œäº§ç”Ÿåå•†å‚æ•°å¹¶è®¡ç®—ä¼šè¯å¯†é’¥ï¼Œè¾“å‡ºä¸´æ—¶ECCå¯†é’¥å¯¹å…¬é’¥ï¼Œå¹¶è¿”å›žåå•†å‡ºæ¥çš„å¯†é’¥ã€‚
-     å‚æ•°è¯´æ˜Žï¼š  hKey:æ“ä½œå¥æŸ„  
-     ulAlias: å¯†é’¥å®¹å™¨å·ï¼Œä»Ž0 åˆ° (MAX_KEY_NUMBER-1)
-     ulKeyUseï¼šå¯†é’¥ç”¨é€”ï¼ŒTYPE_SIGN æˆ–TYPE_ENCRYPT
-     pSponsorPubKeyï¼š       å‘èµ·æ–¹ECCå…¬é’¥
-     ulSponsorPubKeyLenï¼š   å‘èµ·æ–¹ECCå…¬é’¥é•¿åº¦
-     pSponsorTempPubKeyï¼š   å‘èµ·æ–¹ä¸´æ—¶å…¬é’¥
-     ulSponsorTempPubKeyLenï¼šå‘èµ·æ–¹ä¸´æ—¶å…¬é’¥é•¿åº¦
-     ulAgreementKeyLenï¼š   åå•†çš„ä¼šè¯å¯†é’¥é•¿åº¦ï¼Œä¸å¤§äºŽ64å­—èŠ‚
-     pIDï¼š         å“åº”æ–¹IDï¼Œä¸å¤§äºŽ32å­—èŠ‚
-     ulIDLenï¼š     å“åº”æ–¹IDé•¿åº¦
-     pSponsorIDï¼š  å‘èµ·æ–¹IDï¼Œä¸å¤§äºŽ32å­—èŠ‚
-     ulSponsorIDLenï¼šå‘èµ·æ–¹IDé•¿åº¦
-     pTempPubKeyï¼š    å“åº”æ–¹ä¸´æ—¶å…¬é’¥
-     pulTempPubKeyLen å“åº”æ–¹ä¸´æ—¶å…¬é’¥é•¿åº¦ 
-     pAgreementKeyï¼š  åå•†å‡ºæ¥çš„ä¼šè¯å¯†é’¥
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º  ÏìÓ¦·½µ÷ÓÃ,²úÉúÐ­ÉÌÊý¾Ý²¢¼ÆËã»á»°ÃÜÔ¿¡£
+     Ê¹ÓÃECCÃÜÔ¿Ð­ÉÌËã·¨£¬²úÉúÐ­ÉÌ²ÎÊý²¢¼ÆËã»á»°ÃÜÔ¿£¬Êä³öÁÙÊ±ECCÃÜÔ¿¶Ô¹«Ô¿£¬²¢·µ»ØÐ­ÉÌ³öÀ´µÄÃÜÔ¿¡£
+     ²ÎÊýËµÃ÷£º  hKey:²Ù×÷¾ä±ú  
+     ulAlias: ÃÜÔ¿ÈÝÆ÷ºÅ£¬´Ó0 µ½ (MAX_KEY_NUMBER-1)
+     ulKeyUse£ºÃÜÔ¿ÓÃÍ¾£¬TYPE_SIGN »òTYPE_ENCRYPT
+     pSponsorPubKey£º       ·¢Æð·½ECC¹«Ô¿
+     ulSponsorPubKeyLen£º   ·¢Æð·½ECC¹«Ô¿³¤¶È
+     pSponsorTempPubKey£º   ·¢Æð·½ÁÙÊ±¹«Ô¿
+     ulSponsorTempPubKeyLen£º·¢Æð·½ÁÙÊ±¹«Ô¿³¤¶È
+     ulAgreementKeyLen£º   Ð­ÉÌµÄ»á»°ÃÜÔ¿³¤¶È£¬²»´óÓÚ64×Ö½Ú
+     pID£º         ÏìÓ¦·½ID£¬²»´óÓÚ32×Ö½Ú
+     ulIDLen£º     ÏìÓ¦·½ID³¤¶È
+     pSponsorID£º  ·¢Æð·½ID£¬²»´óÓÚ32×Ö½Ú
+     ulSponsorIDLen£º·¢Æð·½ID³¤¶È
+     pTempPubKey£º    ÏìÓ¦·½ÁÙÊ±¹«Ô¿
+     pulTempPubKeyLen ÏìÓ¦·½ÁÙÊ±¹«Ô¿³¤¶È 
+     pAgreementKey£º  Ð­ÉÌ³öÀ´µÄ»á»°ÃÜÔ¿
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_GenAgreementDataAndKeyWithECC(IN HANDLE hKey,
                                                       IN unsigned long ulAlias,
@@ -1024,21 +1024,21 @@ extern "C" {
                                                       OUT unsigned char *pAgreementKey);
     
     /*
-     å‡½æ•°åŠŸèƒ½ï¼šå‘èµ·æ–¹ç¬¬äºŒæ­¥è°ƒç”¨,è®¡ç®—ä¼šè¯å¯†é’¥ã€‚
-     ä½¿ç”¨ECCå¯†é’¥åå•†ç®—æ³•ï¼Œä½¿ç”¨è‡ªèº«åå•†å¥æŸ„å’Œå“åº”æ–¹çš„åå•†å‚æ•°è®¡ç®—ä¼šè¯å¯†é’¥ï¼ŒåŒæ—¶è¿”å›žä¼šè¯å¯†é’¥ã€‚
-     å‚æ•°è¯´æ˜Žï¼š  hKey:æ“ä½œå¥æŸ„  
-     hAgreementHandleï¼šå¯†é’¥åå•†å¥æŸ„
-     pResponsePubKeyï¼š å“åº”æ–¹ECCå…¬é’¥
-     ulResponsePubKeyLenï¼šå“åº”æ–¹ECCå…¬é’¥é•¿åº¦
-     pResponseTempPubKeyï¼š å“åº”æ–¹ä¸´æ—¶ECCå…¬é’¥
-     ulResponseTempPubKeyLenï¼šå“åº”æ–¹ä¸´æ—¶ECCå…¬é’¥é•¿åº¦
-     ulAgreementKeyLenï¼šè¦åå•†çš„ä¼šè¯å¯†é’¥é•¿åº¦ï¼Œä¸å¤§äºŽ64å­—èŠ‚
-     pIDï¼š 	         å‘èµ·æ–¹IDï¼Œä¸å¤§äºŽ32å­—èŠ‚
-     ulIDLenï¼š        å‘èµ·æ–¹IDé•¿åº¦
-     pResponseIDï¼š    å“åº”æ–¹IDï¼Œä¸å¤§äºŽ32å­—èŠ‚
-     ulResponseIDLenï¼šå“åº”æ–¹IDé•¿åº¦
-     pAgreementKeyï¼š  åå•†å‡ºæ¥çš„ä¼šè¯å¯†é’¥
-     è¿”å›žå€¼ï¼š SDKEY_SUCCESS:æˆåŠŸï¼Œå…¶ä»–è§é”™è¯¯ä»£ç 
+     º¯Êý¹¦ÄÜ£º·¢Æð·½µÚ¶þ²½µ÷ÓÃ,¼ÆËã»á»°ÃÜÔ¿¡£
+     Ê¹ÓÃECCÃÜÔ¿Ð­ÉÌËã·¨£¬Ê¹ÓÃ×ÔÉíÐ­ÉÌ¾ä±úºÍÏìÓ¦·½µÄÐ­ÉÌ²ÎÊý¼ÆËã»á»°ÃÜÔ¿£¬Í¬Ê±·µ»Ø»á»°ÃÜÔ¿¡£
+     ²ÎÊýËµÃ÷£º  hKey:²Ù×÷¾ä±ú  
+     hAgreementHandle£ºÃÜÔ¿Ð­ÉÌ¾ä±ú
+     pResponsePubKey£º ÏìÓ¦·½ECC¹«Ô¿
+     ulResponsePubKeyLen£ºÏìÓ¦·½ECC¹«Ô¿³¤¶È
+     pResponseTempPubKey£º ÏìÓ¦·½ÁÙÊ±ECC¹«Ô¿
+     ulResponseTempPubKeyLen£ºÏìÓ¦·½ÁÙÊ±ECC¹«Ô¿³¤¶È
+     ulAgreementKeyLen£ºÒªÐ­ÉÌµÄ»á»°ÃÜÔ¿³¤¶È£¬²»´óÓÚ64×Ö½Ú
+     pID£º 	         ·¢Æð·½ID£¬²»´óÓÚ32×Ö½Ú
+     ulIDLen£º        ·¢Æð·½ID³¤¶È
+     pResponseID£º    ÏìÓ¦·½ID£¬²»´óÓÚ32×Ö½Ú
+     ulResponseIDLen£ºÏìÓ¦·½ID³¤¶È
+     pAgreementKey£º  Ð­ÉÌ³öÀ´µÄ»á»°ÃÜÔ¿
+     ·µ»ØÖµ£º SDKEY_SUCCESS:³É¹¦£¬ÆäËû¼û´íÎó´úÂë
      */
     unsigned long SDKEY_GenKeyWithECC(IN HANDLE hKey,
                                       IN HANDLE hAgreementHandle,

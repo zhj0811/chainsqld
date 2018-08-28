@@ -1,3 +1,26 @@
+/**
+
+* @file       TableStorage.h
+
+* @brief      将 chainSQL 交易存储至后端数据库中.
+
+* @details	解析 chainSQL 交易，并将交易解析成 native SQL 语句并在后端数据库执行 SQL 语句
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -28,6 +51,14 @@ namespace ripple {
 
 class ChainSqlTx;
 class Transactor;
+
+/**
+
+* chainSQL 交易存储类
+
+* chainSQL 交易存储类
+
+*/
 class TableStorage
 {
 public:
@@ -39,7 +70,21 @@ public:
     void SetHaveSyncFlag(bool flag);
     void TryTableStorage();
 
+	/** 交易初始化
+	*
+	*    初始化交易，用户后续的交易处理
+	*	@param tx 交易对象
+	*	@param transactor 事物对象
+	*	@return 错误返回码
+	*/
     TER InitItem(STTx const&tx,Transactor& transactor);
+
+	/** 启动工作线程处理事务
+	*
+	*    启动工作线程处理事务
+	*	@param void
+	*	@return void 
+	*/
     void TableStorageThread();
 
     TxStore& GetTxStore(uint160 nameInDB);

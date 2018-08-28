@@ -1,3 +1,26 @@
+/**
+
+* @file       STTx2SQL.h
+
+* @brief      将 chainSQL 的交易转换成 native SQL.
+
+* @details	真正实现将 chainSQL 交易转换成 native SQL 并且执行 SQL 的类
+
+* @author     dbliu
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -35,6 +58,13 @@ namespace ripple {
 class BuildSQL;
 class DatabaseCon;
 
+/**
+
+* 转换 chainSQL 交易为 native SQL.
+
+* 真正将将 chainSQL 交易转换为 native SQL 语句，并且执行 native SQL。这个操作会更改 chainSQL 后端数据库实体数据
+
+*/
 class STTx2SQL {
 public:
 	STTx2SQL(const std::string& db_type);
@@ -44,7 +74,14 @@ public:
     static bool IsTableExistBySelect(DatabaseCon* dbconn, std::string sTable);
 
 	using MapRule = std::map<std::string, Json::Value>;
-	// convert json into sql
+	/** 处理 chainSQL 交易
+	*
+	*    根据 chainSQL 交易的类型生成相关的 native SQL,并且执行 SQL
+	*	@param tx chainSQL 交易对象
+	*	@param operationRule  行级控制规则
+	*	@param verifyAffectedRows  这个交易是否会影响到行
+	*	@return std::pair 的第一个元素为 0 表示处置交易是否成功，否则处置交易失败；第二个元素成功时为 native SQL 语句，否则为失败信息
+	*/
 	std::pair<int /*retcode*/, std::string /*sql*/> ExecuteSQL(const ripple::STTx& tx, 
 		const std::string& operationRule = "",
 		bool verifyAffectedRows = false);

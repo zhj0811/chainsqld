@@ -1,3 +1,26 @@
+/**
+
+* @file       Tuning.h
+
+* @brief      定义每个用户操作表的相关阈值
+
+* @details	定义每个用户操作表的相关阈值，比如账户创建表的个数及授权上限
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
 This file is part of rippled: https://github.com/ripple/rippled
@@ -21,10 +44,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #define PEERSAFE_APP_TX_PATHS_TUNING_H_INCLUDED
 
 namespace ripple {
-	//an address can create at most 100 tables
+	/** an address can create at most 100 tables */
 	int const ACCOUNT_OWN_TABLE_COUNT = 100;
 
-	//a table owner can grant at most 256 users
+	/** a table owner can grant at most 256 users */
 	int const TABLE_GRANT_COUNT = 256;
 
 } // ripple

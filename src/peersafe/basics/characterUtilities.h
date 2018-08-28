@@ -1,3 +1,48 @@
+/**
+
+* @file       characterUtilities.h
+
+* @brief      字符处理类工具.
+
+* @details	字符处理类工具
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*//**
+
+* @file       characterUtilities.h
+
+* @brief      字符处理类工具.
+
+* @details	字符处理类工具
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -22,7 +67,13 @@
 
 #include <string>
 namespace ripple {
-
+	/** 字符集转换函数
+	*     GBK、UFT8字符集转互换
+	*     @param sSrc 
+	*     @param sDest 
+	*     @param bFromGBK2UTF8 
+	*     @return    
+	*/
     bool  TransGBK_UTF8(const std::string &sSrc, std::string &sDest, bool bFromGBK2UTF8);    
 }
 #endif

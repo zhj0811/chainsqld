@@ -1,3 +1,26 @@
+/**
+
+* @file       TableStorageItem.h
+
+* @brief      数据存储抽象类.
+
+* @details	数据存储抽象类
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -23,22 +46,42 @@
 #include <peersafe/app/sql/TxStore.h>
 namespace ripple {
 class ChainSqlTx;
+/**
 
+* chainSQL 数据存储抽象类
+
+* chainSQL 数据存储抽象类
+
+*/
 class TableStorageItem
 {
+	/**
+
+	* 数据存储动作.
+
+	* 忽略.
+
+	*/
     enum TableStorageDBFlag
     {
-        STORAGE_NONE,
-        STORAGE_ROLLBACK,
-        STORAGE_COMMIT
+        STORAGE_NONE,		///< 不执行任何操作
+        STORAGE_ROLLBACK,	///< 数据回滚
+        STORAGE_COMMIT		///< 数据提交
     };
 
+	/**
+
+	* 交易基本信息.
+
+	* 忽略.
+
+	*/
     typedef struct txInfo_
     {
-        AccountID                                                    accountID;
-        uint256                                                      uTxHash;
-        LedgerIndex                                                  uTxLedgerVersion;        
-        bool                                                         bCommit;
+        AccountID                                                    accountID;				///< 交易提交账号
+        uint256                                                      uTxHash;				///< 交易 hash
+        LedgerIndex                                                  uTxLedgerVersion;      ///< 交易所在账本的版本信息  
+        bool                                                         bCommit;				///< 是否已经提交
 
         txInfo_()
         {

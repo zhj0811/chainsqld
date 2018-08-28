@@ -1,3 +1,26 @@
+/**
+
+* @file       ECIES.h
+
+* @brief      AES.
+
+* @details	AES
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -17,25 +40,6 @@
  */
 //==============================================================================
 
-//------------------------------------------------------------------------------
-/*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2014 Ripple Labs Inc.
-
-    Permission to use, copy, modify, and/or distribute this software for any
-    purpose  with  or without fee is hereby granted, provided that the above
-    copyright notice and this permission notice appear in all copies.
-
-    THE  SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-    WITH  REGARD  TO  THIS  SOFTWARE  INCLUDING  ALL  IMPLIED  WARRANTIES  OF
-    MERCHANTABILITY  AND  FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-    ANY  SPECIAL ,  DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-    WHATSOEVER  RESULTING  FROM  LOSS  OF USE, DATA OR PROFITS, WHETHER IN AN
-    ACTION  OF  CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-*/
-//==============================================================================
-
 #ifndef RIPPLE_CRYPTO_ECIES_H_INCLUDED
 #define RIPPLE_CRYPTO_ECIES_H_INCLUDED
 
@@ -48,7 +52,25 @@ namespace ripple {
 
 // encrypt/decrypt functions with integrity checking.
 // Note that the other side must somehow know what keys to use
+
+/** AES
+*     encrypt functions with integrity checking
+*     @param secretKey 
+*     @param publicKey 
+*     @param plaintext 
+*     @return    
+*     @note    ECIES functions. These throw on failure
+*/
 Blob encryptECIES (uint256 const& secretKey, Blob const& publicKey, Blob const& plaintext);
+
+/** AES
+*     decrypt functions with integrity checking
+*     @param secretKey 
+*     @param publicKey 
+*     @param ciphertext 
+*     @return    
+*     @note    ECIES functions. These throw on failure
+*/
 Blob decryptECIES (uint256 const& secretKey, Blob const& publicKey, Blob const& ciphertext);
 
 } // ripple

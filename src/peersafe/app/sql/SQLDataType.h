@@ -1,3 +1,27 @@
+/**
+
+* @file       SQLDataType.h
+
+* @brief      定义 chainSQL 协议层的数据类型过渡到数据库表字段类型.
+
+* @details	详细定义了 chainSQL 过渡到后端数据库 (MYSQL) 表字段类型映射。其中定义了 InnerDateTime,InnerDate,InnerDecimal 等
+
+* @author     dbliu
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
+
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -26,7 +50,13 @@
 
 namespace ripple {
 
-// only hole-type, no sense
+/**
+
+* only for holding space, no sense.
+
+* 略
+
+*/
 class InnerDateTime
 {
 public:
@@ -34,11 +64,26 @@ public:
 	~InnerDateTime() {}
 };
 
+/**
+
+* only for holding space, no sense.
+
+* 略
+
+*/
 class InnerDate {
 public:
 	InnerDate() {}
 	~InnerDate() {}
 };
+
+/**
+
+* Deciaml 类型
+
+* 将创建表的字段类型解析成 innerDecimal 类型，这种类型和double、float最大的区别是可以定义精确度
+
+*/
 
 class InnerDecimal
 {
@@ -82,15 +127,31 @@ public:
 
 private:
 	InnerDecimal() {}
-	int length_;	// length of decimal
-	int accuracy_;	// accuracy of decimal
+	int length_;	///< length of decimal
+	int accuracy_;	///< accuracy of decimal
 };
 
+/**
+
+* 创建表时，用于解析具体字段类型
+
+* chainSQL 创建的表的时候，应用层会根据 Raw 协议定义表字段的各种类型，这个类用于解析表字段的名称、类型 
+
+*/
 class FieldValue {
 public:
+	/** FieldValue 构造函数
+	*
+	*    FieldValue 默认构造函数 
+	*/
 	explicit FieldValue()
 		: value_type_(INNER_UNKOWN) {};
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 string 的值构造 FieldValue
+	*	@param value 字段值
+	*/
 	explicit FieldValue(const std::string& value)
 		: value_type_(STRING) {
 		value_.str = new std::string;
@@ -100,6 +161,12 @@ public:
 	}
 
 	enum { fVARCHAR, fCHAR, fTEXT, fBLOB };
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 string 的值和类型为 int 的值构造 FieldValue			
+	*	@param value 字段值
+	*	@param flag	字段类型
+	*/
 	explicit FieldValue(const std::string& value, int flag)
 		: value_type_(STRING) {
 
@@ -118,57 +185,113 @@ public:
 		}
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 int 的值构造 FieldValue
+	*	@param value 字段值
+	*/
 	explicit FieldValue(const int value)
 		: value_type_(INT) {
 		value_.i = value;
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 unsigned int 的值构造 FieldValue
+	*	@param value 字段值
+	*/
 	explicit FieldValue(const unsigned int value)
 		: value_type_(UINT) {
 		value_.ui = value;
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 float 的值构造 FieldValue
+	*	@param f 字段值
+	*/
 	explicit FieldValue(const float f)
 		: value_type_(FLOAT) {
 		value_.f = f;
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 double 的值构造 FieldValue
+	*	@param d 字段值
+	*/
 	explicit FieldValue(const double d)
 		: value_type_(DOUBLE) {
 		value_.d = d;
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 int64_t 的值构造 FieldValue
+	*	@param value 字段值
+	*/
 	explicit FieldValue(const int64_t value)
 		: value_type_(LONG64) {
 		value_.i64 = value;
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 InnerDateTime 的值构造 FieldValueE
+	*	@param datetime 字段值
+	*/
 	explicit FieldValue(const InnerDateTime& datetime)
 		: value_type_(DATETIME) {
 		value_.datetime = nullptr;
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 InnerDate 的值构造 FieldValue
+	*	@param date 字段值
+	*/
 	explicit FieldValue(const InnerDate& date)
 		: value_type_(DATE) {
 		value_.date = nullptr;
 	}
 
+	/** FieldValue 构造函数
+	*
+	*    根据类型为 InnerDecimal 的值构造 FieldValueL
+	*	@param d 字段值
+	*/
 	explicit FieldValue(const InnerDecimal& d)
 		: value_type_(DECIMAL) {
 		value_.decimal = new InnerDecimal(d.length(), d.accuracy());
 	}
 
+	/** FieldValue 拷贝构造函数
+	*
+	*    根据类型为 FieldValue 的值构造 FieldValue
+	*	@param value 字段值
+	*/
 	explicit FieldValue(const FieldValue& value)
 		: value_type_(value.value_type_) {
 		assign(value);
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 FieldValue 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象 
+	*/
 	FieldValue& operator =(const FieldValue& value) {
 		value_type_ = value.value_type_;
 		assign(value);
 		return *this;
 	}
 
+	/** 赋值实现
+	*
+	*    将 value 对象的值和类型赋值给新对象
+	*	@param value 需要赋值的对象
+	*/
 	void assign(const FieldValue& value) {
 		if (value_type_ == INT) {
 			value_.i = value.value_.i;
@@ -205,6 +328,12 @@ public:
 		}
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 string 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const std::string& value) {
 		value_type_ = STRING;
 		value_.str = new std::string;
@@ -214,54 +343,109 @@ public:
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 int 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const int value) {
 		value_type_ = INT;
 		value_.i = value;
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 unsigned int 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const unsigned int value) {
 		value_type_ = UINT;
 		value_.ui = value;
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 float 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const float value) {
 		value_type_ = FLOAT;
 		value_.f = value;
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 double 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const double value) {
 		value_type_ = DOUBLE;
 		value_.d = value;
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 InnerDateTime 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const InnerDateTime& value) {
 		value_type_ = DATETIME;
 		value_.datetime = nullptr;
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 InnerDate 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const InnerDate& value) {
 		value_type_ = DATE;
 		value_.date = nullptr;
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 InnerDecimal 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const InnerDecimal& value) {
 		value_type_ = DECIMAL;
 		value_.decimal = new InnerDecimal(value.length(), value.accuracy());
 		return *this;
 	}
 
+	/** FieldValue 赋值运算符
+	*
+	*    根据右值类型为 int64_t 的值生成 FieldValue 对象
+	*	@param value 右值
+	*	@return 返回 FieldValue 类型对象
+	*/
 	FieldValue& operator =(const int64_t value) {
 		value_type_ = LONG64;
 		value_.i64 = value;
 		return *this;
 	}
 
+	/** FieldValue 关系运算符
+	*
+	*    根据两个 FieldValue 对象的值和类型检查两个对象是否相等
+	*	@param left 左值
+	*	@param right 右值
+	*	@return 如果两个类型相当则返回 TRUE, 否则返回 FALSE
+	*/
 	bool operator ==(const FieldValue& r) const {
 		bool eq = false;
 		assert(value_type_ == r.value_type_);
@@ -292,6 +476,13 @@ public:
 		return eq;
 	}
 
+	/** FieldValue 关系运算符
+	*
+	*    根据两个 FieldValue 对象的值和类型检查左值对象是否小于右值对象
+	*	@param left 左值
+	*	@param right 右值
+	*	@return 如果左值小于右值则返回 TRUE, 否则返回 FALSE
+	*/
 	bool operator <(const FieldValue& r) const {
 		bool eq = false;
 		assert(value_type_ == r.value_type_);
@@ -323,6 +514,13 @@ public:
 		return eq;
 	}
 
+	/** FieldValue 关系运算符
+	*
+	*    根据两个 FieldValue 对象的值和类型检查左值对象是否小于等于右值对象
+	*	@param left 左值
+	*	@param right 右值
+	*	@return 如果左值小于等于TRUE, 否则返回 FALSE
+	*/
 	bool operator <=(const FieldValue& r) const {
 		bool eq = false;
 		assert(value_type_ == r.value_type_);
@@ -354,6 +552,13 @@ public:
 		return eq;
 	}
 
+	/** FieldValue 关系运算符
+	*
+	*    根据两个 FieldValue 对象的值和类型检查左值对象是否大于右值对象
+	*	@param left 左值
+	*	@param right 右值
+	*	@return 如果左值大于TRUE, 否则返回 FALSE
+	*/
 	bool operator >(const FieldValue& r) const {
 		bool eq = false;
 		assert(value_type_ == r.value_type_);
@@ -384,6 +589,13 @@ public:
 		return eq;
 	}
 
+	/** FieldValue 关系运算符
+	*
+	*    根据两个 FieldValue 对象的值和类型检查左值对象是否大于等于右值对象
+	*	@param left 左值
+	*	@param right 右值
+	*	@return 如果左值大于等于 TRUE, 否则返回 FALSE
+	*/
 	bool operator >=(const FieldValue& r) const {
 		bool eq = false;
 		assert(value_type_ == r.value_type_);
@@ -607,34 +819,48 @@ public:
 
 private:
 
+	/**
+
+	* chainSQL 支持的内部类型
+
+	* 忽略.
+
+	*/
 	enum inner_type {
-		INNER_UNKOWN,
-		INT,
-		UINT,
-		FLOAT,
-		DOUBLE,
-		LONG64,
-		DECIMAL,
-		DATETIME,
-		DATE,
-		TEXT,
-		VARCHAR,
-		CHAR,
-		BLOB,
-		STRING
+		INNER_UNKOWN,	///< 未知类型
+		INT,			///< integer 
+		UINT,			///< unsigned integer
+		FLOAT,			///< float
+		DOUBLE,			///< double
+		LONG64,			///< long64
+		DECIMAL,		///< decimal
+		DATETIME,		///< datetime
+		DATE,			///< date
+		TEXT,			///< text
+		VARCHAR,		///< varchar
+		CHAR,			///< char
+		BLOB,			///< blob
+		STRING			///< string
 	};
 
-	int value_type_;
+	int value_type_;	///< @enum inner_type 
+	/**
+
+	* chainSQL 支持的 inner_type 对应的系统类型
+
+	* 忽略.
+
+	*/
 	union inner_value {
-		int i;
-		unsigned int ui;
-		int64_t i64;
-		float f;
-		double d;
-		InnerDateTime *datetime;
-		InnerDate *date;
-		InnerDecimal *decimal;
-		std::string *str; // varchar/text/blob/decimal
+		int i;				///< int
+		unsigned int ui;	///< unsigned int
+		int64_t i64;		///< int64_t
+		float f;			///< float
+		double d;			///< date
+		InnerDateTime *datetime;	///< @var InnerDateTime
+		InnerDate *date;			///< @var InnerDate
+		InnerDecimal *decimal;		///< @var InnerDateTime
+		std::string *str;	///< @var inner_type::TEXT/inner_type::VARCHAR/inner_type::TEXT/inner_type::BLOB/inner_type::DECIMAL
 	} value_;
 };
 

@@ -1,3 +1,26 @@
+/**
+
+* @file       OperationRule.h
+
+* @brief      表行级控制规则
+
+* @details	表行级控制规则
+
+* @author     peersafe
+
+* @date       2017/12/09
+
+* @version v1.0
+
+* @par Copyright (c):
+
+*      Copyright (c) 2016-2018 Peersafe Technology Co., Ltd.
+
+* @par History:
+
+*   v1.0: dbliu, 2017/12/09, originator\n
+
+*/
 #ifndef RIPPLE_TX_OPERATION_RULE_H_INCLUDED
 #define RIPPLE_TX_OPERATION_RULE_H_INCLUDED
 
@@ -8,6 +31,13 @@
 
 namespace ripple {
 
+/**
+
+* 表行级控制规则
+
+* 表行级控制规则
+
+*/
 class OperationRule {
 public:
 	//for TableListSet
