@@ -1,3 +1,11 @@
+/**
+* @file       TableAssistant.h
+* @brief      表助手类
+* @date       20171209
+* @version	  V1.0
+* @par Copyright (c):
+*      2016-2018 Peersafe Technology Co., Ltd.
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -43,18 +51,24 @@ namespace ripple {
 
 	class TableAssistant
 	{
+		/**
+		* 交易信息
+		*/
 		typedef struct
 		{
-			LedgerIndex                                                  uTxLedgerVersion;
-			uint256                                                      uTxHash;
-			uint256                                                      uTxCheckHash;
-			bool                                                         bStrictMode;
+			LedgerIndex                                                  uTxLedgerVersion;		///< 最后可以加入的区块高度
+			uint256                                                      uTxHash;				///< 交易hash
+			uint256                                                      uTxCheckHash;			///< 校验hash
+			bool                                                         bStrictMode;			///< 是否为严格模式
 		}txInfo;
+		/**
+		* 校验信息
+		*/
 		typedef struct
 		{
-			uint256                                                      uTxCheckHash;
-			uint256                                                      uTxBackupHash;
-			std::string													 sTableName;
+			uint256                                                      uTxCheckHash;			///< 校验hash
+			uint256                                                      uTxBackupHash;			///< 备份校验hash，和raw字段一起创建新的校验hash
+			std::string													 sTableName;			///< 
 			AccountID													 accountID;
 			time_point_type												 timer;
 			std::list<std::shared_ptr<txInfo>>							 listTx;
@@ -64,19 +78,46 @@ namespace ripple {
 		TableAssistant(Application& app, Config& cfg, beast::Journal journal);
 		~TableAssistant() {}
 
-		//prepare json
+		//
 		//	t_create:generate token & crypt raw
 		//	t_assign:generate token
 		//	r_insert&r_delete&r_update:crypt raw
+		/**
+		*     准备普通交易/事务所需的json数据
+		*
+		*		t_create:生成Token（对Raw字段加解密密码使用用户公钥加密后的密文），加密raw字段
+		*
+		*		r_insert&r_delete&r_update:加密raw字段
+		*
+		*     @param secret 私钥
+		*     @param publickey 公钥
+		*	  @param tx_json input/output json数据
+		*	  @param ws 是否为websocket
+		*     @return 有错误时，返回的error_message或error
+		*/
 		Json::Value prepare(const std::string& secret,const std::string& publickey,Json::Value& tx_json,bool ws = false);
-		//get 'NameInDB'
+		/**
+		*     获取对应底层数据库的实际表名
+		*
+		*     @param accountIdStr 账户ID
+		*     @param tableNameStr 表名
+		*/
 		Json::Value getDBName(const std::string& accountIdStr, const std::string& tableNameStr);
+		/// 存储普通交易/事务中各个交易的校验信息到map中
 		bool Put(STTx const& tx);
+		/// 开启表校验hash线程
 		void TryTableCheckHash();
 
+		/// 获取表校验hash
 		uint256 getCheckHash(uint160 nameInDB);
 	private:
+		/// 存储交易的校验信息到map中
 		bool PutOne(STTx const& tx, const uint256 &uHash);
+		/**
+		* 表校验hash线程
+		*
+		*	将已进入验证区块的交易，从m_map的校验信息中的交易信息列表中移除
+		*/
 		void TableCheckHashThread();
         Config& GetConfig() {return cfg_;}
 

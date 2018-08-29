@@ -1,3 +1,11 @@
+/**
+* @file       TxCommonPrepare.h
+* @brief      普通交易json数据准备类
+* @date       20171209
+* @version	  V1.0
+* @par Copyright (c):
+*      2016-2018 Peersafe Technology Co., Ltd.
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -36,6 +44,16 @@ namespace ripple {
 	class TxCommonPrepare : public TxPrepareBase
 	{
 	public:
+		/**
+		*     构造函数
+		*
+		*	  @param app 当前运行节点程序
+		*     @param secret 私钥
+		*     @param publickey 公钥
+		*	  @param tx_json input/output json数据
+		*	  @param func 获取校验hash回调函数
+		*	  @param ws 是否为websocket
+		*/
 		TxCommonPrepare(Application& app, const std::string& secret,const std::string& publickey, Json::Value& tx_json, getCheckHashFunc func, bool ws);
 		virtual ~TxCommonPrepare();
 	};

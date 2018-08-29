@@ -1,3 +1,12 @@
+/**
+* @file       TableDefines.h
+* @brief      表相关的规定
+* @details	  判断是否为TableListSet类型交易；判断是否为SqlStatement类型交易；判断操作是否为严格模式；操作类型和操作权限的转换等；
+* @date       20171209
+* @version	  V1.0
+* @par Copyright (c):
+*      2016-2018 Peersafe Technology Co., Ltd.
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld

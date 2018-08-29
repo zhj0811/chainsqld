@@ -130,7 +130,7 @@ public:
 	/** 从数据库里直接删除指定的表
 	*
 	*    略
-	*	@param tx tablename 表名
+	*	@param tablename 表名
 	*	@return std::pair 的第一个元素为 0 表示处置交易是否成功，否则处置交易失败；第二个元素为失败后的错误提示
 	*/
 	std::pair<bool, std::string> DropTable(const std::string& tablename);
@@ -138,7 +138,7 @@ public:
 	/** 从数据库里直接查询数据
 	*
 	*    更加查询对象直接从数据库里查询数据
-	*	@param tx context 查询对象
+	*	@param context tx context 查询对象
 	*	@return Json::Value
 	*/
 	Json::Value txHistory(RPC::Context& context);

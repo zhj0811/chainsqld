@@ -1,3 +1,11 @@
+/**
+* @file       STEntry.h
+* @brief      TableList中TableEntries数据中元素
+* @date       20171209
+* @version	  V1.0
+* @par Copyright (c):
+*      2016-2018 Peersafe Technology Co., Ltd.
+*/
 //------------------------------------------------------------------------------
 /*
  This file is part of chainsqld: https://github.com/chainsql/chainsqld
@@ -46,14 +54,46 @@ namespace ripple {
 
 
         STEntry();  
+		/**
+		* 初始化TableList中TableEntries数据中元素各字段的值
+		*
+		* @param tableName 表名
+		* @param nameInDB 对应底层数据库中实际的表名（LedgerSequence+OwnerAccountID+表名）
+		* @param deleted 标示表是否被删除
+		* @param createLgrSeq  本交易的ledger序列号-1
+		* @param createdLedgerHash  本次交易的ledger HASH
+		* @param createdTxnHash TransactionID
+		* @param txnLedgerSequence  本交易的ledger序列号
+		* @param txnLedgerhash  本次交易的ledger HASH
+		* @param prevTxnLedgerSequence 上次交易的ledger序列号
+		* @param prevTxnLedgerhash 上次交易的ledger HASH
+		* @param txCheckhash 校验hash
+		* @param users 授权用户列表
+		*/
 		void init(ripple::Blob tableName, uint160 nameInDB, uint8 deleted, uint32 createLgrSeq, uint256 createdLedgerHash, uint256 createdTxnHash, uint32 txnLedgerSequence, uint256 txnLedgerhash, uint32 prevTxnLedgerSequence, uint256 prevTxnLedgerhash, uint256 txCheckhash, STArray users);
 
+		/**
+		* 初始化行级控制规则
+		*
+		* @param operationRule 行级控制规则字符串
+		*/
 		void initOperationRule(ripple::Blob operationRule);
 
+		/**
+		* 获取操作类型对应的行级控制规则
+		*
+		* @param opType 操作类型
+		*/
 		std::string getOperationRule(TableOpType opType) const;
 
+		/**
+		* 判断账户是否有某种操作权限
+		*
+		* @param account 账户地址
+		* @param flag 操作类型
+		*/
 		bool hasAuthority(const AccountID& account, TableRoleFlags flag);
-
+		/// 判断是否是加密模式
 		bool isConfidential();
 
         STBase*

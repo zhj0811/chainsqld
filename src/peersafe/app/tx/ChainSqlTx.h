@@ -70,7 +70,7 @@ namespace ripple {
 
 		/** 判断交易是否能处理
 		*     判断交易是否能处理
-		*     @param ctxa chainSQL 交易对象上下文信息 
+		*     @param ctx chainSQL 交易对象上下文信息 
 		*     @return    true 交易能被处理， false 交易无法处理
 		*/
 		static bool canDispose(ApplyContext& ctx);

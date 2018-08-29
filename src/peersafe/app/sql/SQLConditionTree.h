@@ -226,7 +226,7 @@ namespace conditionParse {
 	*    略
 	*	@param root 语法树根节点
 	*	@param cb 处理语法树叶子节点的回调函数
-	*	@param cb 处理语法树非叶子节点的回调函数
+	*	@param ncb 处理语法树非叶子节点的回调函数
 	*	@return void
 	*/
 	void traverse(conditionTree& root, handlevaluecb cb, handlenodecb ncb);

@@ -852,14 +852,14 @@ private:
 
 	*/
 	union inner_value {
-		int i;				///< int
-		unsigned int ui;	///< unsigned int
-		int64_t i64;		///< int64_t
-		float f;			///< float
-		double d;			///< date
-		InnerDateTime *datetime;	///< @var InnerDateTime
-		InnerDate *date;			///< @var InnerDate
-		InnerDecimal *decimal;		///< @var InnerDateTime
+		int i;				///< i
+		unsigned int ui;	///< ui
+		int64_t i64;		///< i64
+		float f;			///< f
+		double d;			///< d
+		InnerDateTime *datetime;	///< @var datetime
+		InnerDate *date;			///< @var date
+		InnerDecimal *decimal;		///< @var decimal
 		std::string *str;	///< @var inner_type::TEXT/inner_type::VARCHAR/inner_type::TEXT/inner_type::BLOB/inner_type::DECIMAL
 	} value_;
 };
