@@ -66,7 +66,26 @@ namespace ripple {
         std::string sNormal = ret[jss::tx_json][uint32_t(0)].asString();        
         //2.path 
         std::string sFullPath = ret[jss::tx_json][uint32_t(1)].asString();
+		auto pos = sNormal.find(' ');
+		if (pos != std::string::npos)
+		{
+			std::string secret = sNormal.substr(0,pos);
 
+			auto seed = parseBase58<Seed>(secret);
+			if (!seed)
+			{
+				ret[jss::error] = "error.";
+				ret[jss::error_message] = "secret not valid";
+				ret.removeMember(jss::tx_json);
+				return ret;
+			}
+			KeyType keyType = KeyType::secp256k1;
+			std::pair<PublicKey, SecretKey> key_pair = generateKeyPair(keyType, *seed);
+			auto public_key = key_pair.first;
+			auto secret_key = key_pair.second;
+			auto ownerID = calcAccountID(public_key);
+			sNormal.replace(0, pos, to_string(ownerID));
+		}
 		auto retPair = context.app.getTableSync().StartDumpTable(sNormal, sFullPath, NULL);        
 
 		if(!retPair.first)
@@ -109,19 +128,27 @@ namespace ripple {
 			return ret;
 		}
 
-		std::string owner = ret[jss::tx_json][0U].asString();
+		std::string secret = ret[jss::tx_json][0U].asString();
 		std::string tableName = ret[jss::tx_json][1U].asString();
-        auto pOwnerID = ripple::parseBase58<AccountID>(owner);
 
-        if (!pOwnerID)
-        {
-            ret[jss::error] = "error.";
-            ret[jss::error_message] = "para error, owner is invalid.";
-            ret.removeMember(jss::tx_json);
-            return ret;
-        }
+		auto seed = parseBase58<Seed>(secret);
+		if (!seed) 
+		{
+			ret[jss::error] = "error.";
+			ret[jss::error_message] = "secret not valid";
+			ret.removeMember(jss::tx_json);
+			return ret;
+		}
+		KeyType keyType = KeyType::secp256k1;
+		std::pair<PublicKey, SecretKey> key_pair = generateKeyPair(keyType, *seed);
+		auto public_key = key_pair.first;
+		auto secret_key = key_pair.second;
+		auto ownerID = calcAccountID(public_key);
 
-		AccountID ownerID(*pOwnerID);
+		//std::string owner = ret[jss::tx_json][0U].asString();
+  //      auto pOwnerID = ripple::parseBase58<AccountID>(owner);
+
+
 		auto retPair = context.app.getTableSync().StopDumpTable(ownerID, tableName);
         
 		if (!retPair.first)
