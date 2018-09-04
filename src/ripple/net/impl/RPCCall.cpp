@@ -850,7 +850,7 @@ private:
 
     Json::Value parseDumpTable(Json::Value const& jvParams)
     { 
-		if (jvParams.size() < 2)
+		if (jvParams.size() != 2)
 		{
 			return rpcError(rpcINVALID_PARAMS);
 		}
