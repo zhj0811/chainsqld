@@ -178,13 +178,13 @@ namespace ripple {
 			{
 				if(tableFalgs == lsfInsert)
 					JLOG(j.error()) <<
-						"Invalid table flags: Account" << to_string(sourceID) << "does not have Insert authority";
+						"Invalid table flags: Account " << to_string(sourceID) << " does not have Insert authority";
 				return tefBAD_AUTH_NO;
 			}
 			else
 			{
 				JLOG(j.warn()) <<
-					"Authority check successfully for Account:"<< to_string(sourceID) <<" Auth:Insert";
+					"Authority check successfully for Account: "<< to_string(sourceID) <<" Auth:Insert";
 			}
 		}
 		else
