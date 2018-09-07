@@ -488,7 +488,8 @@ transactionPreProcessImpl (
 				return rpcError(err);
 			}
 			else
-				JLOG(j.warn()) << "TransactionSign secret match Account.";
+				JLOG(j.warn()) << "TransactionSign secret '" << params[jss::secret].asString() <<
+				"' matches Account" << toBase58(calcAccountID(keypair.first));
                 
         }
     }
