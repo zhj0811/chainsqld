@@ -176,9 +176,15 @@ namespace ripple {
 			auto tableFalgs = getFlagFromOptype((TableOpType)tx.getFieldU16(sfOpType));
 			if (!pEntry->hasAuthority(sourceID, tableFalgs))
 			{
-				JLOG(j.trace()) <<
-					"Invalid table flags: Destination table does not authorith this account.";
+				if(tableFalgs == lsfInsert)
+					JLOG(j.error()) <<
+						"Invalid table flags: Account" << to_string(sourceID) << "does not have Insert authority";
 				return tefBAD_AUTH_NO;
+			}
+			else
+			{
+				JLOG(j.warn()) <<
+					"Authority check successfully";
 			}
 		}
 		else

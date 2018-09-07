@@ -481,8 +481,15 @@ transactionPreProcessImpl (
             auto const err = acctMatchesPubKey (
                 sle, srcAddressID, keypair.first);
 
-            if (err != rpcSUCCESS)
-                return rpcError (err);
+			if (err != rpcSUCCESS)
+			{
+				JLOG(j.error()) << "TransactionSign: secret '" << params[jss::secret].asString() <<
+					"' does not match Account" << toBase58(calcAccountID(keypair.first));
+				return rpcError(err);
+			}
+			else
+				JLOG(j.warn()) << "TransactionSign secret match Account.";
+                
         }
     }
 
