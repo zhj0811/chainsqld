@@ -240,7 +240,7 @@ public:
 // additional invariant checks can be declared above and then added to this
 // tuple
 using InvariantChecks = std::tuple<
-    AccountRootsNotDeleted,
+    //AccountRootsNotDeleted,
     LedgerEntryTypesMatch,
     ZXCBalanceChecks,
     ZXCNotCreated,

@@ -92,7 +92,7 @@ transResults()
 		{ tefNOT_MULTI_SIGNING,      { "tefNOT_MULTI_SIGNING",     "Account has no appropriate list of multi-signers."                             } },
 		{ tefPAST_SEQ,               { "tefPAST_SEQ",              "This sequence number has already past."                                        } },
 		{ tefWRONG_PRIOR,            { "tefWRONG_PRIOR",           "This previous transaction does not match."                                     } },
-		{ tefBAD_AUTH_MASTER,        { "tefBAD_AUTH_MASTER",       "Auth for unclaimed account needs correct master key."                          } },
+		{ tefBAD_AUTH_MASTER,        { "tefBAD_AUTH_MASTER",       "Not master account to delete an account."                          } },
 
 		{ telLOCAL_ERROR,            { "telLOCAL_ERROR",           "Local failure."                                                                } },
 		{ telBAD_DOMAIN,             { "telBAD_DOMAIN",            "Domain too long."                                                              } },

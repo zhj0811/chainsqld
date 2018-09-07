@@ -69,6 +69,11 @@ TxFormats::TxFormats ()
         << SOElement (sfDeliverMin,          SOE_OPTIONAL)
         ;
 
+	add("AccountDelete", ttACCOUNT_DELETE)
+		<< SOElement(sfDestination, SOE_REQUIRED)
+		;
+
+
     add ("EscrowCreate", ttESCROW_CREATE) <<
         SOElement (sfDestination,       SOE_REQUIRED) <<
         SOElement (sfAmount,            SOE_REQUIRED) <<

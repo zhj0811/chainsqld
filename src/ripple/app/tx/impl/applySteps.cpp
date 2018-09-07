@@ -35,6 +35,7 @@
 #include <peersafe/app/tx/TableListSet.h>
 #include <peersafe/app/tx/SqlStatement.h>
 #include <peersafe/app/tx/SqlTransaction.h>
+#include <ripple/app/tx/impl/DeleteAccount.h>
 
 namespace ripple {
 
@@ -48,6 +49,7 @@ invoke_preflight (PreflightContext const& ctx)
     case ttOFFER_CANCEL:    return CancelOffer      ::preflight(ctx);
     case ttOFFER_CREATE:    return CreateOffer      ::preflight(ctx);
     case ttPAYMENT:         return Payment          ::preflight(ctx);
+	case ttACCOUNT_DELETE:  return DeleteAccount	::preflight(ctx);
     case ttESCROW_CREATE:   return EscrowCreate     ::preflight(ctx);
     case ttESCROW_FINISH:   return EscrowFinish     ::preflight(ctx);
     case ttESCROW_CANCEL:   return EscrowCancel     ::preflight(ctx);
@@ -116,6 +118,7 @@ invoke_preclaim (PreclaimContext const& ctx)
     case ttOFFER_CANCEL:    return invoke_preclaim<CancelOffer>(ctx);
     case ttOFFER_CREATE:    return invoke_preclaim<CreateOffer>(ctx);
     case ttPAYMENT:         return invoke_preclaim<Payment>(ctx);
+	case ttACCOUNT_DELETE:  return invoke_preclaim<DeleteAccount>(ctx);
     case ttESCROW_CREATE:   return invoke_preclaim<EscrowCreate>(ctx);
     case ttESCROW_FINISH:   return invoke_preclaim<EscrowFinish>(ctx);
     case ttESCROW_CANCEL:   return invoke_preclaim<EscrowCancel>(ctx);
@@ -148,6 +151,7 @@ invoke_calculateBaseFee(PreclaimContext const& ctx)
     case ttOFFER_CANCEL:    return CancelOffer::calculateBaseFee(ctx);
     case ttOFFER_CREATE:    return CreateOffer::calculateBaseFee(ctx);
     case ttPAYMENT:         return Payment::calculateBaseFee(ctx);
+	case ttACCOUNT_DELETE:  return DeleteAccount::calculateBaseFee(ctx);
     case ttESCROW_CREATE:   return EscrowCreate::calculateBaseFee(ctx);
     case ttESCROW_FINISH:   return EscrowFinish::calculateBaseFee(ctx);
     case ttESCROW_CANCEL:   return EscrowCancel::calculateBaseFee(ctx);
@@ -193,6 +197,7 @@ invoke_calculateConsequences(STTx const& tx)
     case ttOFFER_CANCEL:    return invoke_calculateConsequences<CancelOffer>(tx);
     case ttOFFER_CREATE:    return invoke_calculateConsequences<CreateOffer>(tx);
     case ttPAYMENT:         return invoke_calculateConsequences<Payment>(tx);
+	case ttACCOUNT_DELETE:  return invoke_calculateConsequences<DeleteAccount>(tx);
     case ttESCROW_CREATE:   return invoke_calculateConsequences<EscrowCreate>(tx);
     case ttESCROW_FINISH:   return invoke_calculateConsequences<EscrowFinish>(tx);
     case ttESCROW_CANCEL:   return invoke_calculateConsequences<EscrowCancel>(tx);
@@ -227,6 +232,7 @@ invoke_apply (ApplyContext& ctx)
     case ttOFFER_CANCEL:    { CancelOffer   p(ctx); return p(); }
     case ttOFFER_CREATE:    { CreateOffer   p(ctx); return p(); }
     case ttPAYMENT:         { Payment       p(ctx); return p(); }
+	case ttACCOUNT_DELETE:  { DeleteAccount p(ctx); return p(); }
     case ttESCROW_CREATE:   { EscrowCreate  p(ctx); return p(); }
     case ttESCROW_FINISH:   { EscrowFinish  p(ctx); return p(); }
     case ttESCROW_CANCEL:   { EscrowCancel  p(ctx); return p(); }
