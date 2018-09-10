@@ -483,12 +483,12 @@ transactionPreProcessImpl (
 
 			if (err != rpcSUCCESS)
 			{
-				JLOG(j.error()) << "TransactionSign: secret '" << params[jss::secret].asString() <<
+				JLOG(j.error()) << "TransactionSign failed: TransactionType=" << tx_json[jss::TransactionType].asString() <<", secret '" << params[jss::secret].asString() <<
 					"' does not match Account '" << toBase58(calcAccountID(keypair.first))<<"'";
 				return rpcError(err);
 			}
 			else
-				JLOG(j.warn()) << "TransactionSign secret '" << params[jss::secret].asString() <<
+				JLOG(j.warn()) << "TransactionSign success: TransactionType=" << tx_json[jss::TransactionType].asString() <<",secret '" << params[jss::secret].asString() <<
 				"' matches Account '" << toBase58(calcAccountID(keypair.first))<<"'";
                 
         }
