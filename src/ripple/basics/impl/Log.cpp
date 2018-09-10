@@ -21,6 +21,8 @@
 #include <ripple/basics/chrono.h>
 #include <ripple/basics/Log.h>
 #include <ripple/basics/contract.h>
+#include <ripple/protocol/RippleAddress.h>
+#include <ripple/basics/StringUtilities.h>
 #include <boost/algorithm/string.hpp>
 #include <cassert>
 #include <fstream>
@@ -180,6 +182,16 @@ Logs::write (beast::severities::Severity level, std::string const& partition,
 {
     std::string s;
     format (s, text, level, partition);
+
+    if (false)
+    {
+        std::string sKey = "DEDCE9CE67B451D852FD4E846FCDE31C";
+        Blob blob_key = strCopy(sKey);
+        Blob blob_text = strCopy(s);
+        Blob blob_cryptedText = RippleAddress::encryptAES(blob_key, blob_text);
+        s = strCopy(blob_cryptedText);
+    }
+
     std::lock_guard <std::mutex> lock (mutex_);
     file_.writeln (s);
     if (! silent_)
