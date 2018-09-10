@@ -37,4 +37,18 @@ Json::Value doServerInfo (RPC::Context& context)
 
     return ret;
 }
+
+Json::Value doProductInfo(RPC::Context& context)
+{
+    Json::Value ret(Json::objectValue);
+
+    Json::Value info = Json::objectValue;
+    info[jss::productName]    = "众享ChainSQL数据控制软件";
+    info[jss::productVersion] = "V1.0";
+
+    ret[jss::info] = info;
+
+    return ret;
+}
+
 } // ripple

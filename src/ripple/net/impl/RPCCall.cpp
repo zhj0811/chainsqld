@@ -1211,6 +1211,7 @@ public:
             {   "submit",               &RPCParser::parseSignSubmit,            1,  3   },
             {   "submit_multisigned",   &RPCParser::parseSubmitMultiSigned,     1,  1   },
             {   "server_info",          &RPCParser::parseAsIs,                  0,  0   },
+            {   "product_info",         &RPCParser::parseAsIs,                  0,  0 },
             {   "server_state",         &RPCParser::parseAsIs,                  0,  0   },
             {   "stop",                 &RPCParser::parseAsIs,                  0,  0   },
     //      {   "transaction_entry",    &RPCParser::parseTransactionEntry,     -1,  -1  },

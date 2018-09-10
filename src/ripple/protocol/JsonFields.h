@@ -509,6 +509,8 @@ JSS ( warning );                    // rpc:
 JSS ( write_load );                 // out: GetCounts
 JSS (memos);                        // out: memos
 JSS ( lastLedgerSequence );			//
+JSS ( productName );  			    //
+JSS ( productVersion );			    //
 #undef JSS
 
 } // jss
