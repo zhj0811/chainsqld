@@ -47,26 +47,6 @@ namespace ripple {
         std::string sTableName, sNameInDB, sAccount;
         //1. param similar to synctables
         std::string sNormal = ret[jss::tx_json][uint32_t(0)].asString();
-		auto pos = sNormal.find(' ');
-		if (pos != std::string::npos)
-		{
-			std::string secret = sNormal.substr(0, pos);
-
-			auto seed = parseBase58<Seed>(secret);
-			if (!seed)
-			{
-				ret[jss::error] = "error.";
-				ret[jss::error_message] = "secret not valid";
-				ret.removeMember(jss::tx_json);
-				return ret;
-			}
-			KeyType keyType = KeyType::secp256k1;
-			std::pair<PublicKey, SecretKey> key_pair = generateKeyPair(keyType, *seed);
-			auto public_key = key_pair.first;
-			auto secret_key = key_pair.second;
-			auto ownerID = calcAccountID(public_key);
-			sNormal.replace(0, pos, to_string(ownerID));
-		}
         //2. SQL for check
         std::string sSQL = ret[jss::tx_json][uint32_t(1)].asString();
         //3.path 
