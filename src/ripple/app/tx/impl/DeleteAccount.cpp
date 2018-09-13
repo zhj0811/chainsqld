@@ -35,9 +35,6 @@ namespace ripple {
 		if (!isTesSuccess(ret))
 			return ret;
 
-		auto& tx = ctx.tx;
-		auto& j = ctx.j;
-
 		return preflight2(ctx);
 	}
 

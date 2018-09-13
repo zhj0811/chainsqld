@@ -65,6 +65,7 @@ Json::Value doRandom                (RPC::Context&);
 Json::Value doRipplePathFind        (RPC::Context&);
 Json::Value doServerInfo            (RPC::Context&); // for humans
 Json::Value doServerState           (RPC::Context&); // for machines
+Json::Value doProductInfo           (RPC::Context&); // for software version
 Json::Value doSessionClose          (RPC::Context&);
 Json::Value doSessionOpen           (RPC::Context&);
 Json::Value doSign                  (RPC::Context&);

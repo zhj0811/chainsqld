@@ -143,6 +143,7 @@ Handler handlerArray[] {
     {   "submit",               byRef (&doSubmit),             Role::USER,  NEEDS_CURRENT_LEDGER  },
     {   "submit_multisigned",   byRef (&doSubmitMultiSigned),  Role::USER,  NEEDS_CURRENT_LEDGER  },
     {   "server_info",          byRef (&doServerInfo),         Role::USER,  NO_CONDITION     },
+    {   "product_info",         byRef (&doProductInfo),        Role::USER,  NO_CONDITION },
     {   "server_state",         byRef (&doServerState),        Role::USER,  NO_CONDITION     },
     {   "stop",                 byRef (&doStop),               Role::ADMIN,   NO_CONDITION     },
     {   "transaction_entry",    byRef (&doTransactionEntry),   Role::USER,  NO_CONDITION  },

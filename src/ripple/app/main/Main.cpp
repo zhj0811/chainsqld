@@ -155,6 +155,7 @@ void printHelp (const po::options_description& desc)
            "     ripple_path_find <json> [<ledger>]\n"
            "     version\n"
            "     server_info\n"
+           "     product_info\n"
            "     sign <private_key> <tx_json> [offline]\n"
            "     sign_for <signer_address> <signer_private_key> <tx_json> [offline]\n"
            "     stop\n"
