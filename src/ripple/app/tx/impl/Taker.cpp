@@ -323,15 +323,41 @@ BasicTaker::flow_iou_to_iou (
     f.issuers.in = multiply (f.order.in, rate_in);
     f.issuers.out = multiply (f.order.out, rate_out);
 
+	//bool bInCNY = (to_string(order.in.issue().currency) == "CNY");
+
     log_flow ("flow_iou_to_iou", f);
 
     // Clamp on owner balance
     if (owner_funds < f.issuers.out)
     {
-        f.issuers.out = owner_funds;
-        f.order.out = divide (f.issuers.out, rate_out);
-        f.order.in = qual_mul (f.order.out, quality, f.order.in);
-        f.issuers.in = multiply (f.order.in, rate_in);
+		//auto qualityAmount = quality.rate();
+		//STAmount amountFinal = owner_funds;
+		//if (bInCNY)
+		//{
+		//	amountFinal = getLowerBound(owner_funds);
+		//	f.issuers.out = amountFinal;
+		//	f.order.out = divide(f.issuers.out, rate_out);
+		//	f.order.in = qual_mul(f.order.out, quality, f.order.in);
+		//	f.issuers.in = multiply(f.order.in, rate_in);
+		//}
+		//else
+		//{
+		//	f.issuers.out = amountFinal;
+		//	f.order.out = divide(f.issuers.out, rate_out);
+		//	f.order.in = qual_mul(f.order.out, quality, f.order.in);
+		//	f.issuers.in = multiply(f.order.in, rate_in);
+		//	if (f.order.in != getLowerBound(f.order.in))
+		//	{
+		//		f.order.in = getLowerBound(f.order.in);
+		//		f.order.out = qual_div(f.order.in, quality, f.order.out);
+		//		f.issuers.out = multiply(f.order.out, rate_out);
+		//	}
+		//}
+		f.issuers.out = owner_funds;
+		f.order.out = divide(f.issuers.out, rate_out);
+		f.order.in = qual_mul(f.order.out, quality, f.order.in);
+		f.issuers.in = multiply(f.order.in, rate_in);
+
         log_flow ("(clamped on owner funds)", f);
     }
 
@@ -402,6 +428,17 @@ BasicTaker::do_cross (Amounts offer, Quality quality, AccountID const& owner)
     assert (remaining_.in >= zero);
 
     return result;
+}
+
+STAmount
+BasicTaker::getLowerBound(STAmount amount)
+{
+	std::uint64_t value = amount.mantissa();
+	int offset = amount.exponent();
+	std::uint64_t valueParity = std::pow(10, abs(offset));
+	if (value % valueParity != 0)
+		value = value - value % valueParity;
+	return STAmount(amount.issue(), value, offset, amount.negative());
 }
 
 // Calculates the bridged flow through the specified offers
@@ -738,6 +775,9 @@ Taker::cross (Offer& offer)
     // In direct crossings, at least one leg must not be ZXC.
     if (isZXC (offer.amount ().in) && isZXC (offer.amount ().out))
         return tefINTERNAL;
+
+	//auto const owner_funds = get_funds(owner, offer.out);
+	//auto const taker_funds = get_funds(account(), offer.in);
 
     auto const amount = do_cross (
         offer.amount (), offer.quality (), offer.owner ());

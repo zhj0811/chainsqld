@@ -128,6 +128,9 @@ private:
         return effective_rate (m_rate_out, original_.out.issue (), from, to);
     }
 
+	STAmount
+		getLowerBound(STAmount amount);
+
 public:
     BasicTaker () = delete;
     BasicTaker (BasicTaker const&) = delete;

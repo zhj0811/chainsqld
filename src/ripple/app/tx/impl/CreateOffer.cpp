@@ -157,6 +157,22 @@ CreateOffer::preclaim(PreclaimContext const& ctx)
 
     auto viewJ = ctx.app.journal("View");
 
+	//float number not allowed except for CNY
+	STAmount amountPow;
+	if (to_string(saTakerPays.issue().currency) == "CNY")
+	{
+		amountPow = saTakerGets;
+	}
+	else if (to_string(saTakerGets.issue().currency) == "CNY")
+	{
+		amountPow = saTakerPays;
+	}
+	std::uint64_t value = amountPow.mantissa();
+	int offset = amountPow.exponent();
+	std::uint64_t valueParity = std::pow(10, abs(offset));
+	if (value % valueParity > 0)
+		return temMALFORMED;
+
     if (isGlobalFrozen(ctx.view, uPaysIssuerID) ||
         isGlobalFrozen(ctx.view, uGetsIssuerID))
     {
@@ -166,10 +182,10 @@ CreateOffer::preclaim(PreclaimContext const& ctx)
         return tecFROZEN;
     }
     else if (accountFunds(ctx.view, id, saTakerGets,
-        fhZERO_IF_FROZEN, viewJ) <= zero)
+        fhZERO_IF_FROZEN, viewJ) < saTakerGets)
     {
-        JLOG(ctx.j.debug()) <<
-            "delay: Offers must be at least partially funded.";
+        //JLOG(ctx.j.debug()) <<
+        //    "delay: Offers must be at least partially funded.";
 
         return tecUNFUNDED_OFFER;
     }
@@ -575,6 +591,28 @@ CreateOffer::step_account (OfferStream& stream, Taker const& taker)
     while (stream.step ())
     {
         auto const& offer = stream.tip ();
+
+		//if other assets except for CNY has float number, discard
+		if (to_string(offer.amount().in.issue().currency) == "CNY" || 
+			to_string(offer.amount().out.issue().currency) == "CNY")
+		{
+			STAmount amount;
+			if (to_string(offer.amount().in.issue().currency) == "CNY")
+			{
+				amount = offer.amount().out;
+			}
+			else
+			{
+				amount = offer.amount().in;
+			}
+
+			std::uint64_t value = amount.mantissa();
+			int offset = amount.exponent();
+
+			std::uint64_t valueParity = std::pow(10, abs(offset));
+			if(value % valueParity > 0)
+				continue;
+		}
 
         // This offer at the tip crosses the taker's threshold. We're done.
         if (taker.reject (offer.quality ()))

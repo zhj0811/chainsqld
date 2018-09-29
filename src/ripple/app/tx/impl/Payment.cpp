@@ -25,6 +25,7 @@
 #include <ripple/protocol/st.h>
 #include <ripple/protocol/TxFlags.h>
 #include <ripple/protocol/JsonFields.h>
+#include <ripple/ledger/View.h>
 
 namespace ripple {
 
@@ -290,6 +291,51 @@ Payment::preclaim(PreclaimContext const& ctx)
         {
             return telBAD_PATH_COUNT; // Too many paths for proposed ledger.
         }
+
+		//calc balance
+		auto const accountID = ctx.tx[sfAccount];
+		std::vector <std::shared_ptr<SLE const>> offers;
+		if (!forEachItemAfter(ctx.view, accountID,
+			beast::zero, 0, 1000,
+			[&offers](std::shared_ptr<SLE const> const& offer)
+		{
+			if (offer->getType() == ltOFFER)
+			{
+				offers.emplace_back(offer);
+				return true;
+			}
+
+			return false;
+		}))
+		{
+			return tefEXCEPTION;
+		}
+
+		STAmount offerAmount;
+		bool bFirst = true;
+		for (auto const& offer : offers)
+		{
+			auto const& amount = offer->getFieldAmount(sfTakerGets);
+			if (amount.issue() == saDstAmount.issue())
+			{
+				if (bFirst)
+				{
+					offerAmount = amount;
+					bFirst = false;
+				}
+				else
+					offerAmount += amount;
+			}
+		}
+
+		if (!bFirst)
+		{
+			if (accountFunds(ctx.view, accountID, saDstAmount,
+				fhZERO_IF_FROZEN, ctx.j) < offerAmount + saDstAmount)
+			{
+				return tecUNFUNDED_PAYMENT;
+			}
+		}
     }
 
     return tesSUCCESS;
