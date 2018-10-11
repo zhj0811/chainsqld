@@ -21,6 +21,7 @@
 #include <ripple/app/main/Application.h>
 #include <ripple/app/misc/ValidatorList.h>
 #include <ripple/rpc/Context.h>
+#include <ripple/protocol/JsonFields.h>
 
 namespace ripple {
 
@@ -37,8 +38,22 @@ doAddValidators(RPC::Context& context)
 	if (params.isMember("validators"))
 	{
 		bool ret = context.app.validators().addPublicKeys(params["validators"]);
+		if(ret)
+			return context.app.validators().getJson();
+		else
+		{
+			Json::Value ret(Json::objectValue);
+			ret[jss::error] = "Add public key failed!";
+			return ret;
+		}
 	}
-	return context.app.validators().getJson();
+	else
+	{
+		Json::Value ret(Json::objectValue);
+		ret[jss::error] = "param not valid!";
+		return ret;
+	}
+	
 }
 
 }  // namespace ripple
