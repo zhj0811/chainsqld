@@ -1075,6 +1075,23 @@ private:
         return jvRequest;
     }
 
+	// parse add_validators
+	// add_validators validator1 validator2 ...
+	Json::Value parseAddValidators(Json::Value const& jvParams)
+	{
+		const unsigned int size = jvParams.size();
+
+		Json::Value jvRequest;
+		unsigned int index = 0;
+
+		Json::Value& validators =
+			(jvRequest["validators"] = Json::arrayValue);
+		while (index < size)
+			validators.append(jvParams[index++].asString());
+
+		return jvRequest;
+	}
+
     // parse gateway balances
     // gateway_balances [<ledger>] <issuer_account> [ <hotwallet> [ <hotwallet> ]]
 
@@ -1204,6 +1221,7 @@ public:
             {   "wallet_propose",       &RPCParser::parseWalletPropose,         0,  1   },
             {   "wallet_seed",          &RPCParser::parseWalletSeed,            0,  1   },
             {   "internal",             &RPCParser::parseInternal,              1,  -1  },
+			{	"add_validators",		&RPCParser::parseAddValidators,			1,	-1  },
 
             // Evented methods
             {   "path_find",            &RPCParser::parseEvented,               -1, -1  },

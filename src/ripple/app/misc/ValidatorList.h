@@ -179,6 +179,14 @@ public:
         std::vector<std::string> const& configKeys,
         std::vector<std::string> const& publisherKeys);
 
+	/** Add trusted keys.
+
+	@param validator public_keys to add.
+
+	@return `false` if an entry is invalid or unparsable
+	*/
+	bool addPublicKeys(Json::Value const& validators);
+
     /** Apply published list of public keys
 
         @param manifest base64-encoded publisher key manifest

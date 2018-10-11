@@ -30,4 +30,15 @@ doValidators(RPC::Context& context)
     return context.app.validators().getJson();
 }
 
+Json::Value
+doAddValidators(RPC::Context& context)
+{
+	auto& params = context.params;
+	if (params.isMember("validators"))
+	{
+		bool ret = context.app.validators().addPublicKeys(params["validators"]);
+	}
+	return context.app.validators().getJson();
+}
+
 }  // namespace ripple

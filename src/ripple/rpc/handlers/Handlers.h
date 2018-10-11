@@ -103,6 +103,7 @@ Json::Value doGetUserToken(RPC::Context&);
 Json::Value doGetCheckHash(RPC::Context&);
 Json::Value doValidators            (RPC::Context&);
 Json::Value doValidatorListSites    (RPC::Context&);
+Json::Value doAddValidators(RPC::Context&);
 } // ripple
 
 #endif

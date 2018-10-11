@@ -205,6 +205,67 @@ ValidatorList::load (
     return true;
 }
 
+bool ValidatorList::addPublicKeys(Json::Value const& validators)
+{
+	size_t count = 0;
+	PublicKey local;
+	for (auto const& value : validators)
+	{
+		auto n = value.asString();
+		JLOG(j_.trace()) <<
+			"Processing '" << n << "'";
+
+		PublicKey id;
+		if (nullptr == HardEncryptObj::getInstance())
+		{
+			auto const oId = parseBase58<PublicKey>(
+				TokenType::TOKEN_NODE_PUBLIC, n);
+			if (!oId)
+			{
+				JLOG(j_.error()) << "Invalid node identity: " << n;
+				return false;
+			}
+			id = *oId;
+		}
+		else
+		{
+			std::string publicKeyStr = n;
+			std::string publicKeyDe58 = decodeBase58Token(publicKeyStr, TOKEN_NODE_PUBLIC);
+			if (publicKeyDe58.empty() || publicKeyDe58.size() != 65)
+			{
+				JLOG(j_.error()) << "Invalid node identity: " << n;
+				return false;
+			}
+			id = PublicKey(Slice(publicKeyDe58.c_str(), publicKeyDe58.size()));
+		}
+
+		// Skip local key which was already added
+		if (id == localPubKey_)
+			continue;
+
+		auto ret = keyListings_.insert({ id, 1 });
+		if (!ret.second)
+		{
+			JLOG(j_.warn()) << "Duplicate node identity: " << n;
+			continue;
+		}
+		auto it = publisherLists_.emplace(
+			std::piecewise_construct,
+			std::forward_as_tuple(local),
+			std::forward_as_tuple());
+		// Config listed keys never expire
+		if (it.second)
+			it.first->second.expiration = TimeKeeper::time_point::max();
+		it.first->second.list.emplace_back(std::move(id));
+		it.first->second.available = true;
+		++count;
+	}
+
+	JLOG(j_.debug()) <<
+		"Loaded " << count << " entries";
+
+	return true;
+}
 
 ListDisposition
 ValidatorList::applyList (

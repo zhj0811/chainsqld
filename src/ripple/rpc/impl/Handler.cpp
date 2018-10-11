@@ -155,6 +155,7 @@ Handler handlerArray[] {
     {   "wallet_seed",          byRef (&doWalletSeed),         Role::ADMIN,   NO_CONDITION     },
     {   "validators",           byRef (&doValidators),          Role::ADMIN,   NO_CONDITION     },
     {   "validator_list_sites", byRef (&doValidatorListSites),  Role::ADMIN,   NO_CONDITION     },
+	{   "add_validators",		byRef (&doAddValidators),	   Role::ADMIN,	 NO_CONDITION		},
 	{	"t_prepare",			byRef (&doPrepare),            Role::USER,   NO_CONDITION },
     {   "t_create",             byRef (&doRpcSubmit),          Role::USER,   NO_CONDITION     },
     {   "g_dbname",             byRef (&doGetDBName),          Role::USER,    NO_CONDITION     },
