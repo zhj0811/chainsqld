@@ -373,8 +373,8 @@ transactionPreProcessImpl (
     // This test covers the case where we're offline so the sequence number
     // cannot be determined locally.  If we're offline then the caller must
     // provide the sequence number.
-    if (!verify && !tx_json.isMember (jss::Sequence))
-        return RPC::missing_field_error ("tx_json.Sequence");
+    //if (!verify && !tx_json.isMember (jss::Sequence))
+    //    return RPC::missing_field_error ("tx_json.Sequence");
 
     std::shared_ptr<SLE const> sle = cachedRead(*ledger,
         keylet::account(srcAddressID).key, ltACCOUNT_ROOT);
@@ -870,8 +870,8 @@ static Json::Value checkMultiSignFields (Json::Value const& jvRequest)
     // There are a couple of additional fields we need to check before
     // we serialize.  If we serialize first then we generate less useful
     //error messages.
-    if (!tx_json.isMember (jss::Sequence))
-        return RPC::missing_field_error ("tx_json.Sequence");
+    //if (!tx_json.isMember (jss::Sequence))
+    //    return RPC::missing_field_error ("tx_json.Sequence");
 
     if (!tx_json.isMember (sfSigningPubKey.getJsonName()))
         return RPC::missing_field_error ("tx_json.SigningPubKey");

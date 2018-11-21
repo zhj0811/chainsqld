@@ -21,9 +21,15 @@
 #include <ripple/app/ledger/LedgerMaster.h>
 #include <ripple/app/misc/HashRouter.h>
 #include <ripple/app/misc/Transaction.h>
+#include <ripple/app/main/Application.h>		
+#include <ripple/app/ledger/LedgerMaster.h>		
+#include <ripple/app/ledger/OpenLedger.h>		
+#include <ripple/app/misc/TxQ.h>
 #include <ripple/app/tx/apply.h>
 #include <ripple/net/RPCErr.h>
 #include <ripple/protocol/ErrorCodes.h>
+#include <ripple/protocol/Indexes.h>
+#include <ripple/protocol/STParsedJSON.h>
 #include <ripple/resource/Fees.h>
 #include <ripple/rpc/Context.h>
 #include <ripple/rpc/impl/TransactionSign.h>
@@ -101,6 +107,30 @@ Json::Value doSubmit (RPC::Context& context)
     std::string reason;
     auto tpTrans = std::make_shared<Transaction> (
         stpTrans, reason, context.app);
+	{		
+		auto const& ledger = context.app.openLedger().current();
+		auto tx_json= tpTrans->getJson(0);
+		auto const srcAddressID = parseBase58<AccountID>(
+			tx_json[jss::Account].asString());
+		std::shared_ptr<SLE const> sle = cachedRead(*ledger,
+			keylet::account(srcAddressID).key, ltACCOUNT_ROOT);
+
+		if (!tx_json.isMember(jss::Sequence)) {
+			auto seq = (*sle)[sfSequence];
+			auto const queued = context.app.getTxQ().getAccountTxs(srcAddressID,
+				*ledger);
+			// If the account has any txs in the TxQ, skip those sequence
+			// numbers (accounting for possible gaps).
+			for (auto const& tx : queued)
+			{
+				if (tx.first == seq)
+					++seq;
+				else if (tx.first > seq)
+					break;
+			}
+			tx_json[jss::Sequence] = seq;
+		}
+	}
     if (tpTrans->getStatus() != NEW)
     {
         jvResult[jss::error]            = "invalidTransaction";
