@@ -153,23 +153,17 @@ namespace ripple {
 			jvResult[jss::tx_blob] = strHex(
 				tpTrans->getSTransaction()->getSerializer().peekData());
 
-			STer result = tpTrans->getResult();
-			if (temUNCERTAIN != result.ter)
+			TER result = tpTrans->getResult();
+			if (temUNCERTAIN != result)
 			{
 				std::string sToken;
 				std::string sHuman;
 
-				transResultInfo(result.ter, sToken, sHuman);
+				transResultInfo(result, sToken, sHuman);
 
 				jvResult[jss::engine_result] = sToken;
-				jvResult[jss::engine_result_code] = result.ter;
-				if (result.msg.empty())
-					jvResult[jss::engine_result_message] = sHuman;
-				else
-					jvResult[jss::engine_result_message] = result.msg;
-				//jvResult[jss::engine_result_message] = sHuman;
-				//if (!result.msg.empty())
-				//	jvResult[jss::engine_result_message_detail] = result.msg;
+				jvResult[jss::engine_result_code] = result;
+				jvResult[jss::engine_result_message] = sHuman;
 			}
 
 			return jvResult;
