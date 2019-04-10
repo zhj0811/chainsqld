@@ -120,10 +120,42 @@ namespace ripple {
 
 				return jvResult;
 			}
-			tx_json[jss::Sequence] = context.app.getMasterTransaction().getAccountSequence(*srcAddressID);
+			auto sequence = context.app.getMasterTransaction().getAccountSequence(*srcAddressID);
+			if (sequence == 0)
+			{
+				return rpcError(rpcSRC_ACT_NOT_FOUND);
+			}
+			tx_json[jss::Sequence] = sequence;
 		}
 
-		if (tpTrans->getStatus() != NEW)
+		//reconstruct Transcation
+		STParsedJSONObject parsed(std::string(jss::tx_json), tx_json);
+		if (parsed.object == boost::none)
+		{
+			jvResult[jss::error] = parsed.error[jss::error];
+			jvResult[jss::error_exception] = parsed.error[jss::error_message];
+			return jvResult;
+		}
+
+		std::shared_ptr<STTx> stpTransWithSequence;
+		try
+		{
+
+			stpTransWithSequence = std::make_shared<STTx>(
+				std::move(parsed.object.get()));
+		}
+		catch (std::exception& e)
+		{
+			jvResult[jss::error] = "invalidTransaction";
+			jvResult[jss::error_exception] = e.what();
+
+			return jvResult;
+		}
+
+		auto tpTransWithSequence = std::make_shared<Transaction>(
+			stpTransWithSequence, reason, context.app);
+
+		if (tpTransWithSequence->getStatus() != NEW)
 		{
 			jvResult[jss::error] = "invalidTransaction";
 			jvResult[jss::error_exception] = "fails local checks: " + reason;
@@ -136,7 +168,7 @@ namespace ripple {
 			auto const failType = getFailHard(context);
 
 			context.netOps.processTransaction(
-				tpTrans, isUnlimited(context.role), true, failType);
+				tpTransWithSequence, isUnlimited(context.role), true, failType);
 		}
 		catch (std::exception& e)
 		{
@@ -149,11 +181,11 @@ namespace ripple {
 
 		try
 		{
-			jvResult[jss::tx_json] = tpTrans->getJson(0);
+			jvResult[jss::tx_json] = tpTransWithSequence->getJson(0);
 			jvResult[jss::tx_blob] = strHex(
-				tpTrans->getSTransaction()->getSerializer().peekData());
+				tpTransWithSequence->getSTransaction()->getSerializer().peekData());
 
-			TER result = tpTrans->getResult();
+			TER result = tpTransWithSequence->getResult();
 			if (temUNCERTAIN != result)
 			{
 				std::string sToken;

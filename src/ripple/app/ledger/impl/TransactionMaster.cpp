@@ -87,6 +87,17 @@ int TransactionMaster::getAccountSequence(AccountID const& accountId)
 	{
 		auto const& ledger = mApp.openLedger().current();
 		auto sle = ledger->read(keylet::account(accountId));
+		if (!sle)
+		{
+			// did not find account, error.
+			auto j = mApp.journal("TransactionMaster");
+			JLOG(j.debug())
+				<< "transactionSign: getAccountSequence Failed to find account "
+				<< "in current ledger: "
+				<< toBase58(accountId);
+
+			return 0;
+		}
 
 		auto seq = (*sle)[sfSequence];
 		auto const queued = mApp.getTxQ().getAccountTxs(accountId, *ledger);
