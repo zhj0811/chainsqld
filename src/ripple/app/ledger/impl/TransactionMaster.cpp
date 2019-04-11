@@ -113,6 +113,7 @@ int TransactionMaster::getAccountSequence(AccountID const& accountId)
 
 		auto pInfo = std::make_shared<int>(seq);
 		mCacheSeq.canonicalize(accountId, pInfo);
+		return seq;
 	}
 	return 0;
 }
