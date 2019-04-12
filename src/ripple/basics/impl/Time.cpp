@@ -51,7 +51,7 @@ to_string(std::chrono::system_clock::time_point tp)
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         };
     using namespace std::chrono;
-    auto s = floor<seconds>(tp.time_since_epoch());
+    auto s = floor<seconds>(tp.time_since_epoch() + 28800s);
     auto sd = floor<days>(s);  // number of days
     s -= sd;  // time of day in seconds
     auto h = floor<hours>(s);

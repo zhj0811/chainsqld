@@ -22,6 +22,7 @@
 #include <ripple/basics/StringUtilities.h>
 #include <ripple/basics/ToString.h>
 #include <ripple/beast/unit_test.h>
+#include <ripple/basics/chrono.h>
 
 namespace ripple {
 
@@ -65,19 +66,35 @@ public:
         testcase ("parseUrl");
 
         parsedURL pUrl;
+		const auto p0 = std::chrono::time_point<std::chrono::system_clock>{};
+		const auto p1 = std::chrono::system_clock::now();
+		const auto p2 = p1 - std::chrono::hours(24);
 
-        BEAST_EXPECT(parseUrl (pUrl, "lower://domain"));
-        BEAST_EXPECT(pUrl.scheme == "lower");
-        BEAST_EXPECT(pUrl.domain == "domain");
-        BEAST_EXPECT(! pUrl.port);
-        BEAST_EXPECT(pUrl.path == "");
-        BEAST_EXPECT(parseUrl (pUrl, "UPPER://domain:234/"));
+		std::time_t epoch_time = std::chrono::system_clock::to_time_t(p0);
+		std::cout << "epoch: " << std::ctime(&epoch_time);
+		std::time_t today_time = std::chrono::system_clock::to_time_t(p1);
+		std::cout << "today: " << std::ctime(&today_time);
+
+		std::cout << "hours since epoch: "
+			<< std::chrono::duration_cast<std::chrono::hours>(
+				p1.time_since_epoch()).count()
+			<< '\n';
+		std::cout << "yesterday, hours since epoch: "
+			<< std::chrono::duration_cast<std::chrono::hours>(
+				p2.time_since_epoch()).count()
+			<< '\n';
+        //BEAST_EXPECT(parseUrl (pUrl, "lower://domain"));
+        //BEAST_EXPECT(pUrl.scheme == "lower");
+        //BEAST_EXPECT(pUrl.domain == "domain");
+        //BEAST_EXPECT(! pUrl.port);
+        //BEAST_EXPECT(pUrl.path == "");
+        /*BEAST_EXPECT(parseUrl (pUrl, "UPPER://domain:234/"));
         BEAST_EXPECT(pUrl.scheme == "upper");
         BEAST_EXPECT(*pUrl.port == 234);
         BEAST_EXPECT(pUrl.path == "/");
         BEAST_EXPECT(parseUrl (pUrl, "Mixed://domain/path"));
         BEAST_EXPECT(pUrl.scheme == "mixed");
-        BEAST_EXPECT(pUrl.path == "/path");
+        BEAST_EXPECT(pUrl.path == "/path");*/
     }
 
     void testToString ()
@@ -90,8 +107,8 @@ public:
     void run ()
     {
         testParseUrl ();
-        testUnHex ();
-        testToString ();
+        //testUnHex ();
+        //testToString ();
     }
 };
 
