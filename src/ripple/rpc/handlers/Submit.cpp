@@ -31,6 +31,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <ripple/app/misc/TxQ.h>
 #include <ripple/protocol/Indexes.h>
 #include <ripple/protocol/STParsedJSON.h>
+#include <ripple/protocol/TxFlags.h>
 
 namespace ripple {
 
@@ -85,23 +86,6 @@ namespace ripple {
 			return jvResult;
 		}
 
-
-		{
-			if (!context.app.checkSigs())
-				forceValidity(context.app.getHashRouter(),
-					stpTrans->getTransactionID(), Validity::SigGoodOnly);
-			auto validity = checkValidity(context.app.getHashRouter(),
-				*stpTrans, context.ledgerMaster.getCurrentLedger()->rules(),
-				context.app.config());
-			if (validity.first != Validity::Valid)
-			{
-				jvResult[jss::error] = "invalidTransaction";
-				jvResult[jss::error_exception] = "fails local checks: " + validity.second;
-
-				return jvResult;
-			}
-		}
-
 		std::string reason;
 		auto tpTrans = std::make_shared<Transaction>(
 			stpTrans, reason, context.app);
@@ -126,6 +110,8 @@ namespace ripple {
 				return rpcError(rpcSRC_ACT_NOT_FOUND);
 			}
 			tx_json[jss::Sequence] = sequence;
+			if (!tx_json.isMember(jss::Flags))
+				tx_json[jss::Flags] = tfFullyCanonicalSig;
 		}
 
 		//reconstruct Transcation
@@ -151,6 +137,24 @@ namespace ripple {
 
 			return jvResult;
 		}
+
+		//将验签移动到构造带sequence的交易后
+		{
+			if (!context.app.checkSigs())
+				forceValidity(context.app.getHashRouter(),
+					stpTransWithSequence->getTransactionID(), Validity::SigGoodOnly);
+			auto validity = checkValidity(context.app.getHashRouter(),
+				*stpTransWithSequence, context.ledgerMaster.getCurrentLedger()->rules(),
+				context.app.config());
+			if (validity.first != Validity::Valid)
+			{
+				jvResult[jss::error] = "invalidTransaction";
+				jvResult[jss::error_exception] = "fails local checks: " + validity.second;
+
+				return jvResult;
+			}
+		}
+
 
 		auto tpTransWithSequence = std::make_shared<Transaction>(
 			stpTransWithSequence, reason, context.app);

@@ -94,7 +94,7 @@ SF_U16 const sfOpType          = make::one<SF_U16::type>(&sfOpType,          STI
 // 32-bit integers (common)
 SF_U32 const sfFlags             = make::one<SF_U32::type>(&sfFlags,             STI_UINT32,  2, "Flags");
 SF_U32 const sfSourceTag         = make::one<SF_U32::type>(&sfSourceTag,         STI_UINT32,  3, "SourceTag");
-SF_U32 const sfSequence          = make::one<SF_U32::type>(&sfSequence,          STI_UINT32,  4, "Sequence");
+SF_U32 const sfSequence          = make::one<SF_U32::type>(&sfSequence,          STI_UINT32,  4, "Sequence", SField::sMD_Default, SField::notSigning);
 SF_U32 const sfPreviousTxnLgrSeq = make::one<SF_U32::type>(&sfPreviousTxnLgrSeq, STI_UINT32,  5, "PreviousTxnLgrSeq", SField::sMD_DeleteFinal);
 SF_U32 const sfLedgerSequence    = make::one<SF_U32::type>(&sfLedgerSequence,    STI_UINT32,  6, "LedgerSequence");
 SF_U32 const sfCloseTime         = make::one<SF_U32::type>(&sfCloseTime,         STI_UINT32,  7, "CloseTime");
